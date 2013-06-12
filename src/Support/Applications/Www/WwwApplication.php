@@ -1,8 +1,8 @@
 <?php
 /**
- * @author  brooke.bryan
+ * @author Jay Francis <jay.francis@justdevelop.it>
  */
-namespace Project\Applications\Www;
+namespace Support\Applications\Www;
 
 use Cubex\Core\Application\Application;
 
@@ -22,7 +22,7 @@ class WwwApplication extends Application
 
   public function name()
   {
-    return "Skeleton Application";
+    return "Support Center";
   }
 
   public function getNamespace()

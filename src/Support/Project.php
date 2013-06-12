@@ -1,9 +1,8 @@
 <?php
 /**
- * @author  brooke.bryan
+ * @author Jay Francis <jay.francis@justdevelop.it>
  */
-
-namespace Project;
+namespace Support;
 
 class Project extends \Cubex\Core\Project\Project
 {
@@ -14,7 +13,7 @@ class Project extends \Cubex\Core\Project\Project
    */
   public function name()
   {
-    return "Project Name";
+    return "Support Center";
   }
 
   /**
