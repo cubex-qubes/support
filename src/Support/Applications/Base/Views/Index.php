@@ -2,7 +2,7 @@
 /**
  * @author  brooke.bryan
  */
-namespace Support\Applications\Www\Views;
+namespace Support\Applications\Base\Views;
 
 use Cubex\Facade\Session;
 use Cubex\View\HtmlElement;

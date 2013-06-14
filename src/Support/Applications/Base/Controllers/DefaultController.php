@@ -3,7 +3,7 @@
  * @author  brooke.bryan
  */
 
-namespace Support\Applications\Www\Controllers;
+namespace Support\Applications\Base\Controllers;
 
 use Cubex\Core\Controllers\WebpageController;
 use Cubex\Database\ConnectionMode;
@@ -12,10 +12,9 @@ use Cubex\Form\Form;
 use Cubex\Queue\StdQueue;
 use Cubex\View\HtmlElement;
 use Cubex\View\Templates\Errors\Error404;
-use Support\Applications\Www\Forms\ContactUs;
-use Support\Applications\Www\Views\Contact;
-use Support\Applications\Www\Views\Section\Header;
-use Support\Applications\Www\Views\Index;
+use Support\Applications\Base\Views\Contact;
+use Support\Applications\Base\Views\Section\Header;
+use Support\Applications\Base\Views\Index;
 
 class DefaultController extends WebpageController
 {

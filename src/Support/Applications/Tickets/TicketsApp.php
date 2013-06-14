@@ -1,28 +1,23 @@
 <?php
 /**
+ * Tickets Application
+ *
  * @author Jay Francis <jay.francis@justdevelop.it>
  */
-namespace Support\Applications\Www;
+namespace Support\Applications\Tickets;
 
 use Cubex\Core\Application\Application;
 
-class WwwApplication extends Application
+class TicketsApp extends Application
 {
   public function defaultDispatcher()
   {
     return 'DefaultController';
   }
 
-  public function getBundles()
-  {
-    return [
-      //'debugger' => new \Bundl\Debugger\DebuggerBundle()
-    ];
-  }
-
   public function name()
   {
-    return "Support Center";
+    return "Tickets";
   }
 
   public function getNamespace()
