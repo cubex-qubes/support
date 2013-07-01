@@ -3,7 +3,7 @@
  * @author  brooke.bryan
  */
 
-namespace Support\Applications\App\Forms;
+namespace Qubes\Support\Applications\App\Forms;
 
 use Cubex\Data\Filter\Filter;
 use Cubex\Data\Validator\Validator;

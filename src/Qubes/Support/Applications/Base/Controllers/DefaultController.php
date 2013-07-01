@@ -3,18 +3,19 @@
  * @author  brooke.bryan
  */
 
-namespace Support\Applications\Base\Controllers;
+namespace Qubes\Support\Applications\Base\Controllers;
 
 use Cubex\Core\Controllers\WebpageController;
 use Cubex\Database\ConnectionMode;
 use Cubex\Facade\Redirect;
 use Cubex\Form\Form;
+use Cubex\Foundation\Container;
 use Cubex\Queue\StdQueue;
 use Cubex\View\HtmlElement;
 use Cubex\View\Templates\Errors\Error404;
-use Support\Applications\Base\Views\Contact;
-use Support\Applications\Base\Views\Section\Header;
-use Support\Applications\Base\Views\Index;
+use Qubes\Support\Applications\Base\Views\Contact;
+use Qubes\Support\Applications\Base\Views\Section\Header;
+use Qubes\Support\Applications\Base\Views\Index;
 
 class DefaultController extends WebpageController
 {
@@ -35,11 +36,18 @@ class DefaultController extends WebpageController
 
   public function renderIndex()
   {
+
+    var_dump_json(Container::config()->get('supportqube')->getStr('k'));
+
+
+
     if($this->request()->isForm())
     {
       $q = new StdQueue("fejwh");
       \Cubex\Facade\Queue::push($q, $this->request()->postVariables());
     }
+
+    $this->setTitle('dfg');
 
     $form = new Form("cubexformt");
     $form->addTextElement("title");

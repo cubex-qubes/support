@@ -2,11 +2,11 @@
 /**
  * @author Jay Francis <jay.francis@justdevelop.it>
  */
-namespace Support;
+namespace Qubes\Support;
 
 use Cubex\Core\Application\Application;
-use Support\Applications\Base\BaseApp;
-use Support\Applications\Tickets\TicketsApp;
+use Qubes\Support\Applications\Base\BaseApp;
+use Qubes\Support\Applications\Tickets\TicketsApp;
 
 class Project extends \Cubex\Core\Project\Project
 {
@@ -40,6 +40,7 @@ class Project extends \Cubex\Core\Project\Project
    */
   public function defaultApplication()
   {
+    echo 1;
     return new BaseApp();
   }
 }

@@ -2,7 +2,7 @@
 /**
  * @author  brooke.bryan
  */
-namespace Support\Applications\Base\Views\Section;
+namespace Qubes\Support\Applications\Base\Views\Section;
 
 use Cubex\View\HtmlElement;
 use Cubex\View\RenderGroup;

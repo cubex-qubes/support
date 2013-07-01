@@ -1,12 +1,14 @@
 <?php
 /**
+ * Tickets Application
+ *
  * @author Jay Francis <jay.francis@justdevelop.it>
  */
-namespace Support\Applications\Base;
+namespace Qubes\Support\Applications\Tickets;
 
 use Cubex\Core\Application\Application;
 
-class BaseApp extends Application
+class TicketsApp extends Application
 {
   public function defaultDispatcher()
   {
@@ -15,7 +17,11 @@ class BaseApp extends Application
 
   public function name()
   {
-    return "Support Center";
+    return "Tickets";
   }
 
+  public function getNamespace()
+  {
+    return __NAMESPACE__;
+  }
 }
