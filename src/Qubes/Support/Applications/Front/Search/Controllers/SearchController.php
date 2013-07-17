@@ -21,7 +21,7 @@ class SearchController extends FrontController
   public function getRoutes()
   {
     return array(
-      '/:magic@all' => 'index',
+      '/:search@all' => 'index',
     );
   }
 }
