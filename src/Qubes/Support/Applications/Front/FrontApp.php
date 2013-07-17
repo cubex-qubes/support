@@ -7,6 +7,8 @@
 namespace Qubes\Support\Applications\Front;
 
 use Cubex\Core\Application\Application;
+use Cubex\Foundation\Container;
+use Qubes\Support\Applications\Front\Base\Controllers\FrontController;
 
 class FrontApp extends Application
 {
@@ -23,29 +25,61 @@ class FrontApp extends Application
   }
 
   /**
-   * Map base routes to the controllers
+   * Map standard routes to the controllers
    *
    * @return array|\Cubex\Routing\IRoute[]
    */
   public function getRoutes()
   {
-    $indexClass = '\Qubes\Support\Applications\Front\Index\Controllers'
-      . '\IndexController';
-
-    $articleClass = '\Qubes\Support\Applications\Front\Article\Controllers'
-      . '\ArticleController';
-
-    $categoryClass = '\Qubes\Support\Applications\Front\Category\Controllers'
-      . '\CategoryController';
-
-    $searchClass = '\Qubes\Support\Applications\Front\Search\Controllers'
-      . '\SearchController';
-
-    return [
-      "/"              => $indexClass,
-      "/article/(.*)"  => $articleClass,
-      "/category/(.*)" => $categoryClass,
-      "/search/(.*)"   => $searchClass,
+    $controllers = [
+      "/"              => 'Index',
+      "/article/(.*)"  => 'Article',
+      "/category/(.*)" => 'Category',
+      "/search/(.*)"   => 'Search',
     ];
+
+    $routes = [];
+    foreach($controllers as $route => $controller)
+    {
+      $routes[$route] = $this->_getControllerClass($controller);
+    }
+
+    return $routes;
+  }
+
+  /**
+   * Check for overrides then return the correct controller class name
+   *
+   * @param $controllerName
+   *
+   * @return FrontController
+   * @throws \Exception
+   */
+  private function _getControllerClass($controllerName)
+  {
+    $config = Container::config()->get('project');
+    if($config->extended)
+    {
+      $extendedClass = sprintf(
+        '%s\%s\Controllers\%sController',
+        $this->getNamespace(),
+        $controllerName,
+        $controllerName
+      );
+
+      if(class_exists($extendedClass))
+        return $extendedClass;
+    }
+
+    $controllerClass = sprintf(
+      '\Qubes\Support\Applications\Front\%s\Controllers\%sController',
+      $controllerName,
+      $controllerName
+    );
+
+    if(!class_exists($controllerClass))
+      throw new \Exception($controllerClass . ' Not Found');
+
+    return $controllerClass;
   }
 }
