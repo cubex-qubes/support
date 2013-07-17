@@ -73,6 +73,6 @@ abstract class FrontController extends WebpageController
     }
     $this->nest("content", $view);
 
-    return $this;
+    return $view;
   }
 }
