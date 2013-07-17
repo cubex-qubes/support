@@ -8,7 +8,6 @@
 namespace Qubes\Support\Applications\Front\Article\Controllers;
 
 use Qubes\Support\Applications\Front\Base\Controllers\FrontController;
-use Qubes\Support\Applications\Front\Article\Views\ArticleIndexView;
 use Qubes\Support\Applications\Front\Article\Views\ArticleView;
 
 class ArticleController extends FrontController
