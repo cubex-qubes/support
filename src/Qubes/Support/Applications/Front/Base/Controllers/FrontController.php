@@ -18,6 +18,95 @@ abstract class FrontController extends WebpageController
   public function preProcess()
   {
     $this->_addProjectResources();
+    $this->_nestSections();
+  }
+
+  /**
+   * Check for an override then return the view object
+   *
+   * @param $className
+   *
+   * @throws \Exception
+   * @return FrontView
+   */
+  public function getView($className)
+  {
+    $class = sprintf(
+      '%s\Applications\Front\%s\Views\%s',
+      $this->getProjectNamespace(),
+      $this->getApplicationName(),
+      $className
+    );
+
+    if(class_exists($class))
+      return new $class();
+
+    $class = sprintf(
+      'Qubes\Support\Applications\Front\%s\Views\%s',
+      $this->getApplicationName(),
+      $className
+    );
+
+    if(!class_exists($class))
+      throw new \Exception($class . ' Not Found');
+
+    return new $class;
+  }
+
+  /**
+   * Get the application name
+   *
+   * @return mixed
+   */
+  public function getApplicationName()
+  {
+    $classParts = explode('\\', get_called_class());
+
+    array_pop($classParts);
+    array_pop($classParts);
+
+    return end($classParts);
+  }
+
+  /**
+   * Gets the namespace for the project
+   *
+   * @return mixed|string
+   */
+  public function getProjectNamespace()
+  {
+    $config = Container::config()->get('project');
+    if($config->extended)
+      return $config->namespace;
+
+    return $this->getNamespace();
+  }
+
+  /**
+   * Nest the main sections
+   *
+   * @return $this
+   */
+  private function _nestSections()
+  {
+    $config = Container::config()->get('project');
+    if($config->extended)
+    {
+      $namespace = sprintf(
+        '%s\Applications\Front\Base\Views\Section',
+        $config->namespace
+      );
+
+      $header = sprintf('%s\Header', $namespace);
+      if(class_exists($header))
+        $this->nest("header", new $header);
+
+      $footer = sprintf('%s\Footer', $namespace);
+      if(class_exists($footer))
+        $this->nest("footer", new $footer);
+    }
+
+    return $this;
   }
 
   /**
