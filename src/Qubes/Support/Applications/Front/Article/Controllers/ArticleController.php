@@ -13,9 +13,19 @@ use Qubes\Support\Applications\Front\Article\Views\ArticleView;
 class ArticleController extends FrontController
 {
 
+  /**
+   * Render an Article
+   *
+   * @param $slug
+   *
+   * @return ArticleView
+   */
   public function renderArticle($slug)
   {
-    return $this->setView(new ArticleView());
+    /** @var ArticleView $view */
+    $view = $this->getView('ArticleView');
+
+    return $view;
   }
 
   public function getRoutes()

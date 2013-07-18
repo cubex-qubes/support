@@ -13,9 +13,19 @@ use Qubes\Support\Applications\Front\Search\Views\SearchIndexView;
 class SearchController extends FrontController
 {
 
-  public function renderIndex()
+  /**
+   * Render the search results index
+   *
+   * @param null $search
+   *
+   * @return SearchIndexView
+   */
+  public function renderIndex($search = null)
   {
-    return $this->setView(new SearchIndexView());
+    /** @var SearchIndexView $view */
+    $view = $this->getView('SearchIndexView');
+
+    return $view;
   }
 
   public function getRoutes()
