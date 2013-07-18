@@ -13,6 +13,37 @@ use Qubes\Support\Applications\Front\Base\Controllers\FrontController;
 class FrontApp extends Application
 {
 
+  public function init()
+  {
+    $this
+    ->_setGlobalCss()
+    ->_setGlobalJs();
+  }
+
+  private function _setGlobalCss()
+  {
+    Container::config()->get('project')->css = (array)$this->getGlobalCss();
+
+    return $this;
+  }
+
+  private function _setGlobalJs()
+  {
+    Container::config()->get('project')->js = (array)$this->getGlobalJs();
+
+    return $this;
+  }
+
+  public function getGlobalCss()
+  {
+    return [];
+  }
+
+  public function getGlobalJs()
+  {
+    return [];
+  }
+
   /**
    * Set the theme
    *
