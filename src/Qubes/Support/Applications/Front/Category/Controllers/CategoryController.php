@@ -13,30 +13,14 @@ use Qubes\Support\Applications\Front\Category\Views\CategoryIndexView;
 
 class CategoryController extends FrontController
 {
-
-  /**
-   * Render a Category Index
-   *
-   * @param $slug
-   *
-   * @return CategoryIndexView
-   */
-  public function renderIndex($slug)
-  {
-    /** @var CategoryIndexView $view */
-    $view = $this->getView('CategoryIndexView');
-
-    return $view;
-  }
-
   /**
    * Render a Category
    *
-   * @param $slug
+   * @param $id
    *
    * @return CategoryView
    */
-  public function renderCategory($slug)
+  public function renderCategory($id)
   {
     /** @var CategoryView $view */
     $view = $this->getView('CategoryView');
@@ -46,10 +30,8 @@ class CategoryController extends FrontController
 
   public function getRoutes()
   {
-
     return [
-      '/'          => 'index',
-      '/:slug@all' => 'category',
+      '/(?P<id>\d+)-.*' => 'category',
     ];
   }
 }

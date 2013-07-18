@@ -9,7 +9,6 @@ namespace Qubes\Support\Applications\Front\Index\Controllers;
 
 use Qubes\Support\Applications\Front\Base\Controllers\FrontController;
 use Qubes\Support\Applications\Front\Index\Views\IndexView;
-use Qubes\Support\Applications\Front\Base\Views\FrontView;
 
 class IndexController extends FrontController
 {

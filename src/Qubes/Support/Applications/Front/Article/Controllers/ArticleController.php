@@ -16,11 +16,11 @@ class ArticleController extends FrontController
   /**
    * Render an Article
    *
-   * @param $slug
+   * @param $id
    *
    * @return ArticleView
    */
-  public function renderArticle($slug)
+  public function renderArticle($id)
   {
     /** @var ArticleView $view */
     $view = $this->getView('ArticleView');
@@ -31,7 +31,7 @@ class ArticleController extends FrontController
   public function getRoutes()
   {
     return [
-      '/:slug@all' => 'article',
+      '/(?P<id>\d+)-.*' => 'article',
     ];
   }
 }
