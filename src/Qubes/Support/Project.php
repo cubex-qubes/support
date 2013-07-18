@@ -10,10 +10,12 @@ use Qubes\Support\Applications\Front\FrontApp;
 use Qubes\Support\Applications\Back\BackApp;
 use Cubex\Foundation\Container;
 use Cubex\Core\Traits\NamespaceAwareTrait;
+use Cubex\Dispatch\Utils\ListenerTrait;
 
 class Project extends \Cubex\Core\Project\Project implements INamespaceAware
 {
   use NamespaceAwareTrait;
+  use ListenerTrait;
 
   /**
    * Get the path for the project that includes override templates
@@ -32,6 +34,7 @@ class Project extends \Cubex\Core\Project\Project implements INamespaceAware
    */
   public function init()
   {
+    $this->_listen();
     $this->_setProjectPathConfig();
     $this->_setProjectExtendedConfig();
 

@@ -117,18 +117,12 @@ abstract class FrontController extends WebpageController
   private function _addProjectResources()
   {
     $config = Container::config()->get('project');
-    if(!$config->extended)
-    {
-      $this->requireCss(
-        'http://twitter.github.com/bootstrap/assets/css/bootstrap.css'
-      );
-      $this->requireCss('/base');
 
-      $this->requireJs('http://code.jquery.com/jquery-latest.js');
-      $this->requireJs(
-        'http://twitter.github.com/bootstrap/assets/js/bootstrap.min.js'
-      );
-    }
+    foreach($config->css as $file)
+      $this->requireCss($file, $config->namespace);
+
+    foreach($config->js as $file)
+      $this->requireJs($file, $config->namespace);
 
     return $this;
   }
