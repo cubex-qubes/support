@@ -39,7 +39,9 @@ abstract class FrontController extends WebpageController
     );
 
     if(class_exists($class))
+    {
       return new $class();
+    }
 
     $class = sprintf(
       'Qubes\Support\Applications\Front\%s\Views\%s',
@@ -48,7 +50,9 @@ abstract class FrontController extends WebpageController
     );
 
     if(!class_exists($class))
+    {
       throw new \Exception($class . ' Not Found');
+    }
 
     return new $class;
   }
@@ -77,7 +81,9 @@ abstract class FrontController extends WebpageController
   {
     $config = Container::config()->get('project');
     if($config->extended)
+    {
       return $config->namespace;
+    }
 
     return $this->getNamespace();
   }
@@ -99,11 +105,15 @@ abstract class FrontController extends WebpageController
 
       $header = sprintf('%s\Header', $namespace);
       if(class_exists($header))
+      {
         $this->nest("header", new $header);
+      }
 
       $footer = sprintf('%s\Footer', $namespace);
       if(class_exists($footer))
+      {
         $this->nest("footer", new $footer);
+      }
     }
 
     return $this;
@@ -119,10 +129,14 @@ abstract class FrontController extends WebpageController
     $config = Container::config()->get('project');
 
     foreach($config->css as $file)
+    {
       $this->requireCss($file, $config->namespace);
+    }
 
     foreach($config->js as $file)
+    {
       $this->requireJs($file, $config->namespace);
+    }
 
     return $this;
   }
