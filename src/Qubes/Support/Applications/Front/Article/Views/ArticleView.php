@@ -13,7 +13,7 @@ use Qubes\Support\Components\Content\Article\Mappers\Article;
 class ArticleView extends FrontView
 {
   /** @var Article */
-  public $_article;
+  private $_article;
 
   /**
    * @param Article $article
