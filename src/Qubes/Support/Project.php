@@ -5,6 +5,7 @@
 
 namespace Qubes\Support;
 
+use Bundl\Debugger\DebuggerBundle;
 use Cubex\Core\Interfaces\INamespaceAware;
 use Qubes\Support\Applications\Front\FrontApp;
 use Qubes\Support\Applications\Back\BackApp;
@@ -34,6 +35,8 @@ class Project extends \Cubex\Core\Project\Project implements INamespaceAware
    */
   public function init()
   {
+    $this->_debug = new DebuggerBundle();
+    $this->_debug->init();
     $this->_listen();
     $this->_setProjectPathConfig();
     $this->_setProjectExtendedConfig();
