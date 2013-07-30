@@ -21,7 +21,7 @@
   },
   "autoload":          {
     "psr-0": {
-      "Support\\": "src/"
+      "Qubes\\Support\\": "src/"
     }
   },
   "minimum-stability": "dev"
