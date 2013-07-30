@@ -7,6 +7,8 @@ namespace Qubes\Support;
 
 use Bundl\Debugger\DebuggerBundle;
 use Cubex\Core\Interfaces\INamespaceAware;
+use Cubex\Facade\Auth;
+use Qubes\Support\Applications\Back\Login\LoginApp;
 use Qubes\Support\Applications\Front\FrontApp;
 use Qubes\Support\Applications\Back\BackApp;
 use Cubex\Foundation\Container;
@@ -120,7 +122,14 @@ class Project extends \Cubex\Core\Project\Project implements INamespaceAware
   {
     // Back End
     if(starts_with($path, '/admin'))
-      return new BackApp();
+    {
+      if(Auth::loggedin())
+      {
+        return new BackApp();
+      }
+      return new LoginApp();
+    }
+
 
     // Front End
     return $this->_getFrontApp();

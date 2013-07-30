@@ -5,13 +5,17 @@
 namespace Qubes\Support\Applications\Back;
 
 use Cubex\Core\Application\Application;
+use Qubes\Support\Applications\Back\Articles\Controllers\ArticleController;
+use Qubes\Support\Applications\Back\Base\Controllers\DefaultController;
+use Qubes\Support\Applications\Back\Categories\Controllers\CategoryController;
+use Qubes\Support\Applications\Back\Users\Controllers\UserController;
+use Themed\Sidekick\SidekickTheme;
 
-// todo nothing has been added for the back end yet
 class BackApp extends Application
 {
-  public function defaultDispatcher()
+  public function defaultController()
   {
-    return 'DefaultController';
+    return new DefaultController();
   }
 
   public function name()
@@ -22,8 +26,14 @@ class BackApp extends Application
   public function getRoutes()
   {
     return [
-      "/category/:category" => "someControlMethod"
+      'admin/categories/(.*)' => new CategoryController(),
+      'admin/articles/(.*)'   => new ArticleController(),
+      'admin/users/(.*)'   => new UserController()
     ];
   }
 
+  public function getTheme()
+  {
+    return new SidekickTheme();
+  }
 }
