@@ -13,10 +13,11 @@
     }
   ],
   "require":           {
-    "php":            ">=5.4.0",
-    "cubex/cubex":    "*",
-    "bundl/debugger": "*",
-    "qubes/bootstrap": "*"
+    "php":             ">=5.4.0",
+    "cubex/cubex":     "*",
+    "bundl/debugger":  "*",
+    "qubes/bootstrap": "*",
+    "themed/sidekick": "*"
   },
   "autoload":          {
     "psr-0": {
