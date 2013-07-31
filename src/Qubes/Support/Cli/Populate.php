@@ -51,12 +51,6 @@ class Populate extends CliCommand
     $this->_print('Demo content import complete!');
   }
 
-  public function test()
-  {
-    $category = new Category(1);
-    echo json_pretty($category->getChildCategories());
-  }
-
   /**
    * Perform a database reset
    * --reset=true
@@ -142,10 +136,10 @@ class Populate extends CliCommand
       $categoryTitles = $this->_getTitleArray('Category', rand(0, 6));
       foreach($categoryTitles as $categoryTitle)
       {
-        $category           = new Category;
+        $category                   = new Category;
         $category->parentCategoryId = $category->id();
-        $category->title    = $categoryTitle;
-        $category->subTitle = $this->_getExampleContent(rand(5, 15));
+        $category->title            = $categoryTitle;
+        $category->subTitle         = $this->_getExampleContent(rand(5, 15));
         $category->saveChanges();
         $count++;
       }
@@ -244,6 +238,7 @@ class Populate extends CliCommand
         $article             = new Article;
         $article->categoryId = $category->id();
         $article->title      = $articleTitle;
+        $article->subTitle   = $this->_getExampleContent(rand(4, 20));
         $article->content    = $this->_getExampleContent(rand(20, 100));
         $article->saveChanges();
         $count++;
