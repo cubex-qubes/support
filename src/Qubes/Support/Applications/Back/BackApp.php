@@ -5,10 +5,10 @@
 namespace Qubes\Support\Applications\Back;
 
 use Cubex\Core\Application\Application;
-use Qubes\Support\Applications\Back\Articles\Controllers\ArticleController;
+use Qubes\Support\Applications\Back\Article\Controllers\ArticleController;
 use Qubes\Support\Applications\Back\Base\Controllers\DefaultController;
-use Qubes\Support\Applications\Back\Categories\Controllers\CategoryController;
-use Qubes\Support\Applications\Back\Users\Controllers\UserController;
+use Qubes\Support\Applications\Back\Category\Controllers\CategoryController;
+use Qubes\Support\Applications\Back\User\Controllers\UserController;
 use Themed\Sidekick\SidekickTheme;
 
 class BackApp extends Application

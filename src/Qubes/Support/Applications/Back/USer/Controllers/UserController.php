@@ -4,7 +4,7 @@
  * Date: 30/07/13 17:21
  */
 
-namespace Qubes\Support\Applications\Back\Users\Controllers;
+namespace Qubes\Support\Applications\Back\User\Controllers;
 
 use Qubes\Support\Applications\Back\Base\Controllers\BaseController;
 
