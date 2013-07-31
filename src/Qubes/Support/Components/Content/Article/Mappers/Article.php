@@ -16,6 +16,7 @@ class Article extends I18nRecordMapper
 {
   public $categoryId;
   public $title;
+  public $subTitle;
   public $content;
 
   protected function _configure()
