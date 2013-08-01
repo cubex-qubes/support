@@ -1,15 +1,15 @@
 <?php
 /**
- * Block Text Container
+ * Category Text Container
  *
  * @author Jay Francis <jay.francis@jdiuk.com>
  */
 
-namespace Qubes\Support\Components\Content\Block;
+namespace Qubes\Support\Components\Content\Category\Mappers;
 
 use Cubex\Mapper\Database\I18n\TextContainer;
 
-class BlockTextContainer extends TextContainer
+class CategoryText extends TextContainer
 {
   /**
    * @datatype mediumtext

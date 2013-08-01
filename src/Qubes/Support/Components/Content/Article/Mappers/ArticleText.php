@@ -5,11 +5,11 @@
  * @author Jay Francis <jay.francis@jdiuk.com>
  */
 
-namespace Qubes\Support\Components\Content\Article;
+namespace Qubes\Support\Components\Content\Article\Mappers;
 
 use Cubex\Mapper\Database\I18n\TextContainer;
 
-class ArticleTextContainer extends TextContainer
+class ArticleText extends TextContainer
 {
   /**
    * @datatype mediumtext

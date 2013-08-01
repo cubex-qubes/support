@@ -1,15 +1,15 @@
 <?php
 /**
- * Category Text Container
+ * Video Text Container
  *
  * @author Jay Francis <jay.francis@jdiuk.com>
  */
 
-namespace Qubes\Support\Components\Content\Category;
+namespace Qubes\Support\Components\Content\Video\Mappers;
 
 use Cubex\Mapper\Database\I18n\TextContainer;
 
-class CategoryTextContainer extends TextContainer
+class VideoText extends TextContainer
 {
   /**
    * @datatype mediumtext
