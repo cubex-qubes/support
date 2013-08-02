@@ -9,8 +9,13 @@ namespace Qubes\Support\Components\Content\Video\Mappers;
 
 
 use Cubex\Mapper\Database\I18n\I18nRecordMapper;
-use Qubes\Support\Components\Content\Video\VideoTextContainer;
 
+/**
+ * Class Video
+ *
+ * @package Qubes\Support\Components\Content\Video\Mappers
+ * @method static \Qubes\Support\Components\Content\Video\Mappers\Video[]|\Cubex\Mapper\Database\RecordCollection collection
+ */
 class Video extends I18nRecordMapper
 {
   public $categoryId;
@@ -27,10 +32,10 @@ class Video extends I18nRecordMapper
   }
 
   /**
-   * @return VideoTextContainer
+   * @return VideoText
    */
   public function getTextContainer()
   {
-    return new VideoTextContainer();
+    return new VideoText;
   }
 }
