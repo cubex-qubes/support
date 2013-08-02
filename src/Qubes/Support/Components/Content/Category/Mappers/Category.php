@@ -1,13 +1,14 @@
 <?php
 namespace Qubes\Support\Components\Content\Category\Mappers;
-/**
- * Category Mapper
- *
- * @author Jay Francis <jay.francis@jdiuk.com>
- */
-use Cubex\Mapper\Database\I18n\I18nRecordMapper;
-use Qubes\Support\Components\Content\Category\CategoryTextContainer;
 
+use Cubex\Mapper\Database\I18n\I18nRecordMapper;
+
+/**
+ * Class Category
+ *
+ * @package Qubes\Support\Components\Content\Category\Mappers
+ * @method static \Qubes\Support\Components\Content\Category\Mappers\Category[]|\Cubex\Mapper\Database\RecordCollection collection
+ */
 class Category extends I18nRecordMapper
 {
   public $parentCategoryId;
@@ -41,10 +42,10 @@ class Category extends I18nRecordMapper
   }
 
   /**
-   * @return CategoryTextContainer
+   * @return CategoryText
    */
   public function getTextContainer()
   {
-    return new CategoryTextContainer();
+    return new CategoryText;
   }
 }
