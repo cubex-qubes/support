@@ -5,11 +5,17 @@
  * @author Jay Francis <jay.francis@jdiuk.com>
  */
 
-namespace Qubes\Support\Components\Content\Block\Mappers;
+namespace Qubes\Support\Components\Content\Platform\Mappers;
 
 use Cubex\Mapper\Database\I18n\I18nRecordMapper;
-use Qubes\Support\Components\Content\Block\BlockTextContainer;
 
+
+/**
+ * Class Platform
+ *
+ * @package Qubes\Support\Components\Content\Platform\Mappers
+ * @method static \Cubex\Mapper\Database\RecordCollection|\Qubes\Support\Components\Content\Platform\Mappers\Platform[] collection
+ */
 class Platform extends I18nRecordMapper
 {
   public $name;
@@ -24,11 +30,10 @@ class Platform extends I18nRecordMapper
   }
 
   /**
-   * @return BlockTextContainer
+   * @return PlatformText
    */
   public function getTextContainer()
   {
-    return new BlockTextContainer();
+    return new PlatformText;
   }
-
 }
