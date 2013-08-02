@@ -9,35 +9,40 @@ namespace Qubes\Support\Components\Content\Article\Mappers;
 
 
 use Cubex\Mapper\Database\I18n\I18nRecordMapper;
-use Qubes\Support\Components\Content\Block\Mappers\PlatformBlock;
-use Qubes\Support\Components\Content\Article\ArticleTextContainer;
 
+/**
+ * Class Article
+ *
+ * @package Qubes\Support\Components\Content\Article\Mappers
+ * @method static \Qubes\Support\Components\Content\Article\Mappers\Article[]|\Cubex\Mapper\Database\RecordCollection collection
+ */
 class Article extends I18nRecordMapper
 {
   public $categoryId;
   public $title;
   public $subTitle;
-  public $content;
 
   protected function _configure()
   {
     $this->_addTranslationAttribute(
       'title',
-      'subTitle',
-      'content'
+      'subTitle'
     );
   }
 
-  public function getPlatformBlocks()
+  /**
+   * @return ArticleBlock[]
+   */
+  public function getArticleBlocks()
   {
-    return $this->hasMany(new PlatformBlock());
+    return $this->hasMany(new ArticleBlock());
   }
 
   /**
-   * @return ArticleTextContainer
+   * @return ArticleText
    */
   public function getTextContainer()
   {
-    return new ArticleTextContainer();
+    return new ArticleText;
   }
 }
