@@ -7,23 +7,23 @@
 
 namespace Qubes\Support\Cli;
 
-use Cubex\Cli\CliCommand;
 use Cubex\Cli\Shell;
 use Cubex\Cli\UserPrompt;
 use Cubex\FileSystem\FileSystem;
 use Cubex\Mapper\Database\RecordMapper;
 use Cubex\Text\TextTable;
-use Qubes\Support\Components\Content\Article\ArticleTextContainer;
 use Qubes\Support\Components\Content\Article\Mappers\Article;
-use Qubes\Support\Components\Content\Block\BlockTextContainer;
-use Qubes\Support\Components\Content\Block\Mappers\Platform;
-use Qubes\Support\Components\Content\Block\Mappers\PlatformBlock;
-use Qubes\Support\Components\Content\Category\CategoryTextContainer;
+use Qubes\Support\Components\Content\Article\Mappers\ArticleBlock;
+use Qubes\Support\Components\Content\Article\Mappers\ArticleBlockContent;
+use Qubes\Support\Components\Content\Article\Mappers\ArticleText;
 use Qubes\Support\Components\Content\Category\Mappers\Category;
+use Qubes\Support\Components\Content\Category\Mappers\CategoryText;
+use Qubes\Support\Components\Content\Platform\Mappers\Platform;
+use Qubes\Support\Components\Content\Platform\Mappers\PlatformText;
 use Qubes\Support\Components\Content\Video\Mappers\Video;
-use Qubes\Support\Components\Content\Video\VideoTextContainer;
+use Qubes\Support\Components\Content\Video\Mappers\VideoText;
 
-class Populate extends CliCommand
+class Populate extends BaseCli
 {
   /**
    * Reset database!!!
@@ -42,10 +42,9 @@ class Populate extends CliCommand
   {
     $this->_resetDatabase();
     $this->_print('Populating data...');
+    $this->_addPlatforms();
     $this->_addCategories();
     $this->_addArticles();
-    $this->_addPlatforms();
-    $this->_addPlatformBlocks();
     $this->_addWalkthroughs();
     $this->_addVideos();
     $this->_print('Demo content import complete!');
@@ -79,22 +78,23 @@ class Populate extends CliCommand
 
     /** @var RecordMapper[] $mappers */
     $mappers = [
-      new BlockTextContainer,
-      new PlatformBlock,
       new Platform,
+      new PlatformText,
       new Category,
-      new CategoryTextContainer,
+      new CategoryText,
       new Article,
-      new ArticleTextContainer,
+      new ArticleText,
+      new ArticleBlock,
+      new ArticleBlockContent,
       new Video,
-      new VideoTextContainer,
+      new VideoText,
     ];
 
     foreach($mappers as $mapper)
     {
       $mapper->createTable(true);
       $this->_print(
-        "Dropped " . $mapper->tableName(),
+        sprintf("Dropped & Created `%s`", $mapper->tableName()),
         true,
         Shell::COLOUR_FOREGROUND_LIGHT_GREY,
         Shell::COLOUR_BACKGROUND_RED
@@ -115,7 +115,7 @@ class Populate extends CliCommand
     // Add parent categories
     $this->_print('Adding Categories: ', false);
     $count          = 0;
-    $categoryTitles = $this->_getTitleArray('Category', rand(3, 6));
+    $categoryTitles = $this->_getTitleArray('Category', rand(2, 4));
     foreach($categoryTitles as $categoryTitle)
     {
       $category              = new Category;
@@ -133,15 +133,18 @@ class Populate extends CliCommand
     $categories = Category::collection();
     foreach($categories as $category)
     {
-      $categoryTitles = $this->_getTitleArray('Category', rand(0, 6));
-      foreach($categoryTitles as $categoryTitle)
+      if(!(bool)rand(0, 3))
       {
-        $category                   = new Category;
-        $category->parentCategoryId = $category->id();
-        $category->title            = $categoryTitle;
-        $category->subTitle         = $this->_getExampleContent(rand(5, 15));
-        $category->saveChanges();
-        $count++;
+        $categoryTitles = $this->_getTitleArray('Category', rand(0, 2));
+        foreach($categoryTitles as $categoryTitle)
+        {
+          $category                   = new Category;
+          $category->parentCategoryId = $category->id();
+          $category->title            = $categoryTitle;
+          $category->subTitle         = $this->_getExampleContent(rand(5, 15));
+          $category->saveChanges();
+          $count++;
+        }
       }
     }
     $this->_print($count);
@@ -158,6 +161,7 @@ class Populate extends CliCommand
   {
     $this->_print('Adding Platforms: ', false);
     $platformNames = array(
+      'Generic',
       'Windows',
       'Linux',
       'Mac',
@@ -169,7 +173,7 @@ class Populate extends CliCommand
 
     foreach($platformNames as $platformName)
     {
-      $platform              = new Platform;
+      $platform              = new Platform();
       $platform->name        = $platformName;
       $platform->description = $this->_getExampleContent(rand(4, 6));
       $platform->saveChanges();
@@ -179,43 +183,6 @@ class Populate extends CliCommand
 
     return $this;
   }
-
-  /**
-   * Add platform blocks
-   *
-   * @return $this
-   */
-  protected function _addPlatformBlocks()
-  {
-    $this->_print('Adding Platform Blocks: ', false);
-    $count = 0;
-
-    $article = new Article(1);
-
-    /** @var Platform[] $platforms */
-    $platforms = Platform::collection();
-
-    foreach($platforms as $platform)
-    {
-      $block            = new PlatformBlock;
-      $block->articleId = $article->id();
-      $block->content   = sprintf(
-        'Example %s Block... %s',
-        $platform->name,
-        $this->_getExampleContent(rand(20, 60))
-      );
-      $block->saveChanges();
-      $count++;
-
-      $article->title = 'Article 1: Block Example';
-      $article->saveChanges();
-    }
-
-    $this->_print($count);
-
-    return $this;
-  }
-
 
   /**
    * Add example articles
@@ -230,6 +197,9 @@ class Populate extends CliCommand
     /** @var Category[] $categories */
     $categories = Category::collection();
 
+    /** @var Platform[] $platforms */
+    $platforms = Platform::collection();
+
     foreach($categories as $category)
     {
       $articleTitles = $this->_getTitleArray('Article', rand(1, 3));
@@ -239,8 +209,29 @@ class Populate extends CliCommand
         $article->categoryId = $category->id();
         $article->title      = $articleTitle;
         $article->subTitle   = $this->_getExampleContent(rand(4, 20));
-        $article->content    = $this->_getExampleContent(rand(20, 100));
         $article->saveChanges();
+
+        $blockCount = rand(2, 6);
+        $i          = 0;
+        do
+        {
+          $block            = new ArticleBlock();
+          $block->articleId = $article->id();
+          $block->saveChanges();
+
+          foreach($platforms as $platform)
+          {
+            $platformContent             = new ArticleBlockContent();
+            $platformContent->articleBlockId    = $block->id();
+            $platformContent->platformId = $platform->id();
+            $platformContent->content = $this->_getExampleContent(rand(10, 30));
+            $platformContent->saveChanges();
+          }
+
+          $i++;
+        }
+        while($i <= $blockCount);
+
         $count++;
       }
     }
@@ -279,50 +270,22 @@ class Populate extends CliCommand
     $categories = Category::collection();
     foreach($categories as $category)
     {
-      $videoTitles = $this->_getTitleArray('Video', rand(1, 3));
-      foreach($videoTitles as $videoTitle)
+      if(!(bool)rand(0, 3))
       {
-        $video             = new Video;
-        $video->title      = $videoTitle;
-        $video->subTitle   = $this->_getExampleContent(rand(3, 15));
-        $video->categoryId = $category->id();
-        $video->saveChanges();
-        $count++;
+        $videoTitles = $this->_getTitleArray('Video', rand(1, 3));
+        foreach($videoTitles as $videoTitle)
+        {
+          $video             = new Video;
+          $video->title      = $videoTitle;
+          $video->subTitle   = $this->_getExampleContent(rand(3, 15));
+          $video->categoryId = $category->id();
+          $video->saveChanges();
+          $count++;
+        }
       }
     }
 
     $this->_print($count);
-
-    return $this;
-  }
-
-  /**
-   * Print an info message
-   *
-   * @param string $message
-   * @param bool   $eol
-   * @param null   $foreground
-   * @param null   $background
-   *
-   * @return $this
-   */
-  protected function _print(
-    $message = 'info...',
-    $eol = true,
-    $foreground = null,
-    $background = null
-  )
-  {
-    echo Shell::colourText(
-      $message,
-      $foreground,
-      $background
-    );
-
-    if($eol)
-    {
-      echo PHP_EOL;
-    }
 
     return $this;
   }
