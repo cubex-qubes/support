@@ -20,6 +20,8 @@ class Project extends \Cubex\Core\Project\Project implements INamespaceAware
   use NamespaceAwareTrait;
   use ListenerTrait;
 
+  protected $_debug;
+
   /**
    * Get the path for the project that includes override templates
    *
@@ -40,6 +42,7 @@ class Project extends \Cubex\Core\Project\Project implements INamespaceAware
     $this->_debug = new DebuggerBundle();
     $this->_debug->init();
     $this->_listen();
+
     $this->_setProjectPathConfig();
     $this->_setProjectExtendedConfig();
 
@@ -149,7 +152,9 @@ class Project extends \Cubex\Core\Project\Project implements INamespaceAware
     );
 
     if(!class_exists($frontApp))
+    {
       throw new \Exception($frontApp . ' Not Found');
+    }
 
     return new $frontApp();
   }
