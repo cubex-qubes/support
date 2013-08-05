@@ -22,6 +22,7 @@ use Qubes\Support\Components\Content\Platform\Mappers\Platform;
 use Qubes\Support\Components\Content\Platform\Mappers\PlatformText;
 use Qubes\Support\Components\Content\Video\Mappers\Video;
 use Qubes\Support\Components\Content\Video\Mappers\VideoText;
+use Qubes\Support\Components\User\Mappers\User;
 
 class Populate extends BaseCli
 {
@@ -42,6 +43,7 @@ class Populate extends BaseCli
   {
     $this->_resetDatabase();
     $this->_print('Populating data...');
+    $this->_addUsers();
     $this->_addPlatforms();
     $this->_addCategories();
     $this->_addArticles();
@@ -78,6 +80,7 @@ class Populate extends BaseCli
 
     /** @var RecordMapper[] $mappers */
     $mappers = [
+      new User,
       new Platform,
       new PlatformText,
       new Category,
@@ -182,6 +185,25 @@ class Populate extends BaseCli
     $this->_print(count($platformNames));
 
     return $this;
+  }
+
+  protected function _addUsers()
+  {
+    $this->_print('Adding Users: ', false);
+
+    $users = [
+      'admin' => 'admin'
+    ];
+
+    foreach($users as $username => $password)
+    {
+      $user = new User;
+      $user->username = $username;
+      $user->password = md5($password);
+      $user->saveChanges();
+    }
+
+    $this->_print(count($users));
   }
 
   /**
