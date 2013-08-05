@@ -3,7 +3,7 @@
  * Author: oke.ugwu
  * Date: 31/07/13 10:15
  *
- * var $this \Qubes\Support\Applications\Back\Category\Views\Index
+ * @var $this \Qubes\Support\Applications\Back\Category\Views\Index
  */
 ?>
 <h1>Categories</h1>
@@ -36,7 +36,11 @@
       </td>
       <td><?= $category->subTitle; ?></td>
       <td><?= $category->description; ?></td>
-      <td><?= $category->getParentCategory()->title; ?></td>
+      <td>
+        <?=
+        ($category->getParentCategory()) ?
+          $category->getParentCategory()->title : '--'; ?>
+      </td>
       <td>
         <a href="<?= $this->baseUri() . '/' . $category->id() . '/edit/'; ?>"
            title="Edit"><i class="icon-edit"></i></a>
