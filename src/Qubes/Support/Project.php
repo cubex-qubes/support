@@ -9,7 +9,7 @@ use Bundl\Debugger\DebuggerBundle;
 use Cubex\Core\Interfaces\INamespaceAware;
 use Cubex\Facade\Auth;
 use Qubes\Support\Applications\Back\Login\LoginApp;
-use Qubes\Support\Applications\Front\FrontApp;
+use Qubes\Support\Applications\Front\Base\BaseFrontApp;
 use Qubes\Support\Applications\Back\BackApp;
 use Cubex\Foundation\Container;
 use Cubex\Core\Traits\NamespaceAwareTrait;
@@ -119,36 +119,88 @@ class Project extends \Cubex\Core\Project\Project implements INamespaceAware
    *
    * @param $path
    *
-   * @return \Cubex\Core\Application\Application|null|BackApp|FrontApp
+   * @return \Cubex\Core\Application\Application|null|BackApp|BaseFrontApp
    */
   public function getByPath($path)
   {
     // Back End
     if(starts_with($path, '/admin'))
     {
-      if(Auth::loggedin())
-      {
-        return new BackApp();
-      }
-      return new LoginApp();
+      return $this->_getBackApp($path);
     }
 
-
     // Front End
-    return $this->_getFrontApp();
+    return $this->_getFrontApp($path);
   }
 
   /**
-   * Checks for override FrontApp and returns it
+   * @param string $path
    *
-   * @return FrontApp
-   * @throws \Exception
+   * @return LoginApp|BaseFrontApp
    */
-  private function _getFrontApp()
+  private function _getBackApp($path = '')
   {
+    $appMap = array(
+      '' => 'Index',
+      'category' => 'Category',
+      'article' => 'Article',
+      'video' => 'Video',
+      'search' => 'Search',
+    );
+
+    if(!Auth::loggedin())
+    {
+      return new LoginApp();
+    }
+
+    return $this->_getApp($appMap, $path, 'Back');
+  }
+
+  /**
+   * @param string $path
+   *
+   * @return BaseFrontApp
+   */
+  private function _getFrontApp($path = '')
+  {
+    $appMap = array(
+      '' => 'Index',
+      'category' => 'Category',
+      'article' => 'Article',
+      'video' => 'Video',
+      'search' => 'Search',
+    );
+
+    return $this->_getApp($appMap, $path, 'Front');
+  }
+
+  /**
+   * Checks for override App class and returns it
+   *
+   * @param array  $appMap
+   * @param        $path
+   * @param string $base
+   *
+   * @throws \Exception
+   * @return BaseFrontApp|BackApp
+   */
+  private function _getApp(array $appMap = array(), $path, $base = 'Front')
+  {
+    $uriParts = explode('/', ltrim($path, '/'));
+    $baseUrl = current($uriParts);
+
+    if(!array_key_exists($baseUrl, $appMap))
+    {
+      throw new \Exception("No Application Defined for '$baseUrl'", 404);
+    }
+
     $frontApp = sprintf(
-      '%s\Applications\Front\FrontApp',
-      $this->getNamespace()
+      '%s\Applications\%s\%s\%s%sApp',
+      $this->getNamespace(),
+      $base,
+      $appMap[$baseUrl],
+      $appMap[$baseUrl],
+      $base
     );
 
     if(!class_exists($frontApp))

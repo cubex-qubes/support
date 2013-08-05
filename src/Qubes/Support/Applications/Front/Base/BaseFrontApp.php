@@ -4,14 +4,14 @@
  *
  * @author Jay Francis <jay.francis@justdevelop.it>
  */
-namespace Qubes\Support\Applications\Front;
+namespace Qubes\Support\Applications\Front\Base;
 
 use Cubex\Core\Application\Application;
 use Cubex\Foundation\Container;
 use Qubes\Support\Applications\Front\Base\Controllers\FrontController;
 use Themed\Sidekick\SidekickTheme;
 
-class FrontApp extends Application
+abstract class BaseFrontApp extends Application
 {
 
   public function init()
