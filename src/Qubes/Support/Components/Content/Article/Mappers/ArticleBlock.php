@@ -1,10 +1,4 @@
 <?php
-/**
- * Article Block
- *
- * @author Jay Francis <jay.francis@jdiuk.com>
- */
-
 namespace Qubes\Support\Components\Content\Article\Mappers;
 
 use Cubex\Mapper\Database\I18n\I18nRecordMapper;
@@ -12,6 +6,7 @@ use Cubex\Mapper\Database\I18n\I18nRecordMapper;
 /**
  * Class ArticleBlock
  *
+ * @author Jay Francis <jay.francis@jdiuk.com>
  * @package Qubes\Support\Components\Content\Article\Mappers
  * @method static \Qubes\Support\Components\Content\Article\Mappers\ArticleBlock[]|\Cubex\Mapper\Database\RecordCollection collection
  */
@@ -19,6 +14,10 @@ class ArticleBlock extends I18nRecordMapper
 {
   public $name;
   public $articleId;
+  /**
+   * @datatype int(11)
+   */
+  public $order;
 
   /**
    * @return ArticleBlockContent[]

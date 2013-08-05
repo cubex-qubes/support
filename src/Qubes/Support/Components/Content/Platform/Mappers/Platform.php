@@ -9,7 +9,6 @@ namespace Qubes\Support\Components\Content\Platform\Mappers;
 
 use Cubex\Mapper\Database\I18n\I18nRecordMapper;
 
-
 /**
  * Class Platform
  *

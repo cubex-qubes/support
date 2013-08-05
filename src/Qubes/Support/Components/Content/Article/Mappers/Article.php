@@ -1,18 +1,12 @@
 <?php
-/**
- * Article Mapper
- *
- * @author Jay Francis <jay.francis@jdiuk.com>
- */
-
 namespace Qubes\Support\Components\Content\Article\Mappers;
-
 
 use Cubex\Mapper\Database\I18n\I18nRecordMapper;
 
 /**
- * Class Article
+ * Article Mapper
  *
+ * @author  Jay Francis <jay.francis@jdiuk.com>
  * @package Qubes\Support\Components\Content\Article\Mappers
  * @method static \Qubes\Support\Components\Content\Article\Mappers\Article[]|\Cubex\Mapper\Database\RecordCollection collection
  */
@@ -21,6 +15,10 @@ class Article extends I18nRecordMapper
   public $categoryId;
   public $title;
   public $subTitle;
+  /**
+   * @datatype int(11)
+   */
+  public $order;
 
   protected function _configure()
   {

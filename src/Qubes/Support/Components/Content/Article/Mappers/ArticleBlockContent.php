@@ -23,6 +23,7 @@ class ArticleBlockContent extends I18nRecordMapper
   public $platformId;
   public $content;
 
+
   /**
    * @return $this|void
    */

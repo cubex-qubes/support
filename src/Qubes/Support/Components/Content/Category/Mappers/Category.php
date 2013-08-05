@@ -15,6 +15,10 @@ class Category extends I18nRecordMapper
   public $title;
   public $subTitle;
   public $description;
+  /**
+   * @datatype int(11)
+   */
+  public $order;
 
   protected function _configure()
   {
