@@ -18,6 +18,7 @@
     "bundl/debugger":            "*",
     "qubes/bootstrap":           "*",
     "themed/sidekick":           "*",
+    "dflydev/markdown":          "*",
     "phpseclib/phpseclib":       "*",
     "ircmaxell/password-compat": "*"
   },
