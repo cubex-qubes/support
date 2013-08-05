@@ -16,9 +16,4 @@ class DefaultController extends BaseController
   {
     return new HtmlElement('h1', [], 'Hello Admin');
   }
-
-  public function getRoutes()
-  {
-    return ['admin/logout' => 'logout'];
-  }
 }

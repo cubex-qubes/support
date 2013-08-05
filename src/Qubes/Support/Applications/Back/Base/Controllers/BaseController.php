@@ -8,6 +8,8 @@ namespace Qubes\Support\Applications\Back\Base\Controllers;
 
 use Cubex\Core\Controllers\WebpageController;
 use Cubex\Facade\Redirect;
+use Cubex\Routing\StdRoute;
+use Cubex\Routing\Templates\ResourceTemplate;
 use Cubex\View\HtmlElement;
 use Qubes\Support\Applications\Back\Base\Views\Header;
 use Qubes\Support\Applications\Back\Base\Views\Sidebar;
@@ -16,8 +18,9 @@ class BaseController extends WebpageController
 {
   public function preRender()
   {
-    $this->nest('sidebar', $this->getSidebar());
-    $this->nest('header', $this->getHeader());
+    $this->requireCss('base', __NAMESPACE__);
+    $this->tryNest('sidebar', $this->getSidebar());
+    $this->tryNest('header', $this->getHeader());
   }
 
   public function canProcess()
@@ -52,6 +55,9 @@ class BaseController extends WebpageController
 
   public function getRoutes()
   {
-    return ['logout' => 'logout'];
+    $routes   = ResourceTemplate::getRoutes();
+    $routes[] = new StdRoute('logout', 'logout');
+
+    return $routes;
   }
 }

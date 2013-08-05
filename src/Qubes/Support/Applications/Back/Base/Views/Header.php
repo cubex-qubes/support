@@ -22,6 +22,7 @@ class Header extends ViewModel
     $menus = [
       'Categories' => 'admin/categories',
       'Articles'   => 'admin/articles',
+      'Platforms'  => 'admin/platforms',
       'Users'      => 'admin/users'
     ];
 
@@ -30,9 +31,10 @@ class Header extends ViewModel
         <a href="%s" title="%s">%s</a></li>'
       , null, false);
 
+    $currPath = $this->request()->path();
     foreach($menus as $item => $path)
     {
-      $state = '';
+      $state = starts_with($currPath, "/$path", false) ? 'active' : '';
       $navItems->addElement(
         $state,
         '/' . $path,
