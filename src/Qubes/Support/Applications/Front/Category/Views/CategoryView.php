@@ -15,6 +15,11 @@ class CategoryView extends FrontView
   /** @var  Category */
   private $_category;
 
+  public function __construct()
+  {
+    $this->setTitle($this->t("Support : Category"));
+  }
+
   /**
    * @param Category $category
    *

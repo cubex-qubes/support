@@ -12,4 +12,11 @@ use Qubes\Support\Applications\Front\Base\Views\FrontView;
 class IndexView extends FrontView
 {
 
+  public function __construct()
+  {
+    $this->setTitle($this->t("Support : Index"));
+  }
+
 }
+
+
