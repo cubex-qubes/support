@@ -13,11 +13,13 @@
     }
   ],
   "require":           {
-    "php":             ">=5.4.0",
-    "cubex/cubex":     "*",
-    "bundl/debugger":  "*",
-    "qubes/bootstrap": "*",
-    "themed/sidekick": "*"
+    "php":                       ">=5.4.0",
+    "cubex/cubex":               "*",
+    "bundl/debugger":            "*",
+    "qubes/bootstrap":           "*",
+    "themed/sidekick":           "*",
+    "phpseclib/phpseclib":       "*",
+    "ircmaxell/password-compat": "*"
   },
   "autoload":          {
     "psr-0": {
