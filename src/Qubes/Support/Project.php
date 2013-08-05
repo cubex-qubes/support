@@ -194,7 +194,7 @@ class Project extends \Cubex\Core\Project\Project implements INamespaceAware
       throw new \Exception("No Application Defined for '$baseUrl'", 404);
     }
 
-    $frontApp = sprintf(
+    $app = sprintf(
       '%s\Applications\%s\%s\%s%sApp',
       $this->getNamespace(),
       $base,
@@ -203,11 +203,11 @@ class Project extends \Cubex\Core\Project\Project implements INamespaceAware
       $base
     );
 
-    if(!class_exists($frontApp))
+    if(!class_exists($app))
     {
-      throw new \Exception($frontApp . ' Not Found');
+      throw new \Exception($app . ' Not Found');
     }
 
-    return new $frontApp();
+    return new $app();
   }
 }
