@@ -9,6 +9,7 @@ namespace Qubes\Support\Applications\Front;
 use Cubex\Core\Application\Application;
 use Cubex\Foundation\Container;
 use Qubes\Support\Applications\Front\Base\Controllers\FrontController;
+use Themed\Sidekick\SidekickTheme;
 
 class FrontApp extends Application
 {
@@ -42,17 +43,6 @@ class FrontApp extends Application
   public function getGlobalJs()
   {
     return [];
-  }
-
-  /**
-   * Set the theme
-   *
-   * @return \Cubex\Theme\ApplicationTheme|void
-   * @throws \Exception
-   */
-  public function getTheme()
-  {
-    throw new \Exception('Theme not implemented');
   }
 
   /**
@@ -99,7 +89,9 @@ class FrontApp extends Application
       );
 
       if(class_exists($extendedClass))
+      {
         return $extendedClass;
+      }
     }
 
     $controllerClass = sprintf(
@@ -109,8 +101,20 @@ class FrontApp extends Application
     );
 
     if(!class_exists($controllerClass))
+    {
       throw new \Exception($controllerClass . ' Not Found');
+    }
 
     return $controllerClass;
+  }
+
+  /**
+   * Set the default project theme
+   *
+   * @return \Cubex\Theme\ApplicationTheme|SidekickTheme
+   */
+  public function getTheme()
+  {
+    return new SidekickTheme;
   }
 }
