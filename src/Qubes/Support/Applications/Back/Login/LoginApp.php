@@ -6,17 +6,11 @@
 
 namespace Qubes\Support\Applications\Back\Login;
 
-use Qubes\Support\Applications\Back\BackApp;
+use Qubes\Support\Applications\Back\Base\BaseApp;
 use Qubes\Support\Applications\Back\Login\Controllers\DefaultController;
 
-class LoginApp extends BackApp
+class LoginApp extends BaseApp
 {
-  public function getRoutes()
-  {
-    return [
-    ];
-  }
-
   public function defaultController()
   {
     return new DefaultController();

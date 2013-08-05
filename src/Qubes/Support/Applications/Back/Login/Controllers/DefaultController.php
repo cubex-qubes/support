@@ -59,4 +59,11 @@ class DefaultController extends BaseController
   {
     return null;
   }
+
+  public function getRoutes()
+  {
+    return [
+      '/' => 'index'
+    ];
+  }
 }
