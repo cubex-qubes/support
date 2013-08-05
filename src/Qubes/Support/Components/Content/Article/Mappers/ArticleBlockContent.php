@@ -18,9 +18,9 @@ use Qubes\Support\Components\Content\Platform\Mappers\Platform;
  */
 class ArticleBlockContent extends I18nRecordMapper
 {
-  public $name;
   public $articleBlockId;
   public $platformId;
+  public $title;
   public $content;
 
 
@@ -29,7 +29,10 @@ class ArticleBlockContent extends I18nRecordMapper
    */
   protected function _configure()
   {
-    $this->_addTranslationAttribute('content');
+    $this->_addTranslationAttribute(
+      'title',
+      'content'
+    );
   }
 
   /**

@@ -12,7 +12,6 @@ use Cubex\Mapper\Database\I18n\I18nRecordMapper;
  */
 class ArticleBlock extends I18nRecordMapper
 {
-  public $name;
   public $articleId;
   /**
    * @datatype int(11)

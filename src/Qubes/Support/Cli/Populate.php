@@ -224,6 +224,7 @@ class Populate extends BaseCli
             $platformContent                 = new ArticleBlockContent();
             $platformContent->articleBlockId = $block->id();
             $platformContent->platformId     = $platform->id();
+            $platformContent->title          = $this->_getExampleContent(3);
             $platformContent->content        = $this->_getExampleContent(
               rand(10, 30)
             );
