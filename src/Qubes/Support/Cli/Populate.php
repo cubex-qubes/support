@@ -118,11 +118,11 @@ class Populate extends BaseCli
     $categoryTitles = $this->_getTitleArray('Category', rand(2, 4));
     foreach($categoryTitles as $categoryTitle)
     {
-      $category              = new Category;
-      $category->title       = $categoryTitle;
-      $category->subTitle    = $this->_getExampleContent();
-      $category->description = $this->_getExampleContent(rand(5, 15));
-      $category->saveChanges();
+      $subCategory              = new Category;
+      $subCategory->title       = $categoryTitle;
+      $subCategory->subTitle    = $this->_getExampleContent();
+      $subCategory->description = $this->_getExampleContent(rand(5, 15));
+      $subCategory->saveChanges();
       $count++;
     }
     $this->_print($count);
@@ -131,20 +131,20 @@ class Populate extends BaseCli
     $this->_print('Adding Sub-Categories: ', false);
     $count      = 0;
     $categories = Category::collection();
+
     foreach($categories as $category)
     {
-      if(!(bool)rand(0, 3))
+      $subCategoryCount = rand(1, 2);
+
+      $categoryTitles = $this->_getTitleArray('Category', $subCategoryCount);
+      foreach($categoryTitles as $categoryTitle)
       {
-        $categoryTitles = $this->_getTitleArray('Category', rand(0, 2));
-        foreach($categoryTitles as $categoryTitle)
-        {
-          $category                   = new Category;
-          $category->parentCategoryId = $category->id();
-          $category->title            = $categoryTitle;
-          $category->subTitle         = $this->_getExampleContent(rand(5, 15));
-          $category->saveChanges();
-          $count++;
-        }
+        $subCategory                   = new Category;
+        $subCategory->parentCategoryId = $category->id();
+        $subCategory->title            = $categoryTitle;
+        $subCategory->subTitle         = $this->_getExampleContent(rand(5, 15));
+        $subCategory->saveChanges();
+        $count++;
       }
     }
     $this->_print($count);
@@ -221,10 +221,12 @@ class Populate extends BaseCli
 
           foreach($platforms as $platform)
           {
-            $platformContent             = new ArticleBlockContent();
-            $platformContent->articleBlockId    = $block->id();
-            $platformContent->platformId = $platform->id();
-            $platformContent->content = $this->_getExampleContent(rand(10, 30));
+            $platformContent                 = new ArticleBlockContent();
+            $platformContent->articleBlockId = $block->id();
+            $platformContent->platformId     = $platform->id();
+            $platformContent->content        = $this->_getExampleContent(
+              rand(10, 30)
+            );
             $platformContent->saveChanges();
           }
 
