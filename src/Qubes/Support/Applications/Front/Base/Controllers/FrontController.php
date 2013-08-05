@@ -10,6 +10,7 @@ namespace Qubes\Support\Applications\Front\Base\Controllers;
 use Cubex\Core\Controllers\WebpageController;
 use Cubex\Foundation\Container;
 use Cubex\Foundation\IRenderable;
+use Qubes\Support\Applications\Front\Base\Views\FrontHeader;
 use Qubes\Support\Applications\Front\Base\Views\FrontView;
 use Cubex\View\Templates\Errors\Error404;
 
@@ -20,6 +21,17 @@ abstract class FrontController extends WebpageController
     $this->_addProjectResources();
     $this->_nestSections();
   }
+
+  public function preRender()
+  {
+    $this->tryNest('header', $this->getHeader());
+  }
+
+  public function getHeader()
+  {
+    return new FrontHeader;
+  }
+
 
   /**
    * Check for an override then return the view object
