@@ -8,7 +8,7 @@ namespace Qubes\Support\Applications\Back\Category;
 
 use Qubes\Support\Applications\Back\Base\BaseApp;
 
-class CategoryApp extends BaseApp
+class CategoryBackApp extends BaseApp
 {
   public function name()
   {

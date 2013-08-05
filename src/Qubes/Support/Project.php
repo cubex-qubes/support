@@ -153,6 +153,9 @@ class Project extends \Cubex\Core\Project\Project implements INamespaceAware
       return new LoginApp();
     }
 
+    // Strip /admin
+    $path = preg_replace('@^/admin@', '', $path);
+
     return $this->_getApp($appMap, $path, 'Back');
   }
 
@@ -194,7 +197,7 @@ class Project extends \Cubex\Core\Project\Project implements INamespaceAware
       throw new \Exception("No Application Defined for '$baseUrl'", 404);
     }
 
-    $app = sprintf(
+    $className = sprintf(
       '%s\Applications\%s\%s\%s%sApp',
       $this->getNamespace(),
       $base,
@@ -203,11 +206,11 @@ class Project extends \Cubex\Core\Project\Project implements INamespaceAware
       $base
     );
 
-    if(!class_exists($app))
+    if(!class_exists($className))
     {
-      throw new \Exception($app . ' Not Found');
+      throw new \Exception($className . ' Not Found');
     }
 
-    return new $app();
+    return new $className();
   }
 }
