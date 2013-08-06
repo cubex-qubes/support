@@ -4,9 +4,9 @@ namespace Qubes\Support;
 use Bundl\Debugger\DebuggerBundle;
 use Cubex\Core\Interfaces\INamespaceAware;
 use Cubex\Facade\Auth;
-use Qubes\Support\Applications\Back\Login\LoginApp;
+use Qubes\Support\Applications\Back\Login\LoginBackApp;
 use Qubes\Support\Applications\Front\Base\BaseFrontApp;
-use Qubes\Support\Applications\Back\BackApp;
+use Qubes\Support\Applications\Back\Base\BaseBackApp;
 use Cubex\Foundation\Container;
 use Cubex\Core\Traits\NamespaceAwareTrait;
 use Cubex\Dispatch\Utils\ListenerTrait;
@@ -120,7 +120,7 @@ class Project extends \Cubex\Core\Project\Project implements INamespaceAware
    *
    * @param $path
    *
-   * @return \Cubex\Core\Application\Application|null|BackApp|BaseFrontApp
+   * @return \Cubex\Core\Application\Application|null|BaseBackApp|BaseFrontApp
    */
   public function getByPath($path)
   {
@@ -135,7 +135,7 @@ class Project extends \Cubex\Core\Project\Project implements INamespaceAware
   }
 
   /**
-   * @return LoginApp|BaseFrontApp
+   * @return LoginBackApp|BaseFrontApp
    */
   private function _getBackApp()
   {
@@ -143,13 +143,15 @@ class Project extends \Cubex\Core\Project\Project implements INamespaceAware
       ''         => 'Index',
       'category' => 'Category',
       'article'  => 'Article',
+      'platform' => 'Platform',
+      'user'     => 'User',
       'video'    => 'Video',
       'search'   => 'Search',
     );
 
     if(!Auth::loggedin())
     {
-      return new LoginApp();
+      return new LoginBackApp();
     }
 
     // Strip /admin
@@ -193,6 +195,8 @@ class Project extends \Cubex\Core\Project\Project implements INamespaceAware
     $path     = $path ? $path : $this->request()->path();
     $uriParts = explode('/', ltrim($path, '/'));
     $baseUrl  = current($uriParts);
+
+    $baseUrl = ($baseUrl != 'logout')? $baseUrl : '';
 
     if(!array_key_exists($baseUrl, $appMap))
     {

@@ -20,10 +20,10 @@ class Header extends ViewModel
   public function render()
   {
     $menus = [
-      'Categories' => 'admin/categories',
-      'Articles'   => 'admin/articles',
-      'Platforms'  => 'admin/platforms',
-      'Users'      => 'admin/users'
+      'Categories' => 'admin/category',
+      'Articles'   => 'admin/article',
+      'Platforms'  => 'admin/platform',
+      'Users'      => 'admin/user'
     ];
 
     $navItems = new Partial(

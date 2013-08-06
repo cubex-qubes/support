@@ -14,7 +14,7 @@ use Cubex\View\HtmlElement;
 use Qubes\Support\Applications\Back\Base\Views\Header;
 use Qubes\Support\Applications\Back\Base\Views\Sidebar;
 
-class BaseController extends WebpageController
+abstract class BaseBackController extends WebpageController
 {
   public function preRender()
   {
@@ -27,7 +27,7 @@ class BaseController extends WebpageController
   {
     if(!\Auth::loggedIn())
     {
-      Redirect::to('/admin')->now();
+      Redirect::to('/' . $this->baseUri())->now();
     }
     return true;
   }
@@ -45,19 +45,11 @@ class BaseController extends WebpageController
   public function logout()
   {
     \Auth::logout();
-    Redirect::to('/admin')->now();
+    Redirect::to('/' . $this->baseUri())->now();
   }
 
   public function defaultAction()
   {
     return "index";
-  }
-
-  public function getRoutes()
-  {
-    $routes   = ResourceTemplate::getRoutes();
-    $routes[] = new StdRoute('logout', 'logout');
-
-    return $routes;
   }
 }
