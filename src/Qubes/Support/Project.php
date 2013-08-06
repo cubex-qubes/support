@@ -19,7 +19,7 @@ class Project extends \Cubex\Core\Project\Project implements INamespaceAware
   public function getBundles()
   {
     return [
-      new DebuggerBundle()
+      //      new DebuggerBundle()
     ];
   }
 
@@ -143,9 +143,12 @@ class Project extends \Cubex\Core\Project\Project implements INamespaceAware
       '/'            => 'Index',
       '/article'     => 'Article',
       '/category'    => 'Category',
+      '/platform'    => 'Platform',
+      '/user'        => 'User',
       '/search'      => 'Search',
       '/video'       => 'Video',
       '/walkthrough' => 'Walkthrough',
+      '/access'      => 'Access',
     ];
 
     $path = $this->request()->offsetPath(1, 1);
