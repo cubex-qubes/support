@@ -1,7 +1,27 @@
 <?php
 /**
  * ArticleView Template
+ *
  * @var $this Qubes\Support\Applications\Front\Article\Views\ArticleView
  */
+$article = $this->getArticle();
 ?>
-ArticleView Template
+<h1><?= $article->title; ?></h1>
+<h2><?= $article->subTitle; ?></h2>
+<?php foreach($article->getBlockGroups() as $blockGroup): ?>
+  <div id="<?= sprintf('block-group-%d', $blockGroup->id()) ?>">
+    <?php foreach($blockGroup->getBlocks() as $block): ?>
+      <div
+        id="<?= sprintf('block-%d', $block->id()) ?>"
+        class="<?= sprintf('platform-%d', $block->platformId) ?>"
+        >
+        <?php if($block->title) : ?>
+          <h3><?= $block->title ?></h3>
+          <div>
+            <?php echo $block->content ?>
+          </div>
+        <?php endif; ?>
+      </div>
+    <?php endforeach ?>
+  </div>
+<?php endforeach ?>
