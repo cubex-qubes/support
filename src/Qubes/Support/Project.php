@@ -159,7 +159,7 @@ class Project extends \Cubex\Core\Project\Project implements INamespaceAware
     // Strip /admin
     $path = $this->request()->offsetPath(1);
 
-    return $this->_getApp($appMap, $path, 'Back');
+    return $this->_getApp($appMap, 'Back', $path);
   }
 
   /**
