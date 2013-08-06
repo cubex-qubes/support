@@ -20,7 +20,16 @@ class Project extends \Cubex\Core\Project\Project implements INamespaceAware
   use NamespaceAwareTrait;
   use ListenerTrait;
 
-  protected $_debug;
+
+  /**
+   * @return array
+   */
+  public function getBundles()
+  {
+    return [
+      new DebuggerBundle()
+    ];
+  }
 
   /**
    * Get the path for the project that includes override templates
