@@ -6,8 +6,6 @@ use Cubex\Mapper\Database\I18n\I18nRecordMapper;
 /**
  * Article Mapper
  *
- * @author  Jay Francis <jay.francis@jdiuk.com>
- * @package Qubes\Support\Components\Content\Article\Mappers
  * @method static \Qubes\Support\Components\Content\Article\Mappers\Article[]|\Cubex\Mapper\Database\RecordCollection collection
  */
 class Article extends I18nRecordMapper
@@ -15,6 +13,7 @@ class Article extends I18nRecordMapper
   public $categoryId;
   public $title;
   public $subTitle;
+  public $view;
   /**
    * @datatype int(11)
    */
