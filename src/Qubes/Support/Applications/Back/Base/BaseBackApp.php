@@ -7,14 +7,10 @@
 namespace Qubes\Support\Applications\Back\Base;
 
 use Cubex\Core\Application\Application;
-use Qubes\Support\Applications\Back\Article\Controllers\ArticleController;
 use Qubes\Support\Applications\Back\Base\Controllers\DefaultController;
-use Qubes\Support\Applications\Back\Category\Controllers\CategoryController;
-use Qubes\Support\Applications\Back\Platform\Controllers\PlatformController;
-use Qubes\Support\Applications\Back\User\Controllers\UserController;
 use Themed\Sidekick\SidekickTheme;
 
-class BaseApp extends Application
+class BaseBackApp extends Application
 {
   public function __construct()
   {
@@ -35,10 +31,10 @@ class BaseApp extends Application
   public function getRoutes()
   {
     return [
-      'categories/(.*)' => new CategoryController(),
-      'articles/(.*)'   => new ArticleController(),
-      'platforms/(.*)'  => new PlatformController(),
-      'users/(.*)'      => new UserController()
+      'category/(.*)' => 'CategoryBackController',
+      'article/(.*)'  => 'ArticleBackController',
+      'platform/(.*)' => 'PlatformBackController',
+      'user/(.*)'     => 'UserController'
     ];
   }
 
