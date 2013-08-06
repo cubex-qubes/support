@@ -52,7 +52,7 @@ class Header extends ViewModel
       '<div class="nav-collapse collapse">
         <ul class="nav pull-right">
           <li><a href="/admin/profile">' . Auth::getRawUsername() . '</a></li>
-          <li><a href="/admin/logout">Logout</a></li>
+          <li><a href="/admin/access/logout">Logout</a></li>
         </ul>
       </div>'
     );

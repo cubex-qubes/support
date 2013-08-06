@@ -4,16 +4,16 @@
  * Date: 30/07/13 16:24
  */
 
-namespace Qubes\Support\Applications\Back\Login\Controllers;
+namespace Qubes\Support\Applications\Back\Access\Controllers;
 
 use Cubex\Auth\StdLoginCredentials;
 use Cubex\Facade\Auth;
 use Cubex\Facade\Redirect;
 use Cubex\View\RenderGroup;
 use Qubes\Support\Applications\Back\Base\Controllers\BaseBackController;
-use Qubes\Support\Applications\Back\Login\Views\Login;
+use Qubes\Support\Applications\Back\Access\Views\Login;
 
-class LoginBackController extends BaseBackController
+class AccessBackController extends BaseBackController
 {
   public function canProcess()
   {
@@ -48,6 +48,12 @@ class LoginBackController extends BaseBackController
     }
   }
 
+  public function logout()
+  {
+    \Auth::logout();
+    Redirect::to('/' . $this->baseUri())->now();
+  }
+
   public function getHeader()
   {
     return new RenderGroup(
@@ -63,7 +69,8 @@ class LoginBackController extends BaseBackController
   public function getRoutes()
   {
     return [
-      '/' => 'index'
+      '/'       => 'index',
+      '/logout' => 'logout'
     ];
   }
 }

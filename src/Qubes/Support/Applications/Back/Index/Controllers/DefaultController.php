@@ -6,7 +6,6 @@
 
 namespace Qubes\Support\Applications\Back\Index\Controllers;
 
-use Cubex\Routing\StdRoute;
 use Cubex\View\HtmlElement;
 use Cubex\View\RenderGroup;
 use Qubes\Support\Applications\Back\Base\Controllers\BaseBackController;
@@ -16,12 +15,5 @@ class DefaultController extends BaseBackController
   public function renderIndex()
   {
     return new HtmlElement('h1', [], 'Hello Admin');
-  }
-
-  public function getRoutes()
-  {
-    return [
-      new StdRoute('logout', 'logout')
-    ];
   }
 }

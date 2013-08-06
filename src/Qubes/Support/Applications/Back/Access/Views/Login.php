@@ -4,7 +4,7 @@
  * Date: 30/07/13 16:25
  */
 
-namespace Qubes\Support\Applications\Back\Login\Views;
+namespace Qubes\Support\Applications\Back\Access\Views;
 
 use Cubex\Facade\Session;
 use Cubex\Form\Form;

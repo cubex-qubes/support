@@ -8,8 +8,6 @@ namespace Qubes\Support\Applications\Back\Base\Controllers;
 
 use Cubex\Core\Controllers\WebpageController;
 use Cubex\Facade\Redirect;
-use Cubex\Routing\StdRoute;
-use Cubex\Routing\Templates\ResourceTemplate;
 use Cubex\View\HtmlElement;
 use Qubes\Support\Applications\Back\Base\Views\Header;
 use Qubes\Support\Applications\Back\Base\Views\Sidebar;
@@ -27,7 +25,7 @@ abstract class BaseBackController extends WebpageController
   {
     if(!\Auth::loggedIn())
     {
-      Redirect::to('/' . $this->baseUri())->now();
+      Redirect::to('/admin/access')->now();
     }
     return true;
   }
@@ -40,12 +38,6 @@ abstract class BaseBackController extends WebpageController
   public function getHeader()
   {
     return new Header();
-  }
-
-  public function logout()
-  {
-    \Auth::logout();
-    Redirect::to('/' . $this->baseUri())->now();
   }
 
   public function defaultAction()
