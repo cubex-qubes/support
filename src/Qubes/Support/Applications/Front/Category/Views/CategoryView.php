@@ -11,7 +11,7 @@ class CategoryView extends FrontView
 
   public function __construct()
   {
-    $this->setTitle($this->t("Support : Category"));
+    $this->setTitle($this->t("Category"));
   }
 
   /**

@@ -11,7 +11,7 @@ class ArticleView extends FrontView
 
   public function __construct()
   {
-    $this->setTitle($this->t("Support : Article"));
+    $this->setTitle($this->t("Article"));
   }
 
   /**

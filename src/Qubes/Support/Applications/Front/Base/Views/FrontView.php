@@ -9,6 +9,21 @@ abstract class FrontView extends TemplatedViewModel
 {
 
   /**
+   * @param string $title
+   *
+   * @return static
+   */
+  public function setTitle($title = '')
+  {
+    $title = sprintf(
+      '%s - %s',
+      $this->t('Support'),
+      $title
+    );
+    return parent::setTitle($title);
+  }
+
+  /**
    * Override this Views's Template directory
    *
    * @param $directory
