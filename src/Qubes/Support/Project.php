@@ -3,10 +3,6 @@ namespace Qubes\Support;
 
 use Bundl\Debugger\DebuggerBundle;
 use Cubex\Core\Interfaces\INamespaceAware;
-use Cubex\Facade\Auth;
-use Qubes\Support\Applications\Back\Login\LoginBackApp;
-use Qubes\Support\Applications\Front\Base\BaseFrontApp;
-use Qubes\Support\Applications\Back\Base\BaseBackApp;
 use Cubex\Foundation\Container;
 use Cubex\Core\Traits\NamespaceAwareTrait;
 use Cubex\Dispatch\Utils\ListenerTrait;
@@ -23,7 +19,7 @@ class Project extends \Cubex\Core\Project\Project implements INamespaceAware
   public function getBundles()
   {
     return [
-//      new DebuggerBundle()
+      new DebuggerBundle()
     ];
   }
 
@@ -115,101 +111,68 @@ class Project extends \Cubex\Core\Project\Project implements INamespaceAware
     throw new \Exception('Not Implemented');
   }
 
-  /**
-   * Initial Routing to Application
-   *
-   * @param $path
-   *
-   * @return \Cubex\Core\Application\Application|null|BaseBackApp|BaseFrontApp
-   */
   public function getByPath($path)
   {
-    // Back End
-    if(starts_with($path, '/admin'))
+    $basePath = $this->request()->offsetPath(0, 1);
+
+    if($basePath == '/admin')
     {
       return $this->_getBackApp();
     }
 
-    // Front End
     return $this->_getFrontApp();
   }
 
-  /**
-   * @return LoginBackApp|BaseFrontApp
-   */
-  private function _getBackApp()
-  {
-    $appMap = array(
-      ''         => 'Index',
-      'category' => 'Category',
-      'article'  => 'Article',
-      'platform' => 'Platform',
-      'user'     => 'User',
-      'video'    => 'Video',
-      'search'   => 'Search',
-    );
-
-    if(!Auth::loggedin())
-    {
-      return new LoginBackApp();
-    }
-
-    // Strip /admin
-    $path = $this->request()->offsetPath(1);
-
-    return $this->_getApp($appMap, 'Back', $path);
-  }
-
-  /**
-   * @return BaseFrontApp
-   */
   private function _getFrontApp()
   {
-    $appMap = array(
-      ''         => 'Index',
-      'category' => 'Category',
-      'article'  => 'Article',
-      'video'    => 'Video',
-      'search'   => 'Search',
-    );
+    $appRoutes = [
+      '/'            => 'Index',
+      '/article'     => 'Article',
+      '/category'    => 'Category',
+      '/search'      => 'Search',
+      '/video'       => 'Video',
+      '/walkthrough' => 'Walkthrough',
+    ];
 
-    return $this->_getApp($appMap, 'Front');
+    return $this->_getApp($appRoutes);
   }
 
-  /**
-   * Checks for override App class and returns it
-   *
-   * @param array  $appMap
-   * @param        $path
-   * @param string $base
-   *
-   * @throws \Exception
-   * @return BaseFrontApp|BackApp
-   */
+  private function _getBackApp()
+  {
+    $appRoutes = [
+      '/'            => 'Index',
+      '/article'     => 'Article',
+      '/category'    => 'Category',
+      '/search'      => 'Search',
+      '/video'       => 'Video',
+      '/walkthrough' => 'Walkthrough',
+    ];
+
+    $path = $this->request()->offsetPath(1);
+
+    return $this->_getApp($appRoutes, 'Back', $path);
+  }
+
   private function _getApp(
-    array $appMap = array(),
-    $base = 'Front',
+    array $appRoutes = array(),
+    $namespace = 'Front',
     $path = null
   )
   {
-    $path     = $path ? $path : $this->request()->path();
-    $uriParts = explode('/', ltrim($path, '/'));
-    $baseUrl  = current($uriParts);
+    $path = $path ? $path : $this->request()->path(1, 1);
 
-    $baseUrl = ($baseUrl != 'logout')? $baseUrl : '';
-
-    if(!array_key_exists($baseUrl, $appMap))
+    if(!array_key_exists($path, $appRoutes))
     {
-      throw new \Exception("No Application Defined for '$baseUrl'", 404);
+      throw new \Exception("No Application Defined for '$path'", 404);
     }
 
     $className = sprintf(
       '%s\Applications\%s\%s\%s%sApp',
       $this->getNamespace(),
-      $base,
-      $appMap[$baseUrl],
-      $appMap[$baseUrl],
-      $base
+      $namespace,
+      $appRoutes[$path],
+      $appRoutes[$path],
+      $namespace
     );
 
     if(!class_exists($className))

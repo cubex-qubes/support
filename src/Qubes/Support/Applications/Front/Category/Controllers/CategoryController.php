@@ -36,7 +36,7 @@ class CategoryController extends FrontController
   public function getRoutes()
   {
     return [
-      '/(?P<id>\d+)-.*' => 'category',
+      '/category/(?P<id>\d+)-.*' => 'category',
     ];
   }
 }

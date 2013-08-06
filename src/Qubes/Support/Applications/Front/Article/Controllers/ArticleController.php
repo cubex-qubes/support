@@ -7,7 +7,6 @@ use Qubes\Support\Components\Content\Article\Mappers\Article;
 
 class ArticleController extends FrontController
 {
-
   /**
    * Render an Article
    *
@@ -24,7 +23,7 @@ class ArticleController extends FrontController
     }
 
     /** @var ArticleView $view */
-    $view          = $this->getView('ArticleView');
+    $view = $this->getView('ArticleView');
     $view->setArticle($article);
 
     return $view;
@@ -36,7 +35,7 @@ class ArticleController extends FrontController
   public function getRoutes()
   {
     return [
-      '/(?P<id>\d+)-.*' => 'article',
+      '/article/(?P<id>\d+)-.*' => 'article',
     ];
   }
 }

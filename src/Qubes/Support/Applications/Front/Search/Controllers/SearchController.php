@@ -10,11 +10,11 @@ class SearchController extends FrontController
   /**
    * Render the search results index
    *
-   * @param null $search
+   * @param string $search
    *
    * @return SearchIndexView
    */
-  public function renderIndex($search = null)
+  public function renderIndex($search = '')
   {
     /** @var SearchIndexView $view */
     $view = $this->getView('SearchIndexView');
@@ -25,7 +25,7 @@ class SearchController extends FrontController
   public function getRoutes()
   {
     return array(
-      '/:search@all' => 'index',
+      '/search/:search@all' => 'index',
     );
   }
 }
