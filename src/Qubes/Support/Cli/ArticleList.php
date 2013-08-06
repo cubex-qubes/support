@@ -1,6 +1,7 @@
 <?php
 namespace Qubes\Support\Cli;
 
+use Cubex\Cli\Shell;
 use Cubex\I18n\Processor\Cli;
 use Qubes\Support\Components\Content\Article\Mappers\Article;
 use Qubes\Support\Components\Content\Platform\Mappers\Platform;
@@ -32,21 +33,27 @@ class ArticleList extends Cli
     {
       echo PHP_EOL;
 
+      echo Shell::colourText(
+        "Title: " . $article->title . PHP_EOL,
+        true,
+        Shell::COLOUR_FOREGROUND_BROWN,
+        Shell::COLOUR_BACKGROUND_RED
+      );
       echo 'Article ID:  ' . $article->id() . PHP_EOL;
-      echo 'Title:       ' . $article->title . PHP_EOL;
       echo 'Sub-Title:   ' . $article->subTitle . PHP_EOL;
       echo 'View:   ' . $article . PHP_EOL;
 
-      foreach($article->getArticleBlocks() as $articleBlock)
+      foreach($article->getBlockGroups() as $blockGroup)
       {
-        foreach($articleBlock->getArticleBlockContent() as $blockContent)
+        foreach($blockGroup->getBlocks() as $block)
         {
           /** @var Platform $platform */
-          $platform = $platforms->getById($blockContent->platformId);
+          $platform = $platforms->getById($block->platformId);
 
           echo PHP_EOL;
-          echo 'Platform Name: ' . $platform->name . PHP_EOL;
-          echo 'Platform Content: ' . $blockContent->content . PHP_EOL;
+          echo 'Block Platform: ' . $platform->name . PHP_EOL;
+          echo 'Block Title: ' . $block->title . PHP_EOL;
+          echo 'Block Content: ' . $block->content . PHP_EOL;
         }
       }
       echo PHP_EOL;

@@ -28,11 +28,11 @@ class Article extends I18nRecordMapper
   }
 
   /**
-   * @return ArticleBlock[]
+   * @return BlockGroup[]
    */
-  public function getArticleBlocks()
+  public function getBlockGroups()
   {
-    return $this->hasMany(new ArticleBlock());
+    return $this->hasMany(new BlockGroup());
   }
 
   /**

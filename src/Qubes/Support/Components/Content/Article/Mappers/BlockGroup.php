@@ -4,13 +4,9 @@ namespace Qubes\Support\Components\Content\Article\Mappers;
 use Cubex\Mapper\Database\I18n\I18nRecordMapper;
 
 /**
- * Class ArticleBlock
- *
- * @author Jay Francis <jay.francis@jdiuk.com>
- * @package Qubes\Support\Components\Content\Article\Mappers
  * @method static \Qubes\Support\Components\Content\Article\Mappers\ArticleBlock[]|\Cubex\Mapper\Database\RecordCollection collection
  */
-class ArticleBlock extends I18nRecordMapper
+class BlockGroup extends I18nRecordMapper
 {
   public $articleId;
   /**
@@ -19,11 +15,11 @@ class ArticleBlock extends I18nRecordMapper
   public $order;
 
   /**
-   * @return ArticleBlockContent[]
+   * @return Block[]
    */
-  public function getArticleBlockContent()
+  public function getBlocks()
   {
-    return $this->hasMany(new ArticleBlockContent, 'articleBlockId');
+    return $this->hasMany(new Block, 'blockGroupId');
   }
 
   /**

@@ -7,11 +7,11 @@ use Qubes\Support\Components\Content\Platform\Mappers\Platform;
 /**
  * Platform specific Article Block Content, i.e. Windows, Mac, Linux
  *
- * @method static \Qubes\Support\Components\Content\Article\Mappers\ArticleBlockContent[]|\Cubex\Mapper\Database\RecordCollection collection
+ * @method static \Qubes\Support\Components\Content\Article\Mappers\ArticleBlock[]|\Cubex\Mapper\Database\RecordCollection collection
  */
-class ArticleBlockContent extends I18nRecordMapper
+class Block extends I18nRecordMapper
 {
-  public $articleBlockId;
+  public $blockGroupId;
   public $platformId;
   public $title;
   public $content;
@@ -28,12 +28,13 @@ class ArticleBlockContent extends I18nRecordMapper
     );
   }
 
+
   /**
-   * @return \Cubex\Mapper\Database\RecordCollection
+   * @return BlockGroup[]
    */
-  public function getArticleBlock()
+  public function getBlockGroup()
   {
-    return $this->hasMany(new ArticleBlock, 'articleBlockId');
+    return $this->hasMany(new BlockGroup, 'blockGroupId');
   }
 
   /**

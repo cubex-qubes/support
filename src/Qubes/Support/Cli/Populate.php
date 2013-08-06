@@ -8,9 +8,9 @@ use Cubex\I18n\Processor\Cli;
 use Cubex\Mapper\Database\RecordMapper;
 use Cubex\Text\TextTable;
 use Qubes\Support\Components\Content\Article\Mappers\Article;
-use Qubes\Support\Components\Content\Article\Mappers\ArticleBlock;
-use Qubes\Support\Components\Content\Article\Mappers\ArticleBlockContent;
 use Qubes\Support\Components\Content\Article\Mappers\ArticleText;
+use Qubes\Support\Components\Content\Article\Mappers\Block;
+use Qubes\Support\Components\Content\Article\Mappers\BlockGroup;
 use Qubes\Support\Components\Content\Category\Mappers\Category;
 use Qubes\Support\Components\Content\Category\Mappers\CategoryText;
 use Qubes\Support\Components\Content\Platform\Mappers\Platform;
@@ -69,6 +69,7 @@ class Populate extends Cli
       Shell::COLOUR_FOREGROUND_BROWN,
       Shell::COLOUR_BACKGROUND_RED
     );
+    echo PHP_EOL;
 
     $reset = UserPrompt::confirm('Are you sure? You will lose ALL data?');
     if(!$reset)
@@ -85,7 +86,8 @@ class Populate extends Cli
       new CategoryText,
       new Article,
       new ArticleText,
-      new ArticleBlock,
+      new Block,
+      new BlockGroup,
       new Video,
       new VideoText,
     ];
@@ -99,6 +101,7 @@ class Populate extends Cli
         Shell::COLOUR_FOREGROUND_LIGHT_GREY,
         Shell::COLOUR_BACKGROUND_RED
       );
+      echo PHP_EOL;
     }
 
     echo 'Done, now run without flag...' . PHP_EOL;
@@ -194,7 +197,7 @@ class Populate extends Cli
 
     foreach($users as $username => $password)
     {
-      $user = new User;
+      $user           = new User;
       $user->username = $username;
       $user->password = password_hash($password, PASSWORD_DEFAULT);
       $user->saveChanges();
@@ -234,20 +237,22 @@ class Populate extends Cli
         $i          = 0;
         do
         {
-          $block            = new ArticleBlock();
-          $block->articleId = $article->id();
-          $block->saveChanges();
+          $blockGroup            = new BlockGroup;
+          $blockGroup->articleId = $article->id();
+          $blockGroup->saveChanges();
 
           foreach($platforms as $platform)
           {
-            $platformContent                 = new ArticleBlockContent();
-            $platformContent->articleBlockId = $block->id();
-            $platformContent->platformId     = $platform->id();
-            $platformContent->title          = $this->_getExampleContent(3);
-            $platformContent->content        = $this->_getExampleContent(
+            $block                          = new Block;
+            $block->blockGroupId = $blockGroup->id();
+            $block->platformId              = $platform->id();
+            $block->title                   = $this->_getExampleContent(
+              3
+            );
+            $block->content                 = $this->_getExampleContent(
               rand(10, 30)
             );
-            $platformContent->saveChanges();
+            $block->saveChanges();
           }
 
           $i++;
