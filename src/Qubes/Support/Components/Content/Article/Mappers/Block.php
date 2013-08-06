@@ -28,15 +28,6 @@ class Block extends I18nRecordMapper
     );
   }
 
-
-  /**
-   * @return BlockGroup[]
-   */
-  public function getBlockGroup()
-  {
-    return $this->hasMany(new BlockGroup, 'blockGroupId');
-  }
-
   /**
    * @return bool|\Cubex\Mapper\Database\RecordMapper|static
    */
