@@ -86,7 +86,6 @@ class Populate extends Cli
       new Article,
       new ArticleText,
       new ArticleBlock,
-      new ArticleBlockContent,
       new Video,
       new VideoText,
     ];
