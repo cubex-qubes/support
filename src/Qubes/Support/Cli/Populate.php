@@ -199,7 +199,7 @@ class Populate extends BaseCli
     {
       $user = new User;
       $user->username = $username;
-      $user->password = md5($password);
+      $user->password = password_hash($password, PASSWORD_DEFAULT);
       $user->saveChanges();
     }
 
