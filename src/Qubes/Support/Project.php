@@ -131,26 +131,24 @@ class Project extends \Cubex\Core\Project\Project implements INamespaceAware
     // Back End
     if(starts_with($path, '/admin'))
     {
-      return $this->_getBackApp($path);
+      return $this->_getBackApp();
     }
 
     // Front End
-    return $this->_getFrontApp($path);
+    return $this->_getFrontApp();
   }
 
   /**
-   * @param string $path
-   *
    * @return LoginApp|BaseFrontApp
    */
-  private function _getBackApp($path = '')
+  private function _getBackApp()
   {
     $appMap = array(
-      '' => 'Index',
+      ''         => 'Index',
       'category' => 'Category',
-      'article' => 'Article',
-      'video' => 'Video',
-      'search' => 'Search',
+      'article'  => 'Article',
+      'video'    => 'Video',
+      'search'   => 'Search',
     );
 
     if(!Auth::loggedin())
@@ -159,27 +157,25 @@ class Project extends \Cubex\Core\Project\Project implements INamespaceAware
     }
 
     // Strip /admin
-    $path = preg_replace('@^/admin@', '', $path);
+    $path = $this->request()->offsetPath(1);
 
     return $this->_getApp($appMap, $path, 'Back');
   }
 
   /**
-   * @param string $path
-   *
    * @return BaseFrontApp
    */
-  private function _getFrontApp($path = '')
+  private function _getFrontApp()
   {
     $appMap = array(
-      '' => 'Index',
+      ''         => 'Index',
       'category' => 'Category',
-      'article' => 'Article',
-      'video' => 'Video',
-      'search' => 'Search',
+      'article'  => 'Article',
+      'video'    => 'Video',
+      'search'   => 'Search',
     );
 
-    return $this->_getApp($appMap, $path, 'Front');
+    return $this->_getApp($appMap, 'Front');
   }
 
   /**
@@ -192,10 +188,15 @@ class Project extends \Cubex\Core\Project\Project implements INamespaceAware
    * @throws \Exception
    * @return BaseFrontApp|BackApp
    */
-  private function _getApp(array $appMap = array(), $path, $base = 'Front')
+  private function _getApp(
+    array $appMap = array(),
+    $base = 'Front',
+    $path = null
+  )
   {
+    $path     = $path ? $path : $this->request()->path();
     $uriParts = explode('/', ltrim($path, '/'));
-    $baseUrl = current($uriParts);
+    $baseUrl  = current($uriParts);
 
     if(!array_key_exists($baseUrl, $appMap))
     {
