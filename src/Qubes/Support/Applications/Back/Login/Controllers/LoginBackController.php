@@ -10,10 +10,10 @@ use Cubex\Auth\StdLoginCredentials;
 use Cubex\Facade\Auth;
 use Cubex\Facade\Redirect;
 use Cubex\View\RenderGroup;
-use Qubes\Support\Applications\Back\Base\Controllers\BaseController;
+use Qubes\Support\Applications\Back\Base\Controllers\BaseBackController;
 use Qubes\Support\Applications\Back\Login\Views\Login;
 
-class DefaultController extends BaseController
+class LoginBackController extends BaseBackController
 {
   public function canProcess()
   {
@@ -31,7 +31,7 @@ class DefaultController extends BaseController
     $user     = Auth::authByCredentials(
       StdLoginCredentials::make(
         $postData['username'],
-        md5($postData['password'])
+        $postData['password']
       )
     );
 
