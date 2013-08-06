@@ -4,6 +4,7 @@ namespace Qubes\Support\Cli;
 use Cubex\Cli\Shell;
 use Cubex\Cli\UserPrompt;
 use Cubex\FileSystem\FileSystem;
+use Cubex\I18n\Processor\Cli;
 use Cubex\Mapper\Database\RecordMapper;
 use Cubex\Text\TextTable;
 use Qubes\Support\Components\Content\Article\Mappers\Article;
@@ -21,7 +22,7 @@ use Qubes\Support\Components\User\Mappers\User;
 /**
  * Populate the database with demo content
  */
-class Populate extends BaseCli
+class Populate extends Cli
 {
   /**
    * Reset database!!!
@@ -39,14 +40,14 @@ class Populate extends BaseCli
   public function execute()
   {
     $this->_resetDatabase();
-    $this->_print('Populating data...');
+    echo 'Populating data...' . PHP_EOL;
     $this->_addUsers();
     $this->_addPlatforms();
     $this->_addCategories();
     $this->_addArticles();
     $this->_addWalkthroughs();
     $this->_addVideos();
-    $this->_print('Demo content import complete!');
+    echo 'Demo content import complete!' . PHP_EOL;
   }
 
   /**
@@ -62,7 +63,7 @@ class Populate extends BaseCli
       return $this;
     }
 
-    $this->_print(
+    echo Shell::colourText(
       "***** Resetting Database!!! *****",
       true,
       Shell::COLOUR_FOREGROUND_BROWN,
@@ -93,7 +94,7 @@ class Populate extends BaseCli
     foreach($mappers as $mapper)
     {
       $mapper->createTable(true);
-      $this->_print(
+      echo Shell::colourText(
         sprintf("Dropped & Created `%s`", $mapper->tableName()),
         true,
         Shell::COLOUR_FOREGROUND_LIGHT_GREY,
@@ -101,7 +102,7 @@ class Populate extends BaseCli
       );
     }
 
-    $this->_print('Done, now run without flag...');
+    echo 'Done, now run without flag...' . PHP_EOL;
     exit;
   }
 
@@ -113,7 +114,7 @@ class Populate extends BaseCli
   protected function _addCategories()
   {
     // Add parent categories
-    $this->_print('Adding Categories: ', false);
+    echo 'Adding Categories: ';
     $count          = 0;
     $categoryTitles = $this->_getTitleArray('Category', rand(2, 4));
     foreach($categoryTitles as $categoryTitle)
@@ -125,10 +126,10 @@ class Populate extends BaseCli
       $subCategory->saveChanges();
       $count++;
     }
-    $this->_print($count);
+    echo $count . PHP_EOL;
 
     // Add sub-categories
-    $this->_print('Adding Sub-Categories: ', false);
+    echo 'Adding Sub-Categories: ';
     $count      = 0;
     $categories = Category::collection();
 
@@ -147,7 +148,7 @@ class Populate extends BaseCli
         $count++;
       }
     }
-    $this->_print($count);
+    echo $count . PHP_EOL;
 
     return $this;
   }
@@ -159,7 +160,7 @@ class Populate extends BaseCli
    */
   protected function _addPlatforms()
   {
-    $this->_print('Adding Platforms: ', false);
+    echo 'Adding Platforms: ';
     $platformNames = array(
       'Generic',
       'Windows',
@@ -179,14 +180,14 @@ class Populate extends BaseCli
       $platform->saveChanges();
     }
 
-    $this->_print(count($platformNames));
+    echo count($platformNames) . PHP_EOL;
 
     return $this;
   }
 
   protected function _addUsers()
   {
-    $this->_print('Adding Users: ', false);
+    echo 'Adding Users: ';
 
     $users = [
       'admin' => 'admin'
@@ -200,7 +201,7 @@ class Populate extends BaseCli
       $user->saveChanges();
     }
 
-    $this->_print(count($users));
+    echo count($users) . PHP_EOL;
   }
 
   /**
@@ -210,7 +211,7 @@ class Populate extends BaseCli
    */
   protected function _addArticles()
   {
-    $this->_print('Adding Articles: ', false);
+    echo 'Adding Articles: ';
     $count = 0;
 
     /** @var Category[] $categories */
@@ -258,7 +259,7 @@ class Populate extends BaseCli
       }
     }
 
-    $this->_print($count);
+    echo $count . PHP_EOL;
 
     return $this;
   }
@@ -272,8 +273,8 @@ class Populate extends BaseCli
   {
     $count = 0;
 
-    $this->_print('Adding Walkthroughs: ', false);
-    $this->_print($count);
+    echo 'Adding Walkthroughs: ';
+    echo $count . PHP_EOL;
 
     return $this;
   }
@@ -285,7 +286,7 @@ class Populate extends BaseCli
    */
   protected function _addVideos()
   {
-    $this->_print('Adding Videos: ', false);
+    echo 'Adding Videos: ';
     $count = 0;
 
     /** @var Category[] $categories */
@@ -307,7 +308,7 @@ class Populate extends BaseCli
       }
     }
 
-    $this->_print($count);
+    echo $count . PHP_EOL;
 
     return $this;
   }

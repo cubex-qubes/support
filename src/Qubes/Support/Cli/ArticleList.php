@@ -1,13 +1,14 @@
 <?php
 namespace Qubes\Support\Cli;
 
+use Cubex\I18n\Processor\Cli;
 use Qubes\Support\Components\Content\Article\Mappers\Article;
 use Qubes\Support\Components\Content\Platform\Mappers\Platform;
 
 /**
  * Display an article list
  */
-class ArticleList extends BaseCli
+class ArticleList extends Cli
 {
 
   /**
@@ -21,20 +22,20 @@ class ArticleList extends BaseCli
 
     if($articles->count() === 0)
     {
-      return $this->_print('No articles to list.');
+      echo 'No articles to list.';
+      exit;
     }
 
     $platforms = Platform::collection();
 
     foreach($articles as $article)
     {
-      $this->_print();
+      echo PHP_EOL;
 
-      $this->_print('Article ID:  ' . $article->id());
-      $this->_print('Title:       ' . $article->title);
-      $this->_print('Sub-Title:   ' . $article->subTitle);
-
-      $this->_print('View:   ' . View::getTemplate($article));
+      echo 'Article ID:  ' . $article->id() . PHP_EOL;
+      echo 'Title:       ' . $article->title . PHP_EOL;
+      echo 'Sub-Title:   ' . $article->subTitle . PHP_EOL;
+      echo 'View:   ' . $article . PHP_EOL;
 
       foreach($article->getArticleBlocks() as $articleBlock)
       {
@@ -43,12 +44,12 @@ class ArticleList extends BaseCli
           /** @var Platform $platform */
           $platform = $platforms->getById($blockContent->platformId);
 
-          $this->_print();
-          $this->_print('Platform Name: ' . $platform->name);
-          $this->_print('Platform Content: ' . $blockContent->content);
+          echo PHP_EOL;
+          echo 'Platform Name: ' . $platform->name . PHP_EOL;
+          echo 'Platform Content: ' . $blockContent->content . PHP_EOL;
         }
       }
-      $this->_print();
+      echo PHP_EOL;
     }
 
     return $this;
