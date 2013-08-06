@@ -23,7 +23,7 @@ class Project extends \Cubex\Core\Project\Project implements INamespaceAware
   public function getBundles()
   {
     return [
-      new DebuggerBundle()
+//      new DebuggerBundle()
     ];
   }
 
