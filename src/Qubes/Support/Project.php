@@ -48,10 +48,6 @@ class Project extends \Cubex\Core\Project\Project implements INamespaceAware
    */
   public function init()
   {
-    $this->_debug = new DebuggerBundle();
-    $this->_debug->init();
-    $this->_listen();
-
     $this->_setProjectPathConfig();
     $this->_setProjectExtendedConfig();
 
