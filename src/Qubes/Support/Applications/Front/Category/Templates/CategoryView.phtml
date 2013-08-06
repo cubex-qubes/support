@@ -2,8 +2,12 @@
 /**
  * CategoryView Template
  *
- * @author Jay Francis <jay.francis@justdevelop.it>
  * @var $this Qubes\Support\Applications\Front\Category\Views\CategoryView
  */
+$category = $this->getCategory();
 ?>
-CategoryView Template
+<h1><?= $category->title; ?></h1>
+<h2><?= $category->subTitle; ?></h2>
+<div class="category-description">
+  <?php echo $category->description ?>
+</div>
