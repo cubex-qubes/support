@@ -1,10 +1,4 @@
 <?php
-/**
- * Description
- *
- * @author Jay Francis <jay.francis@jdiuk.com>
- */
-
 namespace Qubes\Support\Applications\Front\Base\Controllers;
 
 use Cubex\Core\Controllers\WebpageController;

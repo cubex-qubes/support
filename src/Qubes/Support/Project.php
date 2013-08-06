@@ -1,8 +1,4 @@
 <?php
-/**
- * @author Jay Francis <jay.francis@justdevelop.it>
- */
-
 namespace Qubes\Support;
 
 use Bundl\Debugger\DebuggerBundle;

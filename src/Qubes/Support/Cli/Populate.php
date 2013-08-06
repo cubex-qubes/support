@@ -1,10 +1,4 @@
 <?php
-/**
- * Populate the database with demo content
- *
- * @author Jay Francis <jay.francis@justdevelop.it>
- */
-
 namespace Qubes\Support\Cli;
 
 use Cubex\Cli\Shell;
@@ -24,6 +18,9 @@ use Qubes\Support\Components\Content\Video\Mappers\Video;
 use Qubes\Support\Components\Content\Video\Mappers\VideoText;
 use Qubes\Support\Components\User\Mappers\User;
 
+/**
+ * Populate the database with demo content
+ */
 class Populate extends BaseCli
 {
   /**

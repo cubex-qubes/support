@@ -1,10 +1,4 @@
 <?php
-/**
- * Front View, Everything front end should use this as a base
- *
- * @author Jay Francis <jay.francis@jdiuk.com>
- */
-
 namespace Qubes\Support\Applications\Front\Base\Views;
 
 use Cubex\Foundation\Container;

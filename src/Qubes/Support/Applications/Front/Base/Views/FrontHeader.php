@@ -1,10 +1,4 @@
 <?php
-/**
- * Default Front-end Header
- *
- * @author Jay Francis <jay.francis@justdevelop.it>
- */
-
 namespace Qubes\Support\Applications\Front\Base\Views;
 
 use Cubex\Facade\Auth;

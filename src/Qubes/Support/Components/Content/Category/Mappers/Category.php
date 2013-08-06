@@ -4,9 +4,6 @@ namespace Qubes\Support\Components\Content\Category\Mappers;
 use Cubex\Mapper\Database\I18n\I18nRecordMapper;
 
 /**
- * Class Category
- *
- * @package Qubes\Support\Components\Content\Category\Mappers
  * @method static \Qubes\Support\Components\Content\Category\Mappers\Category[]|\Cubex\Mapper\Database\RecordCollection collection
  */
 class Category extends I18nRecordMapper

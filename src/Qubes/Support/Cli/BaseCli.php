@@ -1,15 +1,12 @@
 <?php
-/**
- * Base Cli script
- *
- * @author Jay Francis <jay.francis@justdevelop.it>
- */
-
 namespace Qubes\Support\Cli;
 
 use Cubex\Cli\CliCommand;
 use Cubex\Cli\Shell;
 
+/**
+ * BaseCli holds all of the shared functionality for Cli scripts
+ */
 abstract class BaseCli extends CliCommand
 {
   /**

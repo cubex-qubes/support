@@ -1,10 +1,4 @@
 <?php
-/**
- * Article Controller
- *
- * @author Jay Francis <jay.francis@justdevelop.it>
- */
-
 namespace Qubes\Support\Applications\Front\Article\Controllers;
 
 use Qubes\Support\Applications\Front\Base\Controllers\FrontController;

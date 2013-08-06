@@ -1,19 +1,12 @@
 <?php
-/**
- * Platform specific Article Block Content, i.e. Windows, Mac, Linux
- *
- * @author Jay Francis <jay.francis@jdiuk.com>
- */
-
 namespace Qubes\Support\Components\Content\Article\Mappers;
 
 use Cubex\Mapper\Database\I18n\I18nRecordMapper;
 use Qubes\Support\Components\Content\Platform\Mappers\Platform;
 
 /**
- * Class ArticleBlockContent
+ * Platform specific Article Block Content, i.e. Windows, Mac, Linux
  *
- * @package Qubes\Support\Components\Content\Article\Mappers
  * @method static \Qubes\Support\Components\Content\Article\Mappers\ArticleBlockContent[]|\Cubex\Mapper\Database\RecordCollection collection
  */
 class ArticleBlockContent extends I18nRecordMapper

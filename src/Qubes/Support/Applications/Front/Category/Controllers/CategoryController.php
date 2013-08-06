@@ -1,10 +1,4 @@
 <?php
-/**
- * Category Controller
- *
- * @author Jay Francis <jay.francis@justdevelop.it>
- */
-
 namespace Qubes\Support\Applications\Front\Category\Controllers;
 
 use Qubes\Support\Applications\Front\Base\Controllers\FrontController;

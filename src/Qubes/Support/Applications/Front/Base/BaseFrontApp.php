@@ -1,9 +1,4 @@
 <?php
-/**
- * Handle the routing to each of the front end applications
- *
- * @author Jay Francis <jay.francis@justdevelop.it>
- */
 namespace Qubes\Support\Applications\Front\Base;
 
 use Cubex\Core\Application\Application;

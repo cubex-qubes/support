@@ -1,10 +1,4 @@
 <?php
-/**
- * Index Controller
- *
- * @author Jay Francis <jay.francis@justdevelop.it>
- */
-
 namespace Qubes\Support\Applications\Front\Index\Controllers;
 
 use Qubes\Support\Applications\Front\Base\Controllers\FrontController;

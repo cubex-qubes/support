@@ -1,15 +1,12 @@
 <?php
-/**
- * Display an article list
- *
- * @author Jay Francis <jay.francis@justdevelop.it>
- */
-
 namespace Qubes\Support\Cli;
 
 use Qubes\Support\Components\Content\Article\Mappers\Article;
 use Qubes\Support\Components\Content\Platform\Mappers\Platform;
 
+/**
+ * Display an article list
+ */
 class ArticleList extends BaseCli
 {
 
@@ -36,6 +33,8 @@ class ArticleList extends BaseCli
       $this->_print('Article ID:  ' . $article->id());
       $this->_print('Title:       ' . $article->title);
       $this->_print('Sub-Title:   ' . $article->subTitle);
+
+      $this->_print('View:   ' . View::getTemplate($article));
 
       foreach($article->getArticleBlocks() as $articleBlock)
       {
