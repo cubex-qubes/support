@@ -148,7 +148,7 @@ class Project extends \Cubex\Core\Project\Project implements INamespaceAware
       '/walkthrough' => 'Walkthrough',
     ];
 
-    $path = $this->request()->offsetPath(1);
+    $path = $this->request()->offsetPath(1, 1);
 
     return $this->_getApp($appRoutes, 'Back', $path);
   }
@@ -159,7 +159,7 @@ class Project extends \Cubex\Core\Project\Project implements INamespaceAware
     $path = null
   )
   {
-    $path = $path ? $path : $this->request()->path(1, 1);
+    $path = $path ? $path : $this->request()->path(1);
 
     if(!array_key_exists($path, $appRoutes))
     {
