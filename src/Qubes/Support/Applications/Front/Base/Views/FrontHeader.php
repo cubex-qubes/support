@@ -5,6 +5,8 @@ use Cubex\Facade\Auth;
 use Cubex\View\Partial;
 use Cubex\View\RenderGroup;
 use Cubex\View\ViewModel;
+use Qubes\Bootstrap\BootstrapItem;
+use Qubes\Bootstrap\FormSearch;
 
 class FrontHeader extends ViewModel
 {
@@ -16,8 +18,9 @@ class FrontHeader extends ViewModel
   {
     $menus = [
       'Home View'           => '/',
-      'Category View'       => '/category/1-example',
-      'Article View'        => '/article/1-example',
+      'Category View'       => '/category/1-example-category',
+      'Article View'        => '/article/1-example-article',
+      'Walkthrough View'    => '/walkthrough/1-example-walkthrough/1-step',
       'Search Results View' => '/search/example',
     ];
 
@@ -39,12 +42,20 @@ class FrontHeader extends ViewModel
       );
     }
 
+    $searchForm = new FormSearch();
+    $searchForm->setAttribute('method', 'post');
+    $searchForm->setAttribute('action', '/search');
+    $searchForm->setFormType(FormSearch::FORM_TYPE_NAVBAR);
+    $searchForm->setAlignment(FormSearch::ALIGN_RIGHT);
+    $searchForm->setText('Search');
+
     return new RenderGroup(
       '<a id="support-logo" class="brand" href="/">',
       'Support Center</a>',
       '<ul class="nav">',
       $navItems,
-      '</ul>'
+      '</ul>',
+      $searchForm->render()
     );
   }
 }
