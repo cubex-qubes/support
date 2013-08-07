@@ -14,6 +14,14 @@ class WalkthroughStep extends I18nRecordMapper
    */
   public $order;
 
+  protected function _configure()
+  {
+    $this->_addTranslationAttribute(
+      'title',
+      'content'
+    );
+  }
+
   public function getTextContainer()
   {
     return new WalkthroughText;
