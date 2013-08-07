@@ -2,6 +2,7 @@
 namespace Qubes\Support\Components\Content\Article\Mappers;
 
 use Cubex\Mapper\Database\I18n\I18nRecordMapper;
+use Cubex\Mapper\Database\RecordCollection;
 
 /**
  * Article Mapper
@@ -28,11 +29,11 @@ class Article extends I18nRecordMapper
   }
 
   /**
-   * @return ArticleSection[]
+   * @return ArticleSection[]|RecordCollection
    */
   public function getArticleSections()
   {
-    return $this->hasMany(new ArticleSection());
+    return $this->hasMany(new ArticleSection, 'articleId');
   }
 
   /**

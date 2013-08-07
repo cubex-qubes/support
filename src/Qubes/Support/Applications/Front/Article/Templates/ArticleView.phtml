@@ -8,9 +8,9 @@ $article = $this->getArticle();
 ?>
 <h1><?= $article->title; ?></h1>
 <h2><?= $article->subTitle; ?></h2>
-<?php foreach($article->getBlockGroups() as $blockGroup): ?>
-  <div id="<?= sprintf('block-group-%d', $blockGroup->id()) ?>">
-    <?php foreach($blockGroup->getBlocks() as $block): ?>
+<?php foreach($article->getArticleSections() as $section): ?>
+  <div id="<?= sprintf('section-%d', $section->id()) ?>" class="section">
+    <?php foreach($section->getBlocks() as $block): ?>
       <div
         id="<?= sprintf('block-%d', $block->id()) ?>"
         class="<?= sprintf('platform-%d', $block->platformId) ?>"
