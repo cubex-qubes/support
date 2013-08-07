@@ -152,11 +152,14 @@ class Populate extends Cli
         $subCategory                   = new Category;
         $subCategory->parentCategoryId = $category->id();
         $subCategory->title            = $categoryTitle;
-        $subCategory->subTitle         = $this->_getExampleContent(rand(5, 15));
+        $subCategory->subTitle         = $this->_getExampleContent(
+          rand(5, 15)
+        );
         $subCategory->saveChanges();
         $count++;
       }
     }
+
     echo $count . PHP_EOL;
 
     return $this;
@@ -250,13 +253,13 @@ class Populate extends Cli
 
           foreach($platforms as $platform)
           {
-            $block               = new ArticleSectionBlock;
+            $block                   = new ArticleSectionBlock;
             $block->articleSectionId = $section->id();
-            $block->platformId   = $platform->id();
-            $block->title        = $this->_getExampleContent(
+            $block->platformId       = $platform->id();
+            $block->title            = $this->_getExampleContent(
               3
             );
-            $block->content      = $this->_getExampleContent(
+            $block->content          = $this->_getExampleContent(
               rand(10, 30)
             );
             $block->saveChanges();
@@ -293,21 +296,21 @@ class Populate extends Cli
       foreach($walkthroughTitles as $walkthroughTitle)
       {
         $walkthrough              = new Walkthrough;
-        $walkthrough->categoryId = $category->id();
+        $walkthrough->categoryId  = $category->id();
         $walkthrough->title       = $walkthroughTitle;
         $walkthrough->subTitle    = $this->_getExampleContent(rand(4, 8));
         $walkthrough->description = $this->_getExampleContent(rand(10, 20));
         $walkthrough->saveChanges();
 
-        $stepTitles = $this->_getTitleArray('Step', rand(3, 6));
-        $stepOrder = 1;
+        $stepTitles = $this->_getTitleArray(rand(3, 6));
+        $stepOrder  = 1;
         foreach($stepTitles as $stepTitle)
         {
           $step                = new WalkthroughStep;
-          $step->title         = $stepTitle;
+          $step->title         = sprintf('Step %d: %s', $stepOrder, $stepTitle);
           $step->walkthroughId = $walkthrough->id();
-          $step->content = $this->_getExampleContent(rand(30, 50));
-          $step->order = $stepOrder;
+          $step->content       = $this->_getExampleContent(rand(30, 50));
+          $step->order         = $stepOrder;
           $step->saveChanges();
 
           $stepOrder++;
