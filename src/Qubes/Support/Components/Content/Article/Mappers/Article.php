@@ -33,7 +33,8 @@ class Article extends I18nRecordMapper
    */
   public function getArticleSections()
   {
-    return $this->hasMany(new ArticleSection, 'articleId');
+    $sections = ArticleSection::collection(['article_id' => $this->id()]);
+    return $sections->setOrderBy('order');
   }
 
   /**
