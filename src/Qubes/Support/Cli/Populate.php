@@ -299,13 +299,18 @@ class Populate extends Cli
         $walkthrough->description = $this->_getExampleContent(rand(10, 20));
         $walkthrough->saveChanges();
 
-        $stepTitles = $this->_getTitleArray(rand(3, 6));
+        $stepTitles = $this->_getTitleArray('Step', rand(3, 6));
+        $stepOrder = 1;
         foreach($stepTitles as $stepTitle)
         {
           $step                = new WalkthroughStep;
           $step->title         = $stepTitle;
           $step->walkthroughId = $walkthrough->id();
+          $step->content = $this->_getExampleContent(rand(30, 50));
+          $step->order = $stepOrder;
           $step->saveChanges();
+
+          $stepOrder++;
         }
 
         $count++;
