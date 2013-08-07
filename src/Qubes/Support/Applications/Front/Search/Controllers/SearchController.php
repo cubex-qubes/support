@@ -22,7 +22,7 @@ class SearchController extends FrontController
     if(!$term)
     {
       $url        = '/';
-      $searchPost = $this->request()->postVariables('search');
+      $searchPost = $this->request()->postVariables('term');
       if($searchPost)
       {
         $url = '/search/' . urlencode($searchPost);
@@ -35,6 +35,7 @@ class SearchController extends FrontController
     $view = $this->getView('SearchIndexView');
 
     $view->setTerm($term);
+
     $searchObject = new SearchObject();
     $searchObject->addLike('title', $term);
 
@@ -47,6 +48,7 @@ class SearchController extends FrontController
   public function getRoutes()
   {
     return array(
+      '/search/' => 'index',
       '/search/:term@all/' => 'index',
     );
   }

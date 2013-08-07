@@ -25,6 +25,11 @@ class SearchIndexView extends FrontView
     return $this;
   }
 
+  public function getTerm()
+  {
+    return $this->_term;
+  }
+
   public function setArticles(RecordCollection $articles)
   {
     $this->_articles = $articles;
