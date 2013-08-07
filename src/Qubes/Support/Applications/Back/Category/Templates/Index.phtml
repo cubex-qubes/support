@@ -7,7 +7,7 @@
  */
 ?>
 <h1>Categories</h1>
-<a href="<?= $this->baseUri() . '/new'; ?>"
+<a href="/<?= $this->baseUri() . '/new'; ?>"
    class="btn btn-success pull-right"
    style="margin-top:-20px;">
   <i class="icon-plus icon-white"></i>
@@ -30,7 +30,7 @@
   <?php foreach($this->getCategories() as $category): ?>
     <tr>
       <td>
-        <a href="<?= $this->baseUri() . '/' . $category->id() . '/edit/'; ?>">
+        <a href="/<?= $this->baseUri() . '/' . $category->id() . '/edit/'; ?>">
           <?= $category->title; ?>
         </a>
       </td>
@@ -42,9 +42,9 @@
           $category->getParentCategory()->title : '--'; ?>
       </td>
       <td>
-        <a href="<?= $this->baseUri() . '/' . $category->id() . '/edit/'; ?>"
+        <a href="/<?= $this->baseUri() . '/' . $category->id() . '/edit/'; ?>"
            title="Edit"><i class="icon-edit"></i></a>
-        <a href="<?= $this->baseUri() . '/' . $category->id() . '/delete/'; ?>"
+        <a href="/<?= $this->baseUri() . '/' . $category->id() . '/delete/'; ?>"
            title="Delete"><i class="icon-trash"></i></a>
       </td>
     </tr>

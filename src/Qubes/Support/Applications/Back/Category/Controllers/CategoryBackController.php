@@ -6,14 +6,17 @@
 
 namespace Qubes\Support\Applications\Back\Category\Controllers;
 
+use Cubex\Data\Validator\Validator;
 use Cubex\Facade\Redirect;
 use Cubex\Form\Form;
-use Qubes\Support\Applications\Back\Base\Controllers\BaseController;
+use Cubex\Form\FormElement;
+use Cubex\Routing\Templates\ResourceTemplate;
+use Qubes\Support\Applications\Back\Base\Controllers\BaseBackController;
 use Qubes\Support\Applications\Back\Category\Views\CategoryForm;
 use Qubes\Support\Applications\Back\Category\Views\Index;
 use Qubes\Support\Components\Content\Category\Mappers\Category;
 
-class CategoryController extends BaseController
+class CategoryBackController extends BaseBackController
 {
   public function renderIndex()
   {
@@ -25,22 +28,31 @@ class CategoryController extends BaseController
   {
     $form = new Form('addCategory', '');
     $form->bindMapper(new Category());
+    $form->getElement('order')
+    ->setRequired(true)
+    ->setType(FormElement::NUMBER)
+    ->setData(0);
 
     return $this->createView(new CategoryForm("New Category", $form));
   }
 
   public function postNew()
   {
-    $postData    = $this->request()->postVariables();
-    $newCategory = new Category();
-    $newCategory->hydrateFromUnserialized($postData);
+    $postData = $this->request()->postVariables();
+
+    $newCategory                   = new Category();
+    $newCategory->parentCategoryId = $postData['parentCategoryId'];
+    $newCategory->title            = $postData['title'];
+    $newCategory->subTitle         = $postData['subTitle'];
+    $newCategory->description      = $postData['description'];
+    $newCategory->order            = $postData['order'];
     $newCategory->saveChanges();
 
     $msg       = new \stdClass();
     $msg->type = 'success';
     $msg->text = 'New Category was successfully added';
 
-    Redirect::to('/admin/categories')->with('msg', $msg)->now();
+    Redirect::to('/' . $this->baseUri())->with('msg', $msg)->now();
   }
 
   public function renderEdit()
@@ -48,6 +60,12 @@ class CategoryController extends BaseController
     $categoryId = $this->getInt('id');
     $form       = new Form('editCategory', '');
     $form->bindMapper(new Category($categoryId));
+    $form->getElement('order')
+    ->setType(FormElement::NUMBER)
+    ->setRequired(true)
+    ->setValidators(Validator::VALIDATE_INT)
+    ->setValidators(Validator::VALIDATE_NOTEMPTY);
+
     return $this->createView(new CategoryForm("Edit Category", $form));
   }
 
@@ -62,7 +80,7 @@ class CategoryController extends BaseController
     $msg->type = 'success';
     $msg->text = 'Category was successfully updated';
 
-    Redirect::to('/admin/categories')->with('msg', $msg)->now();
+    Redirect::to('/' . $this->baseUri())->with('msg', $msg)->now();
   }
 
   public function renderDestroy()
@@ -75,6 +93,11 @@ class CategoryController extends BaseController
     $msg->type = 'success';
     $msg->text = 'Category was successfully deleted';
 
-    Redirect::to('/admin/categories')->with('msg', $msg)->now();
+    Redirect::to('/' . $this->baseUri())->with('msg', $msg)->now();
+  }
+
+  public function getRoutes()
+  {
+    return ResourceTemplate::getRoutes();
   }
 }
