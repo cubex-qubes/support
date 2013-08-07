@@ -12,6 +12,7 @@ class Video extends I18nRecordMapper
   public $title;
   public $subTitle;
   public $url;
+  public $view;
   /**
    * @datatype int(11)
    */
