@@ -7,11 +7,11 @@ use Qubes\Support\Components\Content\Platform\Mappers\Platform;
 /**
  * Platform specific Article Block Content, i.e. Windows, Mac, Linux
  *
- * @method static \Qubes\Support\Components\Content\Article\Mappers\ArticleBlock[]|\Cubex\Mapper\Database\RecordCollection collection
+ * @method static \Qubes\Support\Components\Content\Article\Mappers\ArticleSection[]|\Cubex\Mapper\Database\RecordCollection collection
  */
-class Block extends I18nRecordMapper
+class ArticleSectionBlock extends I18nRecordMapper
 {
-  public $blockGroupId;
+  public $articleSectionId;
   public $platformId;
   public $title;
   public $content;
