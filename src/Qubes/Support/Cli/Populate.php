@@ -8,16 +8,20 @@ use Cubex\I18n\Processor\Cli;
 use Cubex\Mapper\Database\RecordMapper;
 use Cubex\Text\TextTable;
 use Qubes\Support\Components\Content\Article\Mappers\Article;
+use Qubes\Support\Components\Content\Article\Mappers\ArticleSectionBlock;
 use Qubes\Support\Components\Content\Article\Mappers\ArticleText;
-use Qubes\Support\Components\Content\Article\Mappers\Block;
-use Qubes\Support\Components\Content\Article\Mappers\BlockGroup;
+use Qubes\Support\Components\Content\Article\Mappers\ArticleContentBlock;
+use Qubes\Support\Components\Content\Article\Mappers\ArticleSection;
 use Qubes\Support\Components\Content\Category\Mappers\Category;
 use Qubes\Support\Components\Content\Category\Mappers\CategoryText;
 use Qubes\Support\Components\Content\Platform\Mappers\Platform;
 use Qubes\Support\Components\Content\Platform\Mappers\PlatformText;
 use Qubes\Support\Components\Content\Video\Mappers\Video;
 use Qubes\Support\Components\Content\Video\Mappers\VideoText;
+use Qubes\Support\Components\Content\Walkthrough\Mappers\WalkthroughText;
 use Qubes\Support\Components\User\Mappers\User;
+use Qubes\Support\Components\Content\Walkthrough\Mappers\Walkthrough;
+use Qubes\Support\Components\Content\Walkthrough\Mappers\WalkthroughStep;
 
 /**
  * Populate the database with demo content
@@ -86,10 +90,13 @@ class Populate extends Cli
       new CategoryText,
       new Article,
       new ArticleText,
-      new Block,
-      new BlockGroup,
+      new ArticleSectionBlock,
+      new ArticleSection,
       new Video,
       new VideoText,
+      new Walkthrough,
+      new WalkthroughStep,
+      new WalkthroughText,
     ];
 
     foreach($mappers as $mapper)
@@ -237,19 +244,19 @@ class Populate extends Cli
         $i          = 0;
         do
         {
-          $blockGroup            = new BlockGroup;
-          $blockGroup->articleId = $article->id();
-          $blockGroup->saveChanges();
+          $section            = new ArticleSection;
+          $section->articleId = $article->id();
+          $section->saveChanges();
 
           foreach($platforms as $platform)
           {
-            $block                          = new Block;
-            $block->blockGroupId = $blockGroup->id();
-            $block->platformId              = $platform->id();
-            $block->title                   = $this->_getExampleContent(
+            $block               = new ArticleSectionBlock;
+            $block->articleSectionId = $section->id();
+            $block->platformId   = $platform->id();
+            $block->title        = $this->_getExampleContent(
               3
             );
-            $block->content                 = $this->_getExampleContent(
+            $block->content      = $this->_getExampleContent(
               rand(10, 30)
             );
             $block->saveChanges();
@@ -278,6 +285,33 @@ class Populate extends Cli
     $count = 0;
 
     echo 'Adding Walkthroughs: ';
+
+    $categories = Category::collection();
+    foreach($categories as $category)
+    {
+      $walkthroughTitles = $this->_getTitleArray('Walkthrough', rand(1, 3));
+      foreach($walkthroughTitles as $walkthroughTitle)
+      {
+        $walkthrough              = new Walkthrough;
+        $walkthrough->categoryId = $category->id();
+        $walkthrough->title       = $walkthroughTitle;
+        $walkthrough->subTitle    = $this->_getExampleContent(rand(4, 8));
+        $walkthrough->description = $this->_getExampleContent(rand(10, 20));
+        $walkthrough->saveChanges();
+
+        $stepTitles = $this->_getTitleArray(rand(3, 6));
+        foreach($stepTitles as $stepTitle)
+        {
+          $step                = new WalkthroughStep;
+          $step->title         = $stepTitle;
+          $step->walkthroughId = $walkthrough->id();
+          $step->saveChanges();
+        }
+
+        $count++;
+      }
+    }
+
     echo $count . PHP_EOL;
 
     return $this;
