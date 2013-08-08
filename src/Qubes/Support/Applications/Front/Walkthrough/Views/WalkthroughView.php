@@ -13,10 +13,6 @@ class WalkthroughView extends FrontView
   /** @var WalkthroughStep */
   private $_step;
 
-  public function __construct()
-  {
-    $this->setTitle($this->t("Walkthrough"));
-  }
 
   /**
    * @param Walkthrough $walkthrough

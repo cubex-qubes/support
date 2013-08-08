@@ -9,11 +9,6 @@ class ArticleView extends FrontView
   /** @var Article */
   private $_article;
 
-  public function __construct()
-  {
-    $this->setTitle($this->t("Article"));
-  }
-
   /**
    * @param Article $article
    *
@@ -22,6 +17,9 @@ class ArticleView extends FrontView
   public function setArticle(Article $article)
   {
     $this->_article = $article;
+
+    // Set the title
+    $this->setTitle($article->title);
 
     return $this;
   }

@@ -4,7 +4,6 @@ namespace Qubes\Support\Applications\Front\Walkthrough\Controllers;
 use Qubes\Support\Applications\Front\Walkthrough\Views\WalkthroughView;
 use Qubes\Support\Applications\Front\Base\Controllers\FrontController;
 use Qubes\Support\Components\Content\Walkthrough\Mappers\Walkthrough;
-use Qubes\Support\Components\Content\Walkthrough\Mappers\WalkthroughStep;
 
 class WalkthroughController extends FrontController
 {
@@ -34,6 +33,9 @@ class WalkthroughController extends FrontController
     $view = $this->getView('WalkthroughView');
     $view->setWalkthrough($walkthrough);
     $view->setCurrentStep($step);
+
+    // Set the title
+    $view->setTitle(sprintf('%s - %s', $walkthrough->title, $step->title));
 
     return $view;
   }
