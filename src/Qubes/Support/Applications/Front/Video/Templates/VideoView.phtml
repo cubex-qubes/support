@@ -1,0 +1,11 @@
+<?php
+/**
+ * VideoView Template
+ *
+ * @var $this Qubes\Support\Applications\Front\Video\Views\VideoView
+ */
+$video = $this->getVideo();
+?>
+<h1><?= $video->title; ?></h1>
+<h2><?= $video->subTitle; ?></h2>
+<?php echo $this->getVideoHtml() ?>

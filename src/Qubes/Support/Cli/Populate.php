@@ -10,13 +10,13 @@ use Cubex\Text\TextTable;
 use Qubes\Support\Components\Content\Article\Mappers\Article;
 use Qubes\Support\Components\Content\Article\Mappers\ArticleSectionBlock;
 use Qubes\Support\Components\Content\Article\Mappers\ArticleText;
-use Qubes\Support\Components\Content\Article\Mappers\ArticleContentBlock;
 use Qubes\Support\Components\Content\Article\Mappers\ArticleSection;
 use Qubes\Support\Components\Content\Category\Mappers\Category;
 use Qubes\Support\Components\Content\Category\Mappers\CategoryText;
 use Qubes\Support\Components\Content\Platform\Mappers\Platform;
 use Qubes\Support\Components\Content\Platform\Mappers\PlatformText;
 use Qubes\Support\Components\Content\Video\Mappers\Video;
+use Qubes\Support\Components\Content\Video\Mappers\VideoCaption;
 use Qubes\Support\Components\Content\Video\Mappers\VideoText;
 use Qubes\Support\Components\Content\Walkthrough\Mappers\WalkthroughText;
 use Qubes\Support\Components\User\Mappers\User;
@@ -48,9 +48,9 @@ class Populate extends Cli
     $this->_addUsers();
     $this->_addPlatforms();
     $this->_addCategories();
-    $this->_addArticles();
-    $this->_addWalkthroughs();
     $this->_addVideos();
+    $this->_addWalkthroughs();
+    $this->_addArticles();
     echo 'Demo content import complete!' . PHP_EOL;
   }
 
@@ -93,6 +93,7 @@ class Populate extends Cli
       new ArticleSectionBlock,
       new ArticleSection,
       new Video,
+      new VideoCaption,
       new VideoText,
       new Walkthrough,
       new WalkthroughStep,
@@ -334,12 +335,13 @@ class Populate extends Cli
   {
     echo 'Adding Videos: ';
     $count = 0;
+    $captionCount = 0;
 
     /** @var Category[] $categories */
     $categories = Category::collection();
     foreach($categories as $category)
     {
-      if(!(bool)rand(0, 3))
+      if(rand(1, 3))
       {
         $videoTitles = $this->_getTitleArray('Video', rand(1, 3));
         foreach($videoTitles as $videoTitle)
@@ -348,13 +350,38 @@ class Populate extends Cli
           $video->title      = $videoTitle;
           $video->subTitle   = $this->_getExampleContent(rand(3, 15));
           $video->categoryId = $category->id();
+          $video->url = 'http://content.bitsontherun.com/videos/lWMJeVvV-364767.mp4';
           $video->saveChanges();
+
+          // Add Annotations
+          $videoCaptionCount = rand(20, 30);
+          $i = 1;
+          $lastSecond = 0;
+          do
+          {
+            $caption = new VideoCaption;
+            $caption->videoId = $video->id();
+            $caption->text = $this->_getExampleContent(rand(2, 6));
+            $caption->startSecond = $lastSecond;
+            $lastSecond += rand(3, 6);
+            $caption->endSecond = $lastSecond;
+            $caption->saveChanges();
+
+            $captionCount++;
+            $i++;
+          }
+          while($i <= $videoCaptionCount);
           $count++;
         }
       }
     }
 
-    echo $count . PHP_EOL;
+    echo sprintf(
+      '%d (%d Total Captions)%s',
+      $count,
+      $captionCount,
+      PHP_EOL
+    );
 
     return $this;
   }
