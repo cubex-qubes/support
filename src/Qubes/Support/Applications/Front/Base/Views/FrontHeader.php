@@ -48,6 +48,7 @@ class FrontHeader extends ViewModel
     $searchForm->setFormType(FormSearch::FORM_TYPE_NAVBAR);
     $searchForm->setAlignment(FormSearch::ALIGN_RIGHT);
     $searchForm->setText('Search');
+    $searchForm->setName('term');
 
     return new RenderGroup(
       '<a id="support-logo" class="brand" href="/">',
