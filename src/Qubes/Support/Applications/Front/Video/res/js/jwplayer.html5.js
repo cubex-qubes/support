@@ -1,3 +1,6 @@
+/**
+ * @do-not-parse
+ */
 (function(f){f.html5={};f.html5.version="6.5.3609"})(jwplayer);
 (function(f){function h(a){return function(){a("Error loading file")}}function e(a,b,c,e){return function(){try{var g=a.responseXML;if(g&&g.firstChild)return c(a)}catch(d){}(g=f.parseXML(a.responseText))&&g.firstChild?(a=f.extend({},a,{responseXML:g}),c(a)):e&&e(a.responseText?"Invalid XML":b)}}var d=window;f.serialize=function(a){return null==a?null:"true"==a.toString().toLowerCase()?!0:"false"==a.toString().toLowerCase()?!1:isNaN(Number(a))||5<a.length||0==a.length?a:Number(a)};f.filterSources=
 function(a){var b,c,e=f.extensionmap;if(a){c=[];for(var g=0;g<a.length;g++){var d=a[g].type,h=a[g].file;d||(d=e.extType(f.extension(h)),a[g].type=d);f.canPlayHTML5(d)&&(b||(b=d),d==b&&c.push(f.extend({},a[g])))}}return c};f.canPlayHTML5=function(a){if(f.isAndroid()&&("hls"==a||"m3u"==a||"m3u8"==a))return!1;a=f.extensionmap.types[a];return!!a&&jwplayer.vid.canPlayType(a)};f.ajax=function(a,b,c){var k;0<a.indexOf("#")&&(a=a.replace(/#.*$/,""));var g;g=(g=a)&&0<=g.indexOf("://")&&g.split("/")[2]!=d.location.href.split("/")[2]?

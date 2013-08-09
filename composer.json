@@ -20,7 +20,9 @@
     "themed/sidekick":           "*",
     "dflydev/markdown":          "*",
     "phpseclib/phpseclib":       "*",
-    "ircmaxell/password-compat": "*"
+    "ircmaxell/password-compat": "*",
+    "jayfrancis/webvtt": "*",
+    "jayfrancis/cubex-jwplayer": "*"
   },
   "autoload":          {
     "psr-0": {

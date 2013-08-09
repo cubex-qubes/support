@@ -2,6 +2,7 @@
 namespace Qubes\Support\Applications\Front\Video\Views;
 
 use Cubex\Dispatch\Dependency\Resource\TypeEnum;
+use JayFrancis\Cubex\JWPlayer\JWPlayer;
 use Qubes\Support\Applications\Front\Base\Views\FrontView;
 use Qubes\Support\Components\Content\Video\Mappers\Video;
 
@@ -9,6 +10,11 @@ class VideoView extends FrontView
 {
   /** @var Video */
   private $_video;
+
+  function __construct()
+  {
+    $this->requireJs('jwplayer');
+  }
 
   /**
    * @param Video $video
@@ -22,64 +28,27 @@ class VideoView extends FrontView
     // Set the title
     $this->setTitle($video->title);
 
-    // Add Js
-    $this->_addJs();
-
     return $this;
   }
 
-  private function _addJs()
-  {
-    $this->requireJs('jwplayer');
-
-    $video = $this->getVideo();
-
-    $options = [
-      'file'        => $video->url,
-      'height'      => 360,
-      'width'       => 640,
-      'flashplayer' => $this->getDispatchUrl('jwplayer.flash.swf'),
-      'html5player' => $this->getDispatchUrl('jwplayer.html5.js'),
-    ];
-
-    // Add image
-    if($video->imageUrl)
-    {
-      $options['image'] = $video->imageUrl;
-    }
-
-    // Add captions
-    if($video->getCaptions())
-    {
-      $options['tracks'] = [[
-        'file' => sprintf('/video/captions/%d.vtt', $video->id()),
-        'label' => 'On',
-        'kind' => 'captions',
-        'default' => true,
-      ]];
-    }
-
-    $output[] = sprintf(
-      'jwplayer("video-%d").setup(%s);',
-      $video->id(),
-      json_encode($options)
-    );
-
-    $this->addJsBlock(implode(PHP_EOL, $output));
-  }
-
-
   public function getVideoHtml()
   {
-    $video = $this->getVideo();
+    $video  = $this->getVideo();
+    $player = new JWPlayer();
+    $player->setHtml5PlayerUrl($this->getDispatchUrl('jwplayer.html5.js'));
+    $player->setFlashPlayerUrl($this->getDispatchUrl('jwplayer.flash.swf'));
+    $player->setVideoUrl($video->url);
 
-    $output   = [];
-    $output[] = sprintf(
-      '<div id="video-%d">Loading ...</div>',
-      $video->id()
-    );
+    if($video->getCaptions())
+    {
+      $player->addCaptionConfig(
+        sprintf('/video/captions/%d.vtt', $video->id()),
+        'On',
+        true
+      );
+    }
 
-    return implode(PHP_EOL, $output);
+    return $player->getHtml();
   }
 
   /**
