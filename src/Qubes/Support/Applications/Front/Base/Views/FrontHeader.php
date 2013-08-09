@@ -17,12 +17,13 @@ class FrontHeader extends ViewModel
   public function render()
   {
     $menus = [
-      'Home View'           => '/',
-      'Video View'          => '/video/1-example-video',
-      'Category View'       => '/category/1-example-category',
-      'Article View'        => '/article/1-example-article',
-      'Walkthrough View'    => '/walkthrough/1-example-walkthrough/1-step',
-      'Search Results View' => '/search/example',
+      'Home'           => '/',
+      'Video'          => '/video/1-example-video',
+      'Category'       => '/category/1-example-category',
+      'Article'        => '/article/1-example-article',
+      'Walkthrough'    => '/walkthrough/1-example-walkthrough/1-step',
+      'Search Results' => '/search/example',
+      'Contact' => '/contact',
     ];
 
     $navItems = new Partial(

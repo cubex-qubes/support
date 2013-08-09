@@ -132,6 +132,7 @@ class Project extends \Cubex\Core\Project\Project implements INamespaceAware
       '/search'      => 'Search',
       '/video'       => 'Video',
       '/walkthrough' => 'Walkthrough',
+      '/contact'     => 'Contact',
     ];
 
     return $this->_getApp($appRoutes);
