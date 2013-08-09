@@ -18,6 +18,7 @@ class FrontHeader extends ViewModel
   {
     $menus = [
       'Home View'           => '/',
+      'Video View'          => '/video/1-example-video',
       'Category View'       => '/category/1-example-category',
       'Article View'        => '/article/1-example-article',
       'Walkthrough View'    => '/walkthrough/1-example-walkthrough/1-step',
