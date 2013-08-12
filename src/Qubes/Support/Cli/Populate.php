@@ -4,6 +4,7 @@ namespace Qubes\Support\Cli;
 use Cubex\Cli\Shell;
 use Cubex\Cli\UserPrompt;
 use Cubex\FileSystem\FileSystem;
+use Cubex\Helpers\Strings;
 use Cubex\I18n\Processor\Cli;
 use Cubex\Mapper\Database\RecordMapper;
 use Cubex\Text\TextTable;
@@ -129,11 +130,12 @@ class Populate extends Cli
     $categoryTitles = $this->_getTitleArray('Category', rand(2, 4));
     foreach($categoryTitles as $categoryTitle)
     {
-      $subCategory              = new Category;
-      $subCategory->title       = $categoryTitle;
-      $subCategory->subTitle    = $this->_getExampleContent();
-      $subCategory->description = $this->_getExampleContent(rand(5, 15));
-      $subCategory->saveChanges();
+      $category              = new Category;
+      $category->title       = $categoryTitle;
+      $category->slug        = Strings::urlize($categoryTitle);
+      $category->subTitle    = $this->_getExampleContent();
+      $category->description = $this->_getExampleContent(rand(5, 15));
+      $category->saveChanges();
       $count++;
     }
     echo $count . PHP_EOL;
@@ -153,6 +155,7 @@ class Populate extends Cli
         $subCategory                   = new Category;
         $subCategory->parentCategoryId = $category->id();
         $subCategory->title            = $categoryTitle;
+        $subCategory->slug             = Strings::urlize($categoryTitle);
         $subCategory->subTitle         = $this->_getExampleContent(
           rand(5, 15)
         );
@@ -241,6 +244,7 @@ class Populate extends Cli
         $article             = new Article;
         $article->categoryId = $category->id();
         $article->title      = $articleTitle;
+        $article->slug       = Strings::urlize($articleTitle);
         $article->subTitle   = $this->_getExampleContent(rand(4, 20));
         $article->saveChanges();
 
@@ -299,6 +303,7 @@ class Populate extends Cli
         $walkthrough              = new Walkthrough;
         $walkthrough->categoryId  = $category->id();
         $walkthrough->title       = $walkthroughTitle;
+        $walkthrough->slug        = Strings::urlize($walkthroughTitle);
         $walkthrough->subTitle    = $this->_getExampleContent(rand(4, 8));
         $walkthrough->description = $this->_getExampleContent(rand(10, 20));
         $walkthrough->saveChanges();
@@ -334,7 +339,7 @@ class Populate extends Cli
   protected function _addVideos()
   {
     echo 'Adding Videos: ';
-    $count = 0;
+    $count        = 0;
     $captionCount = 0;
 
     /** @var Category[] $categories */
@@ -348,20 +353,21 @@ class Populate extends Cli
         {
           $video             = new Video;
           $video->title      = $videoTitle;
+          $video->slug       = Strings::urlize($videoTitle);
           $video->subTitle   = $this->_getExampleContent(rand(3, 15));
           $video->categoryId = $category->id();
-          $video->url = 'http://content.bitsontherun.com/videos/lWMJeVvV-364767.mp4';
+          $video->url        = 'http://content.bitsontherun.com/videos/lWMJeVvV-364767.mp4';
           $video->saveChanges();
 
           // Add Annotations
           $videoCaptionCount = rand(20, 30);
-          $i = 1;
-          $lastSecond = 0;
+          $i                 = 1;
+          $lastSecond        = 0;
           do
           {
-            $caption = new VideoCaption;
-            $caption->videoId = $video->id();
-            $caption->text = $this->_getExampleContent(rand(2, 6));
+            $caption              = new VideoCaption;
+            $caption->videoId     = $video->id();
+            $caption->text        = $this->_getExampleContent(rand(2, 6));
             $caption->startSecond = $lastSecond;
             $lastSecond += rand(3, 6);
             $caption->endSecond = $lastSecond;
