@@ -37,4 +37,13 @@ class CategoryView extends FrontView
 
     return $this->_category;
   }
+
+  public function getSidebar()
+  {
+    /** @var CategorySidebar $sidebar */
+    $sidebar = $this->getView('CategorySidebar');
+    $sidebar->setCategory($this->getCategory());
+
+    return $sidebar;
+  }
 }
