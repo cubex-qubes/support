@@ -35,7 +35,7 @@ class ArticleController extends FrontController
   public function getRoutes()
   {
     return [
-      '/article/(?P<id>\d+)-.*' => 'article',
+      '/article/(?P<id>\d+).*' => 'article',
     ];
   }
 }

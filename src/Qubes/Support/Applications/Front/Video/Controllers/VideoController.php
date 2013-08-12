@@ -59,7 +59,7 @@ class VideoController extends FrontController
   {
     return [
       '/video/captions/(?P<id>\d+).vtt' => 'vttCaptions',
-      '/video/(?P<id>\d+)-.*'           => 'video',
+      '/video/(?P<id>\d+).*'           => 'video',
     ];
   }
 }

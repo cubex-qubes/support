@@ -46,7 +46,7 @@ class WalkthroughController extends FrontController
   public function getRoutes()
   {
     return [
-      '/walkthrough/(?P<id>\d+)-.*/(?P<stepNumber>\d+)-.*' => 'walkthrough',
+      '/walkthrough/(?P<id>\d+).*/(?P<stepNumber>\d+).*' => 'walkthrough',
     ];
   }
 }
