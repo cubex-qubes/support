@@ -4,9 +4,21 @@ namespace Qubes\Support\Applications\Front\Base\Views;
 use Cubex\Foundation\Container;
 use Cubex\View\TemplatedViewModel;
 use Cubex\Foundation\IRenderable;
+use dflydev\markdown\MarkdownParser;
 
 abstract class FrontView extends TemplatedViewModel
 {
+
+  /**
+   * @param $markdown
+   *
+   * @return string
+   */
+  public function getHtmlFromMarkdown($markdown)
+  {
+    $markdownParser = new MarkdownParser();
+    return $markdownParser->transformMarkdown($markdown);
+  }
 
   /**
    * @param string $title

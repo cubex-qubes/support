@@ -9,5 +9,5 @@ $category = $this->getCategory();
 <h1><?= $category->title; ?></h1>
 <h2><?= $category->subTitle; ?></h2>
 <div class="category-description">
-  <?php echo $category->description ?>
+  <?php echo $this->getHtmlFromMarkdown($category->description) ?>
 </div>

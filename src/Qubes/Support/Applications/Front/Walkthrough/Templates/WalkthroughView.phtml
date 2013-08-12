@@ -10,9 +10,9 @@ $step = $this->getCurrentStep();
 <h1><?= $walkthrough->title; ?></h1>
 <h2><?= $walkthrough->subTitle; ?></h2>
 <div id="walkthrough-description">
-  <?= $walkthrough->description ?>
+  <?= $this->getHtmlFromMarkdown($walkthrough->description) ?>
 </div>
 <div class="step <?= sprintf('step-%d', $step->id()) ?>">
   <h3><?= $step->title ?></h3>
-  <?= $step->content ?>
+  <?= $this->getHtmlFromMarkdown($step->content) ?>
 </div>

@@ -18,7 +18,7 @@ $article = $this->getArticle();
         <?php if($block->title) : ?>
           <h3><?= $block->title ?></h3>
           <div>
-            <?php echo $block->content ?>
+            <?php echo $this->getHtmlFromMarkdown($block->content) ?>
           </div>
         <?php endif; ?>
       </div>
