@@ -5,10 +5,19 @@ use Cubex\Foundation\Container;
 use Cubex\View\TemplatedViewModel;
 use Cubex\Foundation\IRenderable;
 use dflydev\markdown\MarkdownParser;
+use Qubes\Support\Applications\Front\Base\Controllers\FrontController;
+
 
 abstract class FrontView extends TemplatedViewModel
 {
 
+  public function getView($className)
+  {
+    /** @var FrontController $controller */
+    $controller = $this->getHostController();
+
+    return $controller->getView($className);
+  }
   /**
    * @param $markdown
    *

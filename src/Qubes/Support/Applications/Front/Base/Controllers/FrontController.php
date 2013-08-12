@@ -46,7 +46,7 @@ abstract class FrontController extends WebpageController
 
     if(class_exists($class))
     {
-      return new $class();
+      return $this->createView(new $class());
     }
 
     $class = sprintf(
@@ -60,7 +60,7 @@ abstract class FrontController extends WebpageController
       throw new \Exception($class . ' Not Found');
     }
 
-    return new $class;
+    return $this->createView(new $class());
   }
 
   /**
@@ -178,4 +178,5 @@ abstract class FrontController extends WebpageController
 
     return $view;
   }
+
 }

@@ -24,7 +24,7 @@ class CategoryController extends FrontController
     }
 
     /** @var CategoryView $view */
-    $view           = $this->getView('CategoryView');
+    $view = $this->getView('CategoryView');
     $view->setCategory($category);
 
     return $this->setView($view);
