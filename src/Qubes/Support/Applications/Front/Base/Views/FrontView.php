@@ -16,8 +16,7 @@ abstract class FrontView extends TemplatedViewModel
    */
   public function getHtmlFromMarkdown($markdown)
   {
-    $markdownParser = new MarkdownParser();
-    return $markdownParser->transformMarkdown($markdown);
+    return (new MarkdownParser())->transformMarkdown($markdown);
   }
 
   /**
