@@ -12,10 +12,11 @@ class VideoController extends FrontController
    * Render an Video
    *
    * @param $id
+   * @param $slug
    *
    * @return VideoView
    */
-  public function renderVideo($id)
+  public function renderVideo($id, $slug)
   {
     $video = new Video($id);
     if(!$video->exists())
@@ -59,7 +60,7 @@ class VideoController extends FrontController
   {
     return [
       '/video/captions/(?P<id>\d+).vtt' => 'vttCaptions',
-      '/video/(?P<id>\d+).*'           => 'video',
+      '/video/:id@num:slug' => 'video',
     ];
   }
 }

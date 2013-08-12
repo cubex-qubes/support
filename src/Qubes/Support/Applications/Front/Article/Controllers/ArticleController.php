@@ -11,10 +11,11 @@ class ArticleController extends FrontController
    * Render an Article
    *
    * @param $id
+   * @param $slug
    *
    * @return ArticleView
    */
-  public function renderArticle($id)
+  public function renderArticle($id, $slug)
   {
     $article = new Article($id);
     if(!$article->exists())
@@ -35,7 +36,7 @@ class ArticleController extends FrontController
   public function getRoutes()
   {
     return [
-      '/article/(?P<id>\d+).*' => 'article',
+      '/article/:id@num:slug' => 'article',
     ];
   }
 }

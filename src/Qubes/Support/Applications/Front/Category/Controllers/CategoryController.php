@@ -12,10 +12,11 @@ class CategoryController extends FrontController
    * Render a Category
    *
    * @param $id
+   * @param $slug
    *
    * @return CategoryView
    */
-  public function renderCategory($id)
+  public function renderCategory($id, $slug)
   {
     $category = new Category($id);
     if(!$category->exists())
@@ -36,7 +37,7 @@ class CategoryController extends FrontController
   public function getRoutes()
   {
     return [
-      '/category/(?P<id>\d+).*' => 'category',
+      '/category/:id@num:slug' => 'category',
     ];
   }
 }

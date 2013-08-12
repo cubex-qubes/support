@@ -11,11 +11,13 @@ class WalkthroughController extends FrontController
    * Render an Walkthrough
    *
    * @param $id
+   * @param $slug
    * @param $stepNumber
+   * @param $stepSlug
    *
    * @return WalkthroughView
    */
-  public function renderWalkthrough($id, $stepNumber)
+  public function renderWalkthrough($id, $slug, $stepNumber, $stepSlug)
   {
     $walkthrough = new Walkthrough($id);
     if(!$walkthrough->exists())
@@ -46,7 +48,7 @@ class WalkthroughController extends FrontController
   public function getRoutes()
   {
     return [
-      '/walkthrough/(?P<id>\d+).*/(?P<stepNumber>\d+).*' => 'walkthrough',
+      '/walkthrough/:id@num:slug/:stepNumber@num:stepSlug' => 'walkthrough',
     ];
   }
 }
