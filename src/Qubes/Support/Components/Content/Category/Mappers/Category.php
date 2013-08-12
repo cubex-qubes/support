@@ -36,7 +36,7 @@ class Category extends I18nRecordMapper
   }
 
   /**
-   * @return \Cubex\Mapper\Database\RecordMapper|null
+   * @return \Cubex\Mapper\Database\RecordMapper|Category[]
    */
   public function getChildCategories()
   {
