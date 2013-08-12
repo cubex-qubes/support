@@ -4,9 +4,10 @@ namespace Qubes\Support\Applications\Front\Category\Views;
 use Cubex\View\TemplatedViewModel;
 use Qubes\Bootstrap\Nav;
 use Qubes\Bootstrap\NavItem;
+use Qubes\Support\Applications\Front\Base\Views\FrontView;
 use Qubes\Support\Components\Content\Category\Mappers\Category;
 
-class CategorySidebar extends TemplatedViewModel
+class CategorySidebar extends FrontView
 {
   /** @var Category */
   private $_category;
@@ -46,11 +47,14 @@ class CategorySidebar extends TemplatedViewModel
 
     foreach($this->getCategory()->getChildCategories() as $category)
     {
-      $url = sprintf('/category/%s-example', $category->id());
       $state = NavItem::STATE_NONE;
 
       $item = new NavItem(
-        sprintf('<a href="%s">%s</a>', $url, $category->title),
+        sprintf(
+          '<a href="%s">%s</a>',
+          $this->getUrl($category),
+          $category->title
+        ),
         $state
       );
 
