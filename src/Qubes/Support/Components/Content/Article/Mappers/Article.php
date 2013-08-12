@@ -15,6 +15,7 @@ class Article extends I18nRecordMapper
   public $title;
   public $subTitle;
   public $view;
+  public $slug;
   /**
    * @datatype int(11)
    */

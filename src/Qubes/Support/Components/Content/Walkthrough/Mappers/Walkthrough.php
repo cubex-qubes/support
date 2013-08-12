@@ -12,6 +12,11 @@ class Walkthrough extends I18nRecordMapper
   public $title;
   public $subTitle;
   public $description;
+  public $slug;
+  /**
+   * @datatype int(11)
+   */
+  public $order;
 
   protected function _configure()
   {

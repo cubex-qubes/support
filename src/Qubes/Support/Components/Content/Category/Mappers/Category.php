@@ -13,6 +13,7 @@ class Category extends I18nRecordMapper
   public $subTitle;
   public $description;
   public $view;
+  public $slug;
   /**
    * @datatype int(11)
    */
