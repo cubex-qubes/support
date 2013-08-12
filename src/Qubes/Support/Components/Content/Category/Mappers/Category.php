@@ -1,6 +1,7 @@
 <?php
 namespace Qubes\Support\Components\Content\Category\Mappers;
 
+use Cubex\Data\Validator\Validator;
 use Cubex\Mapper\Database\I18n\I18nRecordMapper;
 
 /**
@@ -17,7 +18,7 @@ class Category extends I18nRecordMapper
   /**
    * @datatype int(11)
    */
-  public $order;
+  public $order = 0;
 
   protected function _configure()
   {
@@ -26,6 +27,10 @@ class Category extends I18nRecordMapper
       'subTitle',
       'description'
     );
+
+    $this->_setRequired('order', true);
+    $this->_addValidator('order', Validator::VALIDATE_INT);
+    $this->_addValidator('order', Validator::VALIDATE_NOTEMPTY);
   }
 
   /**
