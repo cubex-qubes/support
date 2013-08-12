@@ -2,6 +2,7 @@
 namespace Qubes\Support\Applications\Front\Base\Views;
 
 use Cubex\Foundation\Container;
+use Cubex\Mapper\Database\RecordMapper;
 use Cubex\View\TemplatedViewModel;
 use Cubex\Foundation\IRenderable;
 use dflydev\markdown\MarkdownParser;
@@ -11,6 +12,29 @@ use Qubes\Support\Applications\Front\Base\Controllers\FrontController;
 abstract class FrontView extends TemplatedViewModel
 {
 
+  public function setBreadcrumbs()
+  {
+
+  }
+
+  /**
+   * @param RecordMapper $entity
+   *
+   * @return string
+   */
+  public function getUrl(RecordMapper $entity)
+  {
+    /** @var FrontController $controller */
+    $controller = $this->getHostController();
+
+    return $controller->getUrl($entity);
+  }
+
+  /**
+   * @param $className
+   *
+   * @return FrontView
+   */
   public function getView($className)
   {
     /** @var FrontController $controller */
@@ -97,6 +121,16 @@ abstract class FrontView extends TemplatedViewModel
    * @return null|IRenderable
    */
   public function getSidebar()
+  {
+    return null;
+  }
+
+  /**
+   * Get the Breadcrumbs nested view
+   *
+   * @return null|IRenderable
+   */
+  public function getBreadcrumbs()
   {
     return null;
   }

@@ -4,9 +4,11 @@ namespace Qubes\Support\Applications\Front\Base\Controllers;
 use Cubex\Core\Controllers\WebpageController;
 use Cubex\Foundation\Container;
 use Cubex\Foundation\IRenderable;
+use Qubes\Support\Applications\Front\Base\Views\FrontBreadcrumbView;
 use Qubes\Support\Applications\Front\Base\Views\FrontHeader;
 use Qubes\Support\Applications\Front\Base\Views\FrontView;
 use Cubex\View\Templates\Errors\Error404;
+use Cubex\Mapper\Database\RecordMapper;
 
 abstract class FrontController extends WebpageController
 {
@@ -21,11 +23,35 @@ abstract class FrontController extends WebpageController
     $this->tryNest('header', $this->getHeader());
   }
 
+  public function getProjectBaseUri()
+  {
+    $config = Container::config()->get('project');
+    if(isset($config->base_uri))
+    {
+      return $config->base_uri;
+    }
+
+    return '/';
+  }
+
+  public function getUrl(RecordMapper $entity)
+  {
+    $parts   = [];
+    $parts[] = strtolower(class_shortname($entity));
+    $slug    = isset($entity->slug) ? sprintf('-%s', $entity->slug) : '';
+    $parts[] = sprintf(
+      '%d%s',
+      $entity->id(),
+      $slug
+    );
+
+    return $this->getProjectBaseUri() . implode('/', $parts);
+  }
+
   public function getHeader()
   {
     return new FrontHeader;
   }
-
 
   /**
    * Check for an override then return the view object
@@ -173,10 +199,19 @@ abstract class FrontController extends WebpageController
       {
         $this->nest("sidebar", $sidebar);
       }
+
+      $breadcrumbs = $view->getBreadcrumbs();
+      if($breadcrumbs !== null
+        //&& $breadcrumbs instanceof IRenderable
+      )
+      {
+        $breadcrumb = new FrontBreadcrumbView($breadcrumbs);
+
+        $this->renderBefore('content', $breadcrumb);
+      }
     }
     $this->nest("content", $view);
 
     return $view;
   }
-
 }
