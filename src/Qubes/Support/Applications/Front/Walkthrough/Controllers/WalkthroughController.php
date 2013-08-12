@@ -37,7 +37,7 @@ class WalkthroughController extends FrontController
     // Set the title
     $view->setTitle(sprintf('%s - %s', $walkthrough->title, $step->title));
 
-    return $view;
+    return $this->setView($view);
   }
 
   /**

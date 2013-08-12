@@ -27,7 +27,7 @@ class VideoController extends FrontController
     $view = $this->getView('VideoView');
     $view->setVideo($video);
 
-    return $view;
+    return $this->setView($view);
   }
 
   public function renderVttCaptions($videoId)

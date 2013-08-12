@@ -20,7 +20,7 @@ class ContactController extends FrontController
     /** @var ContactView $view */
     $view = $this->getView('ContactView');
 
-    return $view;
+    return $this->setView($view);
   }
 
   /**

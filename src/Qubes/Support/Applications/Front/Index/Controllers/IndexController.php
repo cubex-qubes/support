@@ -17,7 +17,7 @@ class IndexController extends FrontController
     /** @var IndexView $view */
     $view = $this->getView('IndexView');
 
-    return $view;
+    return $this->setView($view);
   }
 
   public function getRoutes()

@@ -42,7 +42,7 @@ class SearchController extends FrontController
     // todo currently waiting on http://phabricator.cubex.io/T171
     //$articles = Article::collection($searchObject);
 
-    return $view;
+    return $this->setView($view);
   }
 
   public function getRoutes()
