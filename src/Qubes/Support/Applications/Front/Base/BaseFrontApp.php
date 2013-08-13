@@ -3,6 +3,7 @@ namespace Qubes\Support\Applications\Front\Base;
 
 use Cubex\Core\Application\Application;
 use Cubex\Foundation\Container;
+use Cubex\Theme\ApplicationTheme;
 use Qubes\Support\Applications\Front\Base\Controllers\FrontController;
 use Themed\Sidekick\SidekickTheme;
 
@@ -47,6 +48,11 @@ abstract class BaseFrontApp extends Application
    */
   public function getTheme()
   {
+    if(Container::config()->get('project')->extended)
+    {
+      return new ApplicationTheme($this);
+    }
+
     return new SidekickTheme;
   }
 }
