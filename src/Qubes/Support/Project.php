@@ -46,6 +46,11 @@ class Project extends \Cubex\Core\Project\Project implements INamespaceAware
     return $this;
   }
 
+  public function isExtended()
+  {
+    return Container::config()->get('project')->extended;
+  }
+
   /**
    * Set the Project path, and a flag it as extended
    *
@@ -170,22 +175,26 @@ class Project extends \Cubex\Core\Project\Project implements INamespaceAware
       throw new \Exception("No Application Defined for '$path'", 404);
     }
 
-    $extendedClassName = sprintf(
-      'Qubes\Support\Applications\%s\%s\%s%sApp',
-      $namespace,
-      $appRoutes[$path],
-      $appRoutes[$path],
-      $namespace
-    );
-
-    if(class_exists($extendedClassName))
+    // Attempt to find the override App
+    if($this->isExtended())
     {
-      return new $extendedClassName();
+      $extendedClassName = sprintf(
+        '%s\Applications\%s\%s\%s%sApp',
+        $this->getNamespace(),
+        $namespace,
+        $appRoutes[$path],
+        $appRoutes[$path],
+        $namespace
+      );
+
+      if(class_exists($extendedClassName))
+      {
+        return new $extendedClassName();
+      }
     }
 
     $baseClassName = sprintf(
-      '%s\Applications\%s\%s\%s%sApp',
-      $this->getNamespace(),
+      'Qubes\Support\Applications\%s\%s\%s%sApp',
       $namespace,
       $appRoutes[$path],
       $appRoutes[$path],
@@ -198,8 +207,7 @@ class Project extends \Cubex\Core\Project\Project implements INamespaceAware
     }
 
     $message = sprintf(
-      'Could not find %s or %s',
-      $extendedClassName,
+      'Could not find %s',
       $baseClassName
     );
     throw new \Exception($message, 500);
