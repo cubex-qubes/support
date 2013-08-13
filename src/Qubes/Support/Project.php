@@ -170,7 +170,20 @@ class Project extends \Cubex\Core\Project\Project implements INamespaceAware
       throw new \Exception("No Application Defined for '$path'", 404);
     }
 
-    $className = sprintf(
+    $extendedClassName = sprintf(
+      'Qubes\Support\Applications\%s\%s\%s%sApp',
+      $namespace,
+      $appRoutes[$path],
+      $appRoutes[$path],
+      $namespace
+    );
+
+    if(class_exists($extendedClassName))
+    {
+      return new $extendedClassName();
+    }
+
+    $baseClassName = sprintf(
       '%s\Applications\%s\%s\%s%sApp',
       $this->getNamespace(),
       $namespace,
@@ -179,11 +192,16 @@ class Project extends \Cubex\Core\Project\Project implements INamespaceAware
       $namespace
     );
 
-    if(!class_exists($className))
+    if(class_exists($baseClassName))
     {
-      throw new \Exception($className . ' Not Found');
+      return new $baseClassName();
     }
 
-    return new $className();
+    $message = sprintf(
+      'Could not find %s or %s',
+      $extendedClassName,
+      $baseClassName
+    );
+    throw new \Exception($message, 500);
   }
 }
