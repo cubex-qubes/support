@@ -168,12 +168,12 @@ abstract class FrontController extends WebpageController
 
     foreach($config->css as $file)
     {
-      $this->requireCss($file, $config->namespace);
+      $this->requireCss($file);
     }
 
     foreach($config->js as $file)
     {
-      $this->requireJs($file, $config->namespace);
+      $this->requireJs($file);
     }
 
     return $this;

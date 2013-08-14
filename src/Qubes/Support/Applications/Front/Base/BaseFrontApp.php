@@ -34,26 +34,18 @@ abstract class BaseFrontApp extends Application
 
   private function _setGlobalCss()
   {
-    Container::config()->get('project')->css = (array)$this->getGlobalCss();
+    $css = $this->getProject()->getGlobalCss();
+    Container::config()->get('project')->css = $css;
 
     return $this;
   }
 
   private function _setGlobalJs()
   {
-    Container::config()->get('project')->js = (array)$this->getGlobalJs();
+    $js = $this->getProject()->getGlobalJs();
+    Container::config()->get('project')->js = $js;
 
     return $this;
-  }
-
-  public function getGlobalCss()
-  {
-    return [];
-  }
-
-  public function getGlobalJs()
-  {
-    return [];
   }
 
   /**
