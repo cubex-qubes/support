@@ -36,7 +36,6 @@ class CategoryBackController extends BaseBackController
     $postData = $this->request()->postVariables();
 
     $newCategory = new Category();
-    unset($postData['id']);
     $newCategory->hydrateFromUnserialized($postData);
     $newCategory->saveChanges();
 

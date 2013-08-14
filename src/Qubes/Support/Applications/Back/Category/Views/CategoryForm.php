@@ -25,18 +25,21 @@ class CategoryForm extends TemplatedViewModel
     $this->_form->getElement('title')->setRequired(true);
     $this->_form->getElement('subTitle')->setRequired(true);
 
-    $value = $this->_form->getElement('parentCategoryId')->rawData();
-    $id    = $this->_form->getElement('id')->rawData();
-
-    //child cannot be a parent of its parent
-    $exception = Category::collection(['parent_category_id' => $id])
-                 ->getUniqueField('id');
+    $value     = $this->_form->getElement('parentCategoryId')->rawData();
+    $exception = [];
+    if($this->_form->getElement('id') !== null)
+    {
+      $id = $this->_form->getElement('id')->rawData();
+      //child cannot be a parent of its parent
+      $exception = Category::collection(['parent_category_id' => $id])
+                   ->getUniqueField('id');
+    }
 
     //grand children not allowed to be parents of grand parents
     $grandChildren = Category::collection()->whereIn(
-                                'parent_category_id',
-                                $exception
-                              )->getUniqueField('id');
+                       'parent_category_id',
+                       $exception
+                     )->getUniqueField('id');
 
     $exception = array_merge($exception, $grandChildren);
 
