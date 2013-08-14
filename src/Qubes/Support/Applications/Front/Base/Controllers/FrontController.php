@@ -50,23 +50,29 @@ abstract class FrontController extends WebpageController
 
   public function getHeader()
   {
-    return new FrontHeader;
+    return $this->getView('FrontHeader', 'Base');
   }
 
   /**
    * Check for an override then return the view object
    *
-   * @param $className
+   * @param      $className
+   * @param null $applicationName
    *
    * @throws \Exception
    * @return FrontView
    */
-  public function getView($className)
+  public function getView($className, $applicationName = null)
   {
+    if(!$applicationName)
+    {
+      $applicationName = $this->getApplicationName();
+    }
+
     $class = sprintf(
       '%s\Applications\Front\%s\Views\%s',
       $this->getProjectNamespace(),
-      $this->getApplicationName(),
+      $applicationName,
       $className
     );
 
@@ -77,7 +83,7 @@ abstract class FrontController extends WebpageController
 
     $class = sprintf(
       'Qubes\Support\Applications\Front\%s\Views\%s',
-      $this->getApplicationName(),
+      $applicationName,
       $className
     );
 

@@ -19,6 +19,7 @@ class CategoryController extends FrontController
   public function renderCategory($id, $slug)
   {
     $category = new Category($id);
+
     if(!$category->exists())
     {
       return $this->renderNotFound();
