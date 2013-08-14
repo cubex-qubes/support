@@ -2,10 +2,12 @@
 namespace Qubes\Support;
 
 use Bundl\Debugger\DebuggerBundle;
+use Cubex\Core\Application\Application;
 use Cubex\Core\Interfaces\INamespaceAware;
 use Cubex\Foundation\Container;
 use Cubex\Core\Traits\NamespaceAwareTrait;
 use Cubex\Dispatch\Utils\ListenerTrait;
+use Cubex\Theme\ApplicationTheme;
 
 class Project extends \Cubex\Core\Project\Project implements INamespaceAware
 {
@@ -189,7 +191,7 @@ class Project extends \Cubex\Core\Project\Project implements INamespaceAware
 
       if(class_exists($extendedClassName))
       {
-        return new $extendedClassName();
+        return new $extendedClassName($this);
       }
     }
 
@@ -203,7 +205,7 @@ class Project extends \Cubex\Core\Project\Project implements INamespaceAware
 
     if(class_exists($baseClassName))
     {
-      return new $baseClassName();
+      return new $baseClassName($this);
     }
 
     $message = sprintf(
@@ -211,5 +213,10 @@ class Project extends \Cubex\Core\Project\Project implements INamespaceAware
       $baseClassName
     );
     throw new \Exception($message, 500);
+  }
+
+  public function getTheme(Application $app)
+  {
+    return new ApplicationTheme($app);
   }
 }

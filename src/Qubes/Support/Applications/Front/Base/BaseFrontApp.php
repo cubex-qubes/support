@@ -5,10 +5,25 @@ use Cubex\Core\Application\Application;
 use Cubex\Foundation\Container;
 use Cubex\Theme\ApplicationTheme;
 use Qubes\Support\Applications\Front\Base\Controllers\FrontController;
+use Qubes\Support\Project;
 use Themed\Sidekick\SidekickTheme;
 
 abstract class BaseFrontApp extends Application
 {
+  protected $_project;
+
+  function __construct(\Cubex\Core\Project\Project $project)
+  {
+    $this->_project = $project;
+  }
+
+  /**
+   * @return Project
+   */
+  public function getProject()
+  {
+    return $this->_project;
+  }
 
   public function init()
   {
@@ -50,7 +65,7 @@ abstract class BaseFrontApp extends Application
   {
     if(Container::config()->get('project')->extended)
     {
-      return new ApplicationTheme($this);
+      return $this->getProject()->getTheme($this);
     }
 
     return new SidekickTheme;
