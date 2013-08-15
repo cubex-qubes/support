@@ -8,13 +8,30 @@ use Cubex\Foundation\IRenderable;
 use dflydev\markdown\MarkdownParser;
 use Qubes\Support\Applications\Front\Base\Controllers\FrontController;
 
-
 abstract class FrontView extends TemplatedViewModel
 {
+  /** @var MarkdownParser */
+  private $_markdownParser;
+
+  /**
+   * @param $markdown
+   *
+   * @return string
+   */
+  public function getHtmlFromMarkdown($markdown)
+  {
+    if(!isset($this->_markdownParser)
+      || !$this->_markdownParser instanceof MarkdownParser
+    )
+    {
+      $this->_markdownParser = new MarkdownParser();
+    }
+
+    return $this->_markdownParser->transformMarkdown($markdown);
+  }
 
   public function setBreadcrumbs()
   {
-
   }
 
   /**
@@ -42,15 +59,6 @@ abstract class FrontView extends TemplatedViewModel
 
     return $controller->getView($className);
   }
-  /**
-   * @param $markdown
-   *
-   * @return string
-   */
-  public function getHtmlFromMarkdown($markdown)
-  {
-    return (new MarkdownParser())->transformMarkdown($markdown);
-  }
 
   /**
    * @param string $title
@@ -64,6 +72,7 @@ abstract class FrontView extends TemplatedViewModel
       $this->t('Support'),
       $title
     );
+
     return parent::setTitle($title);
   }
 
@@ -91,7 +100,9 @@ abstract class FrontView extends TemplatedViewModel
       );
 
       if(file_exists(sprintf('%s/%s.phtml', $templatePath, $className)))
+      {
         $directory = $templatePath;
+      }
     }
 
     $this->_baseDirectory = $directory;
