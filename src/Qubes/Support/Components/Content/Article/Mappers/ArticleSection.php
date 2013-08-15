@@ -16,11 +16,25 @@ class ArticleSection extends I18nRecordMapper
   public $order;
 
   /**
+   * @param null $platformId
+   *
    * @return ArticleSectionBlock[]|RecordCollection
    */
-  public function getBlocks()
+  public function getBlocks($platformId = null)
   {
-    return $this->hasMany(new ArticleSectionBlock, 'articleSectionId');
+    $blocks = $this->hasMany(new ArticleSectionBlock, 'articleSectionId');
+    if($platformId)
+    {
+      $blocks = $blocks->whereEq('platform_id', $platformId);
+    }
+
+    // todo this is a workaround: http://phabricator.cubex.io/T145
+    foreach($blocks as $block)
+    {
+      $block->reload();
+    }
+
+    return $blocks;
   }
 
   /**
