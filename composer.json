@@ -21,8 +21,9 @@
     "dflydev/markdown":          "*",
     "phpseclib/phpseclib":       "*",
     "ircmaxell/password-compat": "*",
-    "jayfrancis/webvtt": "*",
-    "jayfrancis/cubex-jwplayer": "*"
+    "jayfrancis/webvtt":         "*",
+    "jayfrancis/cubex-jwplayer": "*",
+    "mpdf/mpdf":                 "*"
   },
   "autoload":          {
     "psr-0": {
