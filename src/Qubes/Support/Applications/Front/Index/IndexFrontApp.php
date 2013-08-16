@@ -8,6 +8,9 @@ class IndexFrontApp extends BaseFrontApp
 {
   public function defaultController()
   {
-    return new IndexController();
+    /** @var IndexController $controller */
+    $controller = $this->getController('IndexController');
+
+    return $controller;
   }
 }

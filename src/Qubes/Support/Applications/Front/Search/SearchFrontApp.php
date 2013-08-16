@@ -8,6 +8,9 @@ class SearchFrontApp extends BaseFrontApp
 {
   public function defaultController()
   {
-    return new SearchController();
+    /** @var SearchController $controller */
+    $controller = $this->getController('SearchController');
+
+    return $controller;
   }
 }

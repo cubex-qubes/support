@@ -8,6 +8,9 @@ class ContactFrontApp extends BaseFrontApp
 {
   public function defaultController()
   {
-    return new ContactController();
+    /** @var ContactController $controller */
+    $controller = $this->getController('ContactController');
+
+    return $controller;
   }
 }

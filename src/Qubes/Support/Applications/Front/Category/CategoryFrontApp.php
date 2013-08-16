@@ -8,6 +8,9 @@ class CategoryFrontApp extends BaseFrontApp
 {
   public function defaultController()
   {
-    return new CategoryController();
+    /** @var CategoryController $controller */
+    $controller = $this->getController('CategoryController');
+
+    return $controller;
   }
 }

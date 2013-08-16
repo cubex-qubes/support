@@ -8,6 +8,9 @@ class ArticleFrontApp extends BaseFrontApp
 {
   public function defaultController()
   {
-    return new ArticleController();
+    /** @var ArticleController $controller */
+    $controller = $this->getController('ArticleController');
+
+    return $controller;
   }
 }

@@ -8,6 +8,9 @@ class VideoFrontApp extends BaseFrontApp
 {
   public function defaultController()
   {
-    return new VideoController();
+    /** @var VideoController $controller */
+    $controller = $this->getController('VideoController');
+
+    return $controller;
   }
 }
