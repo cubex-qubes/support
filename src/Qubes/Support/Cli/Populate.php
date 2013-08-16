@@ -127,12 +127,14 @@ class Populate extends Cli
     // Add parent categories
     echo 'Adding Categories: ';
     $count          = 0;
-    $categoryTitles = $this->_getTitleArray('Category', rand(2, 4));
-    foreach($categoryTitles as $categoryTitle)
+    //$categoryTitles = $this->_getTitleArray('Category', rand(2, 4));
+
+    $platforms = Platform::collection();
+    foreach($platforms as $platform)
     {
       $category              = new Category;
-      $category->title       = $categoryTitle;
-      $category->slug        = Strings::urlize($categoryTitle);
+      $category->title       = $platform->name;
+      $category->slug        = Strings::urlize($platform->name);
       $category->subTitle    = $this->_getExampleContent();
       $category->description = $this->_getExampleContent(rand(5, 15));
       $category->saveChanges();
