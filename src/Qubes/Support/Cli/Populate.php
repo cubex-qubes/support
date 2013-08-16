@@ -314,6 +314,7 @@ class Populate extends Cli
         {
           $step                = new WalkthroughStep;
           $step->title         = sprintf('Step %d: %s', $stepOrder, $stepTitle);
+          $step->slug          = Strings::urlize($stepTitle);
           $step->walkthroughId = $walkthrough->id();
           $step->content       = $this->_getExampleContent(rand(30, 50));
           $step->order         = $stepOrder;

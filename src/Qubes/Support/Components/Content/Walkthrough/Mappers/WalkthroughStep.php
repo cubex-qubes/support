@@ -9,6 +9,7 @@ class WalkthroughStep extends I18nRecordMapper
   public $walkthroughId;
   public $title;
   public $content;
+  public $slug;
   /**
    * @datatype int(11)
    */
@@ -20,6 +21,14 @@ class WalkthroughStep extends I18nRecordMapper
       'title',
       'content'
     );
+  }
+
+  /**
+   * @return \Cubex\Mapper\Database\RecordMapper|Walkthrough
+   */
+  public function getWalkthrough()
+  {
+    return $this->belongsTo(new Walkthrough, 'walkthroughId');
   }
 
   public function getTextContainer()
