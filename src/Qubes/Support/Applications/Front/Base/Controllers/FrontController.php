@@ -135,12 +135,21 @@ abstract class FrontController extends WebpageController
   }
 
   /**
+   * @return \Qubes\Support\Project
+   */
+  public function getProject()
+  {
+    return $this->getApplication()->getProject();
+  }
+
+  /**
    * Gets the namespace for the project
    *
    * @return mixed|string
    */
   public function getProjectNamespace()
   {
+    return $this->getProject()->getNamespace();
   }
 
   /**
