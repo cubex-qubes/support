@@ -2,6 +2,7 @@
 namespace Qubes\Support\Applications\Front\Article\Views;
 
 use Qubes\Support\Applications\Front\Base\Views\FrontView;
+use Qubes\Support\Applications\Front\Category\Views\CategorySidebar;
 use Qubes\Support\Components\Content\Article\Mappers\Article;
 
 class ArticleView extends FrontView
@@ -36,5 +37,14 @@ class ArticleView extends FrontView
     }
 
     return $this->_article;
+  }
+
+  public function getSidebar()
+  {
+    /** @var CategorySidebar $sidebar */
+    $sidebar = $this->getView('CategorySidebar', 'Category');
+    $category = $this->getArticle()->getCategory();
+    $sidebar->setCategory($category);
+    return $sidebar;
   }
 }
