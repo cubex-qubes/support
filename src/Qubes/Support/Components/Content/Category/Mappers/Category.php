@@ -3,12 +3,15 @@ namespace Qubes\Support\Components\Content\Category\Mappers;
 
 use Cubex\Data\Validator\Validator;
 use Cubex\Mapper\Database\I18n\I18nRecordMapper;
+use Qubes\Support\Components\Helpers\ViewOptionsTrait;
 
 /**
  * @method static \Qubes\Support\Components\Content\Category\Mappers\Category[]|\Cubex\Mapper\Database\RecordCollection collection
  */
 class Category extends I18nRecordMapper
 {
+  use ViewOptionsTrait;
+
   public $parentCategoryId;
   public $title;
   public $subTitle;
@@ -55,5 +58,10 @@ class Category extends I18nRecordMapper
   public function getTextContainer()
   {
     return new CategoryText;
+  }
+
+  public function views()
+  {
+    return $this->getViewOptions();
   }
 }

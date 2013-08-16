@@ -3,6 +3,7 @@ namespace Qubes\Support\Components\Content\Article\Mappers;
 
 use Cubex\Mapper\Database\I18n\I18nRecordMapper;
 use Cubex\Mapper\Database\RecordCollection;
+use Qubes\Support\Components\Helpers\ViewOptionsTrait;
 
 /**
  * Article Mapper
@@ -11,6 +12,8 @@ use Cubex\Mapper\Database\RecordCollection;
  */
 class Article extends I18nRecordMapper
 {
+  use ViewOptionsTrait;
+
   public $categoryId;
   public $title;
   public $subTitle;
@@ -44,5 +47,10 @@ class Article extends I18nRecordMapper
   public function getTextContainer()
   {
     return new ArticleText;
+  }
+
+  public function views()
+  {
+    return $this->getViewOptions();
   }
 }
