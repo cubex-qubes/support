@@ -3,6 +3,7 @@ namespace Qubes\Support\Components\Content\Article\Mappers;
 
 use Cubex\Mapper\Database\I18n\I18nRecordMapper;
 use Cubex\Mapper\Database\RecordCollection;
+use Qubes\Support\Components\Content\Category\Mappers\Category;
 use Qubes\Support\Components\Helpers\ViewOptionsTrait;
 
 /**
@@ -30,6 +31,11 @@ class Article extends I18nRecordMapper
       'title',
       'subTitle'
     );
+  }
+
+  public function getCategory()
+  {
+    return $this->belongsTo(new Category, 'categoryId');
   }
 
   /**
