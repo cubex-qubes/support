@@ -43,11 +43,19 @@ class CategorySidebar extends FrontView
    */
   public function render()
   {
-    $menu = new Nav(Nav::NAV_DEFAULT);
+    $currentCategory = $this->getCategory();
+    $menu            = new Nav(Nav::NAV_DEFAULT);
 
-    foreach($this->getCategory()->getChildCategories() as $category)
+    foreach($currentCategory->getSiblingCategories() as $category)
     {
-      $state = NavItem::STATE_NONE;
+      if($category->id() == $currentCategory->id())
+      {
+        $state = NavItem::STATE_ACTIVE;
+      }
+      else
+      {
+        $state = NavItem::STATE_NONE;
+      }
 
       $item = new NavItem(
         sprintf(
@@ -56,6 +64,10 @@ class CategorySidebar extends FrontView
           $category->title
         ),
         $state
+      );
+
+      $item->setAttribute(
+        'id', sprintf('sidebar-category-%d', $category->id())
       );
 
       $menu->addItem($item);

@@ -37,15 +37,25 @@ class Category extends I18nRecordMapper
   }
 
   /**
-   * @return bool|\Cubex\Mapper\Database\RecordMapper|static
+   * @return \Cubex\Mapper\Database\RecordMapper[]|Category[]
    */
-  public function getParentCategory()
+  public function getSiblingCategories()
   {
-    return $this->belongsTo(new Category(), 'parentCategoryId');
+    $categories = Category::collection();
+
+    return $categories->whereEq('parent_category_id', $this->parentCategoryId);
   }
 
   /**
-   * @return \Cubex\Mapper\Database\RecordMapper|Category[]
+   * @return \Cubex\Mapper\Database\RecordMapper|Category
+   */
+  public function getParentCategory()
+  {
+    return $this->belongsTo(new Category(), 'parent_category_id');
+  }
+
+  /**
+   * @return \Cubex\Mapper\Database\RecordMapper[]|Category[]
    */
   public function getChildCategories()
   {
