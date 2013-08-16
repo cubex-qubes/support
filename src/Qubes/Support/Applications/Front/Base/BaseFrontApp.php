@@ -54,7 +54,6 @@ abstract class BaseFrontApp extends Application
     {
       $class = sprintf(
         '%s\Applications\Front\%s\Controllers\%s',
-        'Project',
         $this->getProjectNamespace(),
         $applicationName,
         $className
