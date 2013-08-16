@@ -48,16 +48,17 @@ abstract class FrontView extends TemplatedViewModel
   }
 
   /**
-   * @param $className
+   * @param      $className
+   * @param null $applicationName
    *
    * @return FrontView
    */
-  public function getView($className)
+  public function getView($className, $applicationName = null)
   {
     /** @var FrontController $controller */
     $controller = $this->getHostController();
 
-    return $controller->getView($className);
+    return $controller->getView($className, $applicationName);
   }
 
   /**
