@@ -1,0 +1,11 @@
+input[type=text] {
+  width: 700px;
+}
+
+.block-title, .block-content {
+  width: 675px !important;
+}
+
+.block-content {
+  height: 300px;
+}
