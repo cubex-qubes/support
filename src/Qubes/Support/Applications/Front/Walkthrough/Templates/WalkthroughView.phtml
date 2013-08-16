@@ -16,3 +16,15 @@ $step = $this->getCurrentStep();
   <h3><?= $step->title ?></h3>
   <?= $this->getHtmlFromMarkdown($step->content) ?>
 </div>
+
+<?php if($this->getPreviousStepUrl()) : ?>
+  <a href="<?= $this->getPreviousStepUrl() ?>">
+    Previous Step
+  </a>
+<?php endif; ?>
+
+<?php if($this->getNextStepUrl()) : ?>
+  <a href="<?= $this->getNextStepUrl() ?>">
+    Next Step
+  </a>
+<?php endif; ?>
