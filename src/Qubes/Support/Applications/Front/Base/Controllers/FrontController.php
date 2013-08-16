@@ -4,6 +4,7 @@ namespace Qubes\Support\Applications\Front\Base\Controllers;
 use Cubex\Core\Controllers\WebpageController;
 use Cubex\Foundation\Container;
 use Cubex\Foundation\IRenderable;
+use Qubes\Support\Applications\Front\Base\BaseFrontApp;
 use Qubes\Support\Applications\Front\Base\Views\FrontBreadcrumbView;
 use Qubes\Support\Applications\Front\Base\Views\FrontHeader;
 use Qubes\Support\Applications\Front\Base\Views\FrontView;
@@ -13,6 +14,7 @@ use Qubes\Support\Components\Content\Walkthrough\Mappers\WalkthroughStep;
 
 abstract class FrontController extends WebpageController
 {
+
   public function preProcess()
   {
     $this->_addProjectResources();
@@ -117,18 +119,19 @@ abstract class FrontController extends WebpageController
   }
 
   /**
-   * Get the application name
-   *
-   * @return mixed
+   * @return string
    */
   public function getApplicationName()
   {
-    $classParts = explode('\\', get_called_class());
+    return $this->getApplication()->getApplicationName();
+  }
 
-    array_pop($classParts);
-    array_pop($classParts);
-
-    return end($classParts);
+  /**
+   * @return BaseFrontApp
+   */
+  public function getApplication()
+  {
+    return $this->application();
   }
 
   /**
@@ -138,13 +141,6 @@ abstract class FrontController extends WebpageController
    */
   public function getProjectNamespace()
   {
-    $config = Container::config()->get('project');
-    if($config->extended)
-    {
-      return $config->namespace;
-    }
-
-    return $this->getNamespace();
   }
 
   /**
