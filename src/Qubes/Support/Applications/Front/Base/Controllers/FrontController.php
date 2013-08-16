@@ -9,6 +9,7 @@ use Qubes\Support\Applications\Front\Base\Views\FrontHeader;
 use Qubes\Support\Applications\Front\Base\Views\FrontView;
 use Cubex\View\Templates\Errors\Error404;
 use Cubex\Mapper\Database\RecordMapper;
+use Qubes\Support\Components\Content\Walkthrough\Mappers\WalkthroughStep;
 
 abstract class FrontController extends WebpageController
 {
@@ -36,7 +37,13 @@ abstract class FrontController extends WebpageController
 
   public function getUrl(RecordMapper $entity)
   {
-    $parts   = [];
+    $parts = [];
+
+    if($entity instanceof WalkthroughStep)
+    {
+      return $this->_getWalkthroughStepUrl($entity);
+    }
+
     $parts[] = strtolower(class_shortname($entity));
     $slug    = isset($entity->slug) ? sprintf('-%s', $entity->slug) : '';
     $parts[] = sprintf(
@@ -46,6 +53,20 @@ abstract class FrontController extends WebpageController
     );
 
     return $this->getProjectBaseUri() . implode('/', $parts);
+  }
+
+  private function _getWalkthroughStepUrl(WalkthroughStep $walkthroughStep)
+  {
+    $walkthrough = $walkthroughStep->getWalkthrough();
+
+    $url = sprintf(
+      '%s/%d-%s',
+      $this->getUrl($walkthrough),
+      $walkthroughStep->id(),
+      $walkthroughStep->slug
+    );
+
+    return $url;
   }
 
   public function getHeader()

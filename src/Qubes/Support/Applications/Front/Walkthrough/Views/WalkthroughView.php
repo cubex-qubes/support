@@ -60,4 +60,13 @@ class WalkthroughView extends FrontView
 
     return $this->_walkthrough;
   }
+
+  public function getSidebar()
+  {
+    /** @var WalkthroughSidebar $sidebar */
+    $sidebar = $this->getView('WalkthroughSidebar');
+    $sidebar->setWalkthrough($this->getWalkthrough());
+
+    return $sidebar;
+  }
 }
