@@ -69,7 +69,7 @@ class ArticleController extends FrontController
   public function getRoutes()
   {
     return [
-      '/article/:id@num:slug' => 'article',
+      '/article/:id@num:slug@all' => 'article',
       '/article/pdf/:id@num/:platformId@num'  => 'pdf',
     ];
   }

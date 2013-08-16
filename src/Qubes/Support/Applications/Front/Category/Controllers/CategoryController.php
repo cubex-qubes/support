@@ -38,7 +38,7 @@ class CategoryController extends FrontController
   public function getRoutes()
   {
     return [
-      '/category/:id@num:slug' => 'category',
+      '/category/:id@num:slug@all' => 'category',
     ];
   }
 }
