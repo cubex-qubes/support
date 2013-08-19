@@ -6,30 +6,61 @@
 namespace Qubes\Support\Components\Helpers;
 
 use Cubex\Foundation\Container;
+use Cubex\Mapper\Database\RecordMapper;
 
 trait ViewOptionsTrait
 {
-
   public function getViewOptions()
   {
-    $viewOptions = [];
-    $projectBase = Container::config()->get('_cubex_')->getStr('project_base');
-    $viewPath    = "/Qubes/Support/Applications/Front/" . class_shortname(
-        $this
-      ) . "/Views/";
-    $viewDir     = $projectBase . $viewPath;
-
-    $files = glob($viewDir . '*.php');
-    foreach($files as $file)
+    if($this instanceof RecordMapper)
     {
-      $pathInfo = pathinfo($file);
-      $fileName  = basename($pathInfo['filename']);
+      $viewOptions = [];
+      $project     = Container::config()->get('project');
+      $mapperName  = class_shortname($this);
+      $viewPath    = "/Applications/Front/" . $mapperName . "/Views/";
 
-      $fullClassName = str_replace('/', '\\', $viewPath) . $fileName;
+      $viewDirs                      = [];
+      $extended                      = [];
+      $viewDirs[$project->namespace] = $project->path . $viewPath;
+      $extended[$project->namespace] = false;
+      if($project->extended)
+      {
+        $viewDirs[$project->extended_namespace] = $project->extended_path . $viewPath;
+        $extended[$project->extended_namespace] = true;
+      }
 
-      $viewOptions[$fullClassName] = $fileName;
+      foreach($viewDirs as $namespace => $viewDir)
+      {
+        if(file_exists($viewDir))
+        {
+          $files = glob($viewDir . '*.php');
+          foreach($files as $file)
+          {
+            $pathInfo      = pathinfo($file);
+            $className     = basename($pathInfo['filename']);
+            $fullClassName = $namespace . '\\Applications\\Front\\' .
+              $mapperName . '\\Views\\' . $className;
+
+            if(isset($extended[$namespace]) && $extended[$namespace])
+            {
+              $className = $className . ' [Default]';
+            }
+
+            $viewOptions[$fullClassName] = $className;
+          }
+        }
+      }
+
+      if(empty($viewOptions))
+      {
+        throw new \Exception('No Views found');
+      }
+
+      return $viewOptions;
     }
-
-    return $viewOptions;
+    else
+    {
+      throw new \Exception('ViewOptionTrait can only be used by a RecordMapper');
+    }
   }
 }

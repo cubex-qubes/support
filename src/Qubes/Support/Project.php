@@ -84,6 +84,11 @@ class Project extends \Cubex\Core\Project\Project implements INamespaceAware
   {
     $config           = Container::config()->get('project');
     $config->extended = !($this->getProjectPath() == __DIR__);
+    if($config->extended)
+    {
+      $config->extended_path = __DIR__;
+      $config->extended_namespace = __NAMESPACE__;
+    }
 
     return $this;
   }
