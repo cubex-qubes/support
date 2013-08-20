@@ -1,0 +1,963 @@
+.navbar-search {
+  padding:3px 0 0;
+}
+.navbar-search input {
+  margin:0;
+}
+.navbar-search .btn {
+  margin:0;
+}
+
+/**/
+[class~="icon-"] {
+  display:block;
+  overflow:hidden;
+  text-indent:-9999em;
+}
+
+/**/
+[class*="icon-32-"] {
+  width:32px;
+  height:32px;
+  background:url('/icons/icons-32.png') no-repeat 0 -9999em;
+}
+.icon-32-chalkboard,
+.icon-32-blackboard {
+  background-position:0 0;
+}
+.icon-32-video {
+  background-position:0 -32px;
+}
+.icon-32-file {
+  background-position:0 -64px;
+}
+.icon-32-facebook {
+  background-position:0 -96px;
+}
+.icon-32-twitter {
+  background-position:0 -128px;
+}
+.icon-32-envelope {
+  background-position:0 -160px;
+}
+
+/* icon-20 */
+[class^="icon-20-"] {
+  width:20px;
+  height:20px;
+  background:url('/icons/icons-20px.png') no-repeat 0 -9999em;
+}
+.icon-20-windowsBlue {
+  background-position:0 0;
+}
+.icon-20-kindle {
+  background-position:0 -20px;
+}
+.icon-20-linux {
+  background-position:0 -40px;
+}
+.icon-20-infinity {
+  background-position:0 -60px;
+}
+.icon-20-hdd {
+  background-position:0 -80px;
+}
+.icon-20-storage {
+  background-position:0 -100px;
+}
+.icon-20-fileShare {
+  background-position:0 -120px;
+}
+.icon-20-fax {
+  background-position:0 -140px;
+}
+.icon-20-phone {
+  background-position:0 -160px;
+}
+.icon-20-blackberry {
+  background-position:0 -180px;
+}
+.icon-20-android {
+  background-position:0 -200px;
+}
+.icon-20-apple {
+  background-position:0 -220px;
+}
+.icon-20-windows {
+  background-position:0 -240px;
+}
+.icon-20-noEntry {
+  background-position:0 -260px;
+}
+.icon-20-files {
+  background-position:0 -280px;
+}
+.icon-20-switch {
+  background-position:0 -300px;
+}
+.icon-20-music {
+  background-position:0 -320px;
+}
+.icon-20-film {
+  background-position:0 -340px;
+}
+.icon-20-pc {
+  background-position:0 -360px;
+}
+.icon-20-arrowUp {
+  background-position:0 -380px;
+}
+.icon-20-upload {
+  background-position:0 -400px;
+}
+.icon-20-cursor {
+  background-position:0 -420px;
+}
+.icon-20-padlock {
+  background-position:0 -440px;
+}
+.icon-20-monitor {
+  background-position:0 -460px;
+}
+.icon-20-money {
+  background-position:0 -480px;
+}
+.icon-20-briefcase {
+  background-position:0 -500px;
+}
+.icon-20-user {
+  background-position:0 -520px;
+}
+.icon-20-fileUpload {
+  background-position:0 -540px;
+}
+.icon-20-folderUpload {
+  background-position:0 -560px;
+}
+.icon-20-fileSync {
+  background-position:0 -580px;
+}
+.icon-20-fileNoAccess {
+  background-position:0 -600px;
+}
+.icon-20-fileAccess {
+  background-position:0 -620px;
+}
+.icon-20-editFolder {
+  background-position:0 -640px;
+}
+.icon-20-folderNoAccess {
+  background-position:0 -660px;
+}
+.icon-20-folderAccess {
+  background-position:0 -680px;
+}
+.icon-20-calendarTick {
+  background-position:0 -700px;
+}
+.icon-20-calendar {
+  background-position:0 -720px;
+}
+.icon-20-calendarPlay {
+  background-position:0 -740px;
+}
+.icon-20-calendarAdd {
+  background-position:0 -760px;
+}
+.icon-20-remove {
+  background-position:0 -780px;
+}
+.icon-20-key {
+  background-position:0 -800px;
+}
+.icon-20-padlock2 {
+  background-position:0 -820px;
+}
+.icon-20-exclamation {
+  background-position:0 -840px;
+}
+.icon-20-arrowDown {
+  background-position:0 -860px;
+}
+.icon-20-bin {
+  background-position:0 -880px;
+}
+.icon-20-download {
+  background-position:0 -900px;
+}
+.icon-20-battery {
+  background-position:0 -920px;
+}
+.icon-20-storageUpload {
+  background-position:0 -940px;
+}
+.icon-20-fileAccessLeft {
+  background-position:0 -960px;
+}
+.icon-20-addComputer {
+  background-position:0 -980px;
+}
+.icon-20-tablet {
+  background-position:0 -1000px;
+}
+.icon-20-mobilePhone {
+  background-position:0 -1020px;
+}
+.icon-20-padlockWhite {
+  background-position:0 -1040px;
+}
+.icon-20-cd {
+  background-position:0 -1080px;
+}
+.icon-20-pictures {
+  background-position:0 -1100px;
+}
+.icon-20-file {
+  background-position:0 -1120px;
+}
+.icon-20-folderTick {
+  background-position:0 -1140px;
+}
+.icon-20-support {
+  background-position:0 -1160px;
+}
+.icon-20-receipts {
+  background-position:0 -1180px;
+}
+.icon-20-link {
+  background-position:0 -1200px;
+}
+.icon-20-padlockGrey {
+  background-position:0 -1220px;
+}
+.icon-20-envelope {
+  background-position:0 -1240px;
+}
+.icon-20-datacentre {
+  background-position:0 -1260px;
+}
+.icon-20-globe {
+  background-position:0 -1280px;
+}
+.icon-20-port {
+  background-position:0 -1300px;
+}
+.icon-20-255 {
+  background-position:0 -1320px;
+}
+.icon-20-minusGrey {
+  background-position:0 -1340px;
+}
+.icon-20-plusGrey {
+  background-position:0 -1360px;
+}
+.icon-20-cog {
+  background-position:0 -1380px;
+}
+.icon-20-placeTag {
+  background-position:0 -1400px;
+}
+.icon-20-calendar2 {
+  background-position:0 -1420px;
+}
+.icon-20-syncFiles {
+  background-position:0 -1440px;
+}
+.icon-20-receipt {
+  background-position:0 -1460px;
+}
+.icon-20-arrowLeftBlue {
+  background-position:0 -1480px;
+}
+.icon-20-cash {
+  background-position:0 -1500px;
+}
+.icon-20-file2 {
+  background-position:0 -1520px;
+}
+.icon-20-twitter {
+  background-position:0 -1540px;
+}
+.icon-20-openFolder {
+  background-position:0 -1560px;
+}
+.icon-20-people {
+  background-position:0 -1580px;
+}
+.icon-20-addressBook {
+  background-position:0 -1600px;
+}
+.icon-20-piggyBank {
+  background-position:0 -1620px;
+}
+.icon-20-contactDetails {
+  background-position:0 -1640px;
+}
+.icon-20-user2 {
+  background-position:0 -1660px;
+}
+.icon-20-question {
+  background-position:0 -1680px;
+}
+.icon-20-envelope2 {
+  background-position:0 -1700px;
+}
+.icon-20-versioning {
+  background-position:0 -1720px;
+}
+.icon-20-directory {
+  background-position:0 -1740px;
+}
+.icon-20-home {
+  background-position:0 -1760px;
+}
+.icon-20-star {
+  background-position:0 -1780px;
+}
+.icon-20-add {
+  background-position:0 -1800px;
+}
+.icon-20-cross {
+  background-position:0 -1820px;
+}
+.icon-20-pencil {
+  background-position:0 -1840px;
+}
+.icon-20-userGrey {
+  background-position:0 -1860px;
+}
+.icon-20-arrowRightGrey {
+  background-position:0 -1880px;
+}
+.icon-20-monitorGrey {
+  background-position:0 -1900px;
+}
+.icon-20-greyFolder {
+  background-position:0 -1920px;
+}
+.icon-20-arrowUpGrey {
+  background-position:0 -1940px;
+}
+.icon-20-tick {
+  background-position:0 -1960px;
+}
+.icon-20-chart {
+  background-position:0 -1980px;
+}
+.icon-20-gift {
+  background-position:0 -2000px;
+}
+.icon-20-clock {
+  background-position:0 -2020px;
+}
+.icon-20-facebook {
+  background-position:0 -2040px;
+}
+.icon-20-sync {
+  background-position:0 -2060px;
+}
+.icon-20-computer {
+  background-position:0 -2080px;
+}
+.icon-20-clipboard {
+  background-position:0 -2100px;
+}
+.icon-20-tools {
+  background-position:0 -2120px;
+}
+
+/**/
+[class^="icon-product-"] {
+  height:60px;
+  background:url('/icons/products.png') no-repeat 0 -9999em;
+}
+.icon-product-website {
+  width:50px;
+  background-position:0 0;
+}
+*:hover > .icon-product-website,
+*:focus > .icon-product-website,
+*.active > .icon-product-website,
+.icon-product-website:hover {
+  background-position:-60px 0;
+}
+
+.icon-product-windows {
+  width:53px;
+  background-position:0 -60px;
+}
+*:hover > .icon-product-windows,
+*:focus > .icon-product-windows,
+*.active > .icon-product-windows,
+.icon-product-windows:hover {
+  background-position:-60px -60px;
+}
+
+.icon-product-mac {
+  width:41px;
+  background-position:0 -120px;
+}
+*:hover > .icon-product-mac,
+*:focus > .icon-product-mac,
+*.active > .icon-product-mac,
+.icon-product-mac:hover {
+  background-position:-60px -120px;
+}
+
+.icon-product-iphone {
+  width:29px;
+  background-position:0 -180px;
+}
+*:hover > .icon-product-iphone,
+*:focus > .icon-product-iphone,
+*.active > .icon-product-iphone,
+.icon-product-iphone:hover {
+  background-position:-60px -180px;
+}
+
+.icon-product-blackberry {
+  width:43px;
+  background-position:0 -240px;
+}
+*:hover > .icon-product-blackberry,
+*:focus > .icon-product-blackberry,
+*.active > .icon-product-blackberry,
+.icon-product-blackberry:hover {
+  background-position:-60px -240px;
+}
+
+.icon-product-android {
+  width:39px;
+  background-position:0 -300px;
+}
+*:hover > .icon-product-android,
+*:focus > .icon-product-android,
+*.active > .icon-product-android,
+.icon-product-android:hover {
+  background-position:-60px -300px;
+}
+
+.icon-product-kindle {
+  width:33px;
+  background-position:0 -360px;
+}
+*:hover > .icon-product-kindle,
+*:focus > .icon-product-kindle,
+*.active > .icon-product-kindle,
+.icon-product-kindle:hover {
+  background-position:-60px -360px;
+}
+
+.icon-product-windows8 {
+  width:40px;
+  background-position:0 -420px;
+}
+*:hover > .icon-product-windows8,
+*:focus > .icon-product-windows8,
+*.active > .icon-product-windows8,
+.icon-product-windows8:hover {
+  background-position:-60px -420px;
+}
+
+.icon-product-ipad {
+  width:38px;
+  background-position:0 -480px;
+}
+*:hover > .icon-product-ipad,
+*:focus > .icon-product-ipad,
+*.active > .icon-product-ipad,
+.icon-product-ipad:hover {
+  background-position:-60px -480px;
+}
+
+.icon-product-linux {
+  width:51px;
+  background-position:0 -540px;
+}
+*:hover > .icon-product-linux,
+*:focus > .icon-product-linux,
+*.active > .icon-product-linux,
+.icon-product-linux:hover {
+  background-position:-60px -540px;
+}
+
+/**/
+#header .centerIt {
+  width:auto;
+  float:none;
+  display:none;
+}
+#header .centerIt .push {
+  width:100%;
+}
+
+/**/
+.panels {
+  overflow:hidden;
+  position:relative;
+}
+.panels [class*="panel"] {
+  overflow:hidden;
+  position:relative;
+}
+
+/**/
+.text-shadow-border:after {
+  content:'';
+  width:90%;
+  height:110px;
+  border-bottom:1px solid #eee;
+  display:block;
+  margin:-95px auto 0;
+  box-shadow: 0 20px 20px -30px rgba(0, 0, 0, 0.6);
+}
+
+/**/
+[class*="menu-"] {
+  float:left;
+  margin-bottom:30px;
+  list-style:none;
+}
+[class*="menu-"] > ul {
+  padding:0;
+  overflow:hidden;
+  list-style:none;
+}
+[class*="menu-"] .heading {
+  padding-bottom:10px;
+  border:none;
+  margin-bottom:0;
+}
+
+/**/
+.menu-articles {
+  width:100%;
+}
+.menu-articles > ul {
+  width:100%;
+  margin-left:0;
+}
+.menu-articles li {
+  width:100%;
+  float:left;
+}
+.menu-articles li + li {
+  border-top:1px dotted #bababd;
+}
+.menu-articles .heading + li {
+  border-top:none;
+}
+.menu-articles a {
+  padding:15px 0 15px 50px;
+  display:block;
+  position:relative;
+}
+.menu-articles a:hover {
+  text-decoration:none;
+}
+.menu-articles a span {
+  display:block;
+}
+.menu-articles a [class*="icon-"] {
+  position:absolute;
+  top:15px;
+  left:0;
+}
+.menu-articles .title {
+  font-size:15px;
+  color:#5a5a5a;
+}
+.menu-articles .text {
+  width:100%;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  font-size:14px;
+  color:#8c8c8c;
+}
+.menu-articles a:hover .title,
+.menu-articles a:hover .text {
+  color:#3c3c3c;
+}
+
+/**/
+.menu-panels,
+.menu-panels > ul {
+  text-align:center;
+}
+.menu-panels li {
+  border:1px solid #d6d6d6;
+  border-radius:5px;
+  margin-top:20px;
+  box-shadow:0 0 2px rgba(0, 0, 0, 0.2) inset;
+  background-color:rgb(255, 255, 255);
+  background-image:-moz-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(246, 246, 246, 1) 100%);
+  background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 1)), color-stop(100%, rgba(246, 246, 246, 1)));
+  background-image:-webkit-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(246, 246, 246, 1) 100%);
+  background-image:-o-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(246, 246, 246, 1) 100%);
+  background-image:-ms-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(246, 246, 246, 1) 100%);
+  background-image:linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(246, 246, 246, 1) 100%);
+}
+.menu-panels li a {
+  width:100%;
+  height:85px;
+  padding:20px 10px;
+  float:left;
+  text-decoration:none;
+}
+.menu-panels li .image {
+  float:left;
+  margin:0 10px 0 0;
+  position:relative;
+  top:-8px;
+}
+.menu-panels li .content {
+  width:50%;
+  float:left;
+  text-align:left;
+}
+.menu-panels li .content .overflow {
+  width:130%;
+  float:left;
+}
+.menu-panels li .title {
+  width:100%;
+  display:block;
+  margin:0;
+  font-family:"myriad pro", arial, sans-serif;
+  font-size:17px;
+  color:#5a5a5a;
+}
+.menu-panels li .text {
+  width:100%;
+  display:block;
+  margin:6px 0 0;
+  font-size:14px;
+  color:#8c8c8c;
+}
+
+/**/
+.menu-panels .span2 .title {
+  line-height:45px;
+}
+
+/**/
+.menu-panels li a:hover .title,
+.menu-panels li a:hover .text {
+  color:#3c3c3c;
+}
+
+/**/
+.menu-panels .active {
+  border:1px solid #87add0;
+  box-shadow:0 0 4px rgba(209, 222, 236, 1);
+}
+.menu-panels .active .title {
+  color:#1068cb;
+}
+
+/**/
+.lt-ie9 .menu-panels li span {
+  display:block !important;
+}
+
+/**/
+.lt-ie8 .span4 + .span4 .menu-articles li {
+  width:90% !important;
+}
+.lt-ie8 .menu-panels li a {
+  height:60px;
+  padding-bottom:5px;
+}
+.lt-ie8 .menu-panels .span3 {
+  width:263px;
+}
+.lt-ie8 .menu-panels .span2 {
+  width:168px;
+}
+
+/**/
+.menu-categories,
+.menu-categories > ul {
+  width:100%;
+  border-radius:5px;
+  margin-bottom:15px;
+  margin-left:0;
+  list-style:none;
+  box-shadow:0 0 3px rgba(0, 0, 0, 0.3);
+}
+.menu-categories li {
+  width:193px;
+  padding:20px;
+  float:left;
+  margin:0 1px;
+  text-align:center;
+}
+.menu-categories li a {
+  width:100%;
+  float:left;
+  text-decoration:none;
+}
+
+.menu-categories li + li {
+  background:url('bg-category-sep.png') no-repeat 0 center;
+}
+.menu-categories li span {
+  display:block;
+}
+.menu-categories .title {
+  margin:0 0 10px;
+  font-size:17px;
+  color:#5a5a5a;
+}
+.menu-categories .text {
+  margin:0;
+  font-size:14px;
+  color:#8c8c8c;
+}
+.menu-categories .image {
+  width:75px;
+  height:75px;
+  overflow:hidden;
+  margin:0 auto 10px;
+  position:relative;
+  background:url('icons/categories.jpg') no-repeat center -9999em;
+  background-size:100% auto;
+}
+
+/**/
+.menu-categories .speedTest .image {
+  background-position:0 0;
+}
+.menu-categories .faqs .image {
+  background-position:0 20%;
+}
+.menu-categories .billing .image {
+  background-position:0 40%;
+}
+.menu-categories .getStarted .image {
+  background-position:0 60%;
+}
+.menu-categories .videoTutorials .image {
+  background-position:0 80%;
+}
+.menu-categories .downloads .image {
+  background-position:0 100%;
+}
+
+/**/
+.lt-ie9 .menu-categories {
+  border:1px solid #ddd;
+}
+.lt-ie9 .menu-categories .span2 {
+  width:184px;
+}
+
+/**/
+.lt-ie8 .menu-categories .span2 {
+  width:144px;
+}
+
+/**/
+.menu-navigation {
+  width:100%;
+  border:1px solid #ddd;
+  border-radius:5px;
+  margin-top:10px;
+  -moz-box-shadow:0 0 3px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow:0 0 3px rgba(0, 0, 0, 0.2);
+  box-shadow:0 0 2px rgba(0, 0, 0, 0.2);
+  background:#fff;
+}
+.menu-navigation > ul {
+  padding:5px 10px;
+  float:none;
+  margin-bottom:0;
+  margin-left:0;
+}
+.menu-navigation li {
+  padding:10px 20px 10px 26px;
+  display:block;
+  margin:0;
+  position:relative;
+  color:#0f5fb9;
+}
+.menu-navigation li + li {
+  padding:0;
+  border-top:1px solid #e9e9e9;
+}
+.menu-navigation li a {
+  padding:10px 10px 10px 26px;
+  display:block;
+  position:relative;
+  text-decoration:none;
+  color:#5a5a5a;
+}
+.menu-navigation li [class^="icon-"] {
+  margin:0 5px 0 0;
+  position:absolute;
+  top:12px;
+  left:0;
+}
+.menu-navigation li .font-icon-right-open {
+  margin:0;
+  position:absolute;
+  top:10px;
+  left:auto;
+  right:0;
+  font-size:10px;
+}
+.menu-navigation li.closed .font-icon-right-open {
+  -webkit-transform:rotate(90deg);
+  -moz-transform:rotate(90deg);
+  -o-transform:rotate(90deg);
+  -ms-transform:rotate(90deg);
+  transform:rotate(90deg);
+}
+.menu-navigation li.closed {
+  cursor:pointer;
+}
+
+/**/
+.table-bordered th,
+.table-bordered td {
+  border:none;
+}
+.table-bordered th {
+  border-bottom:1px solid #ddd;
+  border-left:1px solid #ddd;
+  color:#5a5a5a;
+  background-color:#f1f1f1;
+  background-image:-moz-linear-gradient(top, rgba(254, 255, 255, 1) 0%, rgba(241, 241, 241, 1) 100%);
+  background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(254, 255, 255, 1)), color-stop(100%, rgba(241, 241, 241, 1)));
+  background-image:-webkit-linear-gradient(top, rgba(254, 255, 255, 1) 0%, rgba(241, 241, 241, 1) 100%);
+  background-image:-o-linear-gradient(top, rgba(254, 255, 255, 1) 0%, rgba(241, 241, 241, 1) 100%);
+  background-image:-ms-linear-gradient(top, rgba(254, 255, 255, 1) 0%, rgba(241, 241, 241, 1) 100%);
+  background-image:linear-gradient(to bottom, rgba(254, 255, 255, 1) 0%, rgba(241, 241, 241, 1) 100%);
+}
+.table-bordered tbody tr + tr td {
+  border-top:1px dotted #bababd;
+}
+.table-bordered td {
+  border-left:1px solid #ddd;
+}
+.table-bordered th + th,
+.table-bordered td + td {
+  border-left:none;
+}
+.table-bordered td p {
+  margin:0;
+}
+.table-bordered td p + p {
+  margin:10px 0 0;
+}
+
+/**/
+.supportTicket {
+  width:32px;
+  height:32px;
+  display:block;
+  margin:0;
+  position:relative;
+}
+.supportTicket [class*="icon"] {
+  margin:0;
+  vertical-align:baseline;
+}
+.supportTicket .count {
+  padding:0 2px;
+  border:1px solid #ad0a11;
+  border-radius:10px;
+  line-height:10px;
+  position:absolute;
+  top:3px;
+  right:-1px;
+  text-align:center;
+  font-family:verdana, arial, sans-serif;
+  font-size:10px;
+  font-weight:normal;
+  color:#fff;
+  background:#cd050a;
+}
+
+/* Large desktop */
+@media (min-width: 1200px) {
+}
+
+/* desktop only */
+@media (max-width: 1199px) {
+}
+
+/**/
+@media (min-width: 980px) and (max-width:1199px) {
+  .menu-categories li {
+    width:154px;
+  }
+
+  /**/
+  .menu-panels li .title {
+    line-height:45px;
+  }
+  .menu-panels li .text,
+  .menu-panels .span2 .title {
+    display:none !important;
+  }
+  .menu-panels .span2 .image {
+    float:none;
+    margin:0 auto;
+  }
+}
+
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 979px) {
+  .menu-categories li {
+    width:118px;
+  }
+
+  /**/
+  .menu-panels .span2 .image {
+    float:none;
+    margin:0 auto;
+  }
+  .menu-panels .span2 .title {
+    display:none;
+  }
+}
+
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) {
+  .menu-categories li {
+    width:100%;
+    padding:10px 20px;
+    background:none !important;
+  }
+  .menu-categories li .image {
+    width:50px;
+    height:50px;
+    float:left;
+    margin:0 10px 0 0;
+  }
+  .menu-categories li .title {
+    float:left;
+    margin:0;
+    line-height:60px;
+  }
+
+  /**/
+  .menu-panels li {
+    height:auto;
+    float:left;
+  }
+  .menu-panels li a {
+    padding:20px 20px 5px;
+  }
+  .menu-panels li .title {
+    line-height:45px;
+  }
+  .menu-panels li .image {
+    width:58px;
+  }
+}
+
+/* Landscape phones and down */
+@media (max-width: 480px) {}

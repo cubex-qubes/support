@@ -19,6 +19,7 @@ abstract class FrontController extends WebpageController
   {
     $this->_addProjectResources();
     $this->_nestSections();
+    $this->requireCss('/main');
   }
 
   public function preRender()
