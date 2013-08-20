@@ -7,6 +7,7 @@
 namespace Qubes\Support\Applications\Back\Article\Controllers;
 
 use Cubex\Core\Http\Response;
+use Cubex\Data\Transportable\TransportMessage;
 use Cubex\Facade\Redirect;
 use Cubex\Form\Form;
 use Cubex\Routing\StdRoute;
@@ -40,25 +41,43 @@ class ArticleSectionBackController extends BaseBackController
       $articleId = $article->id();
     }
 
-    $blockGroup            = new ArticleSection();
-    $blockGroup->articleId = $articleId;
-    $blockGroup->order     = ArticleSection::collection(
-                               ['article_id' => $articleId]
-                             )->count() + 1;
-    $blockGroup->saveChanges();
-
     $platforms = Platform::collection()->loadAll();
-    foreach($platforms as $platform)
-    {
-      $sectionBlock                   = new ArticleSectionBlock();
-      $sectionBlock->articleSectionId = $blockGroup->id();
-      $sectionBlock->platformId       = $platform->id();
-      $sectionBlock->title            = '';
-      $sectionBlock->content          = '';
-      $sectionBlock->saveChanges();
-    }
 
-    Redirect::to('/admin/article/' . $articleId . '/edit')->now();
+    if($platforms->hasMappers())
+    {
+      $blockGroup            = new ArticleSection();
+      $blockGroup->articleId = $articleId;
+      $blockGroup->order     = ArticleSection::collection(
+                                 ['article_id' => $articleId]
+                               )->count() + 1;
+      $blockGroup->saveChanges();
+
+      foreach($platforms as $platform)
+      {
+        $sectionBlock                   = new ArticleSectionBlock();
+        $sectionBlock->articleSectionId = $blockGroup->id();
+        $sectionBlock->platformId       = $platform->id();
+        $sectionBlock->title            = '';
+        $sectionBlock->content          = '';
+        $sectionBlock->saveChanges();
+      }
+
+      Redirect::to('/admin/article/' . $articleId . '/edit')->now();
+    }
+    else
+    {
+      Redirect::to('/admin/article/' . $articleId . '/edit')
+      ->with(
+          'msg',
+          new TransportMessage(
+            'error',
+            'Failed to add section to article. No Platforms exist. ' .
+            'Ensure you had created ' .
+            'some platforms first. <a href="/admin/platform/new">' .
+            'Create Platform Now</a>'
+          )
+        )->now();
+    }
   }
 
   public function ajaxEdit()

@@ -7,6 +7,13 @@
  */
 ?>
 <h1><?= $this->heading ?></h1>
+<div class="clearfix"></div>
+<div style="margin-top:10px;"></div>
+<?php if(Session::getFlash('msg')): ?>
+  <div class="alert alert-<?= Session::getFlash('msg')->type; ?>">
+    <?= Session::getFlash('msg')->message; ?>
+  </div>
+<?php endif; ?>
 <?= $this->form()->open() ?>
 <?= $this->form()->getElement('id') ?>
 <div class="row-fluid">
