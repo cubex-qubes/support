@@ -230,7 +230,7 @@ abstract class FrontController extends WebpageController
       $sidebar = $view->getSidebar();
       if($sidebar !== null && $sidebar instanceof IRenderable)
       {
-        $this->nest("sidebar", $sidebar);
+        $this->nest("aside", $sidebar);
       }
 
       $breadcrumbs = $view->getBreadcrumbs();
