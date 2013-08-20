@@ -4,24 +4,29 @@
  *
  * @var $this Qubes\Support\Applications\Front\Article\Views\ArticleView
  */
+
 $article = $this->getArticle();
 ?>
-<h1><?= $article->title; ?></h1>
-<h2><?= $article->subTitle; ?></h2>
-<?php foreach($article->getArticleSections() as $section): ?>
-  <div id="<?= sprintf('section-%d', $section->id()) ?>" class="section">
-    <?php foreach($section->getBlocks() as $block): ?>
-      <div
-        id="<?= sprintf('block-%d', $block->id()) ?>"
-        class="<?= sprintf('platform-%d', $block->platformId) ?>"
+
+<div class="wrapperContainer">
+  <h1><?= $article->title; ?></h1>
+  <h2><?= $article->subTitle; ?></h2>
+
+  <?php foreach($article->getArticleSections() as $section): ?>
+    <div id="<?= sprintf('section-%d', $section->id()); ?>" class="section">
+      <?php foreach($section->getBlocks() as $block): ?>
+        <div
+        id="<?= sprintf('block-%d', $block->id()); ?>"
+        class="<?= sprintf('platform-%d', $block->platformId); ?>"
         >
-        <?php if($block->title) : ?>
-          <h3><?= $block->title ?></h3>
-          <div>
-            <?php echo $this->getHtmlFromMarkdown($block->content) ?>
-          </div>
-        <?php endif; ?>
-      </div>
-    <?php endforeach ?>
-  </div>
-<?php endforeach ?>
+          <?php if($block->title) : ?>
+            <h3><?= $block->title ?></h3>
+            <div>
+              <?php echo $this->getHtmlFromMarkdown($block->content); ?>
+            </div>
+          <?php endif; ?>
+        </div>
+      <?php endforeach ?>
+    </div>
+  <?php endforeach ?>
+</div>
