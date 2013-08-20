@@ -22,9 +22,9 @@ class ArticleForm extends TemplatedViewModel
 
   public function __construct($heading, $articleMapper, $platforms)
   {
-    $this->heading = $heading;
+    $this->heading    = $heading;
     $this->_platforms = $platforms;
-    $this->_article = $articleMapper;
+    $this->_article   = $articleMapper;
   }
 
   public function form()
@@ -55,9 +55,11 @@ class ArticleForm extends TemplatedViewModel
       $this->_form->getElement("slug")
       ->addAttribute('placeholder', 'Slug');
 
+      $viewOptions = $this->getArticle()->getViewOptions();
+      array_unshift($viewOptions, "- SELECT -");
       $this->_form->addSelectElement(
         'view',
-        $this->getArticle()->getViewOptions()
+        $viewOptions
       );
 
       $options = Category::collection()->getKeyPair('id', 'title');
