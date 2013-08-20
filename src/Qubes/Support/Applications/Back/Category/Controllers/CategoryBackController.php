@@ -6,6 +6,7 @@
 
 namespace Qubes\Support\Applications\Back\Category\Controllers;
 
+use Cubex\Data\Transportable\TransportMessage;
 use Cubex\Data\Validator\Validator;
 use Cubex\Facade\Redirect;
 use Cubex\Form\Form;
@@ -39,11 +40,10 @@ class CategoryBackController extends BaseBackController
     $newCategory->hydrateFromUnserialized($postData);
     $newCategory->saveChanges();
 
-    $msg       = new \stdClass();
-    $msg->type = 'success';
-    $msg->text = 'New Category was successfully added';
-
-    Redirect::to('/' . $this->baseUri())->with('msg', $msg)->now();
+    Redirect::to('/' . $this->baseUri())->with(
+      'msg',
+      new TransportMessage('success', 'New Category was successfully added')
+    )->now();
   }
 
   public function renderEdit()
@@ -62,11 +62,10 @@ class CategoryBackController extends BaseBackController
     $newCategory->hydrateFromUnserialized($postData);
     $newCategory->saveChanges();
 
-    $msg       = new \stdClass();
-    $msg->type = 'success';
-    $msg->text = 'Category was successfully updated';
-
-    Redirect::to('/' . $this->baseUri())->with('msg', $msg)->now();
+    Redirect::to('/' . $this->baseUri())->with(
+      'msg',
+      new TransportMessage('success', 'Category was successfully updated')
+    )->now();
   }
 
   public function renderDestroy()
@@ -75,11 +74,10 @@ class CategoryBackController extends BaseBackController
     $category   = new Category($categoryId);
     $category->delete();
 
-    $msg       = new \stdClass();
-    $msg->type = 'success';
-    $msg->text = 'Category was successfully deleted';
-
-    Redirect::to('/' . $this->baseUri())->with('msg', $msg)->now();
+    Redirect::to('/' . $this->baseUri())->with(
+      'msg',
+      new TransportMessage('success', 'Category was successfully deleted')
+    )->now();
   }
 
   public function getRoutes()
