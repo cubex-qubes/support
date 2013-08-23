@@ -30,7 +30,7 @@ $(function(){
       {
         console.log('1. no frame above frame')
       }
-      adjustEndFrame(targetFrameId, startVal)
+      validateEndFrame(targetFrameId)
     }
     else
     {
@@ -49,61 +49,48 @@ $(function(){
       {
         createFrame(targetFrameId);
       }
-      adjustStartFrame(targetFrameId, endVal);
+      validateStartFrame(targetFrameId);
     }
 
   });
 
 
-  function adjustEndFrame(prevFrameId, val)
+  function validateEndFrame(prevFrameId)
   {
-    //get start and end value of the frame above
-    var startFrame = $('#start-frame-'+prevFrameId);
+    //get end value of the frame above
     var endFrame = $('#end-frame-'+prevFrameId);
-
-    var startVal = parseInt(startFrame.val(),10);
     var endVal = parseInt(endFrame.val(),10);
 
-    //get start and end value of the current frame
+    //get start value of the current frame
     var currFrameId = prevFrameId+1;
     var currStartFrame = $('#start-frame-'+currFrameId);
-    var currEndFrame = $('#end-frame-'+currFrameId);
-
     var currStartVal = parseInt(currStartFrame.val(),10);
-    var currEndVal = parseInt(currEndFrame.val(),10);
-
 
     if(currStartVal < endVal)
     {
+      console.log('1. invalid operation:');
       console.log(currStartVal+' < '+endVal);
-      console.log('1. invalid operation: start cannot be greater than end');
 
       //recover from invalid operation
       currStartFrame.val(currStartVal+1);
     }
   }
 
-  function adjustStartFrame(nextFrameId, val)
+  function validateStartFrame(nextFrameId)
   {
-    //get start and end value of the frame below
+    //get start value of the frame below
     var startFrame = $('#start-frame-'+nextFrameId);
-    var endFrame = $('#end-frame-'+nextFrameId);
-
     var startVal = parseInt(startFrame.val(),10);
-    var endVal = parseInt(endFrame.val(),10);
 
-    //get start and end value of the current frame
+    //get end value of the current frame
     var currFrameId = nextFrameId-1;
-    var currStartFrame = $('#start-frame-'+currFrameId);
     var currEndFrame = $('#end-frame-'+currFrameId);
-
-    var currStartVal = parseInt(currStartFrame.val(),10);
     var currEndVal = parseInt(currEndFrame.val(),10);
 
     if(currEndVal > startVal)
     {
+      console.log('2. invalid operation:');
       console.log(currEndVal+' > '+startVal);
-      console.log('2. invalid operation: start cannot be greater than end');
 
       //recover from invalid operation
       currEndFrame.val(currEndVal-1);
@@ -148,28 +135,26 @@ $(function(){
   setTimeout(function(){
     var videoElementId = $('.jwplayer').attr('id');
     var player = jwplayer(videoElementId);
-    player.onPause(function(){
-      console.log('video paused at '+player.getPosition());
-    });
-    console.log(videoElementId);
 
-    player.onReady(function() {
-      if (duration == 0) {
-        player.play();
-      }
-    });
+    console.log('Video loaded! '+videoElementId);
+    console.log(player);
+
+    if (duration == 0) {
+      player.play();
+    }
 
     player.onTime(function() {
     if (duration == 0) {
       duration = player.getDuration();
       player.stop();
+
+      console.log(duration);
+
+      var lastFrame = $('.frame:last .caption-time:last');
+      lastFrame.val(duration);
+      lastFrame.attr('max', duration);
     }
   });
-
-  var lastFrame = $('.frame:last .caption-time:last');
-  lastFrame.val(duration);
-  lastFrame.attr('max', duration);
-
 
   }, 3000);
 
