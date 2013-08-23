@@ -3,7 +3,7 @@
  * @author  chris.sparshott
  */
 
-namespace Project\Libs\Helpers\Icons;
+namespace Qubes\Support\Libs\Helpers\Icons;
 
 class Icon32
 {
