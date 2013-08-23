@@ -5,8 +5,11 @@
 
 namespace Qubes\Support\Libs\Helpers\Icons;
 
-class Icon16
+use Cubex\Type\Enum;
+
+class Icon16 extends Enum
 {
+  const __default        = 'icon-20-windowsBlue';
   const WINDOWS_BLUE     = 'icon-20-windowsBlue';
   const KINDLE           = 'icon-20-kindle';
   const LINUX            = 'icon-20-linux';
