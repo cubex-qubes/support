@@ -65,7 +65,6 @@ class VideoBackController extends BaseBackController
       $video->categoryId
     );
 
-    $this->requireJs('videoEdit');
     return new VideoForm("Edit Video", $form);
   }
 

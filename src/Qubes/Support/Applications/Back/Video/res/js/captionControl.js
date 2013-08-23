@@ -1,6 +1,7 @@
 /**
  * Created by oke.ugwu on 21/08/13.
  */
+var duration = 0;
 $(function(){
   $('table.caption-control').on('change', '.caption-time', function(){
 
@@ -142,6 +143,8 @@ $(function(){
     player.seek($(this).data('time'));
   });
 
+  //wait 3 seconds after page has loaded. Enough time for video to be
+  //fully loaded in DOM
   setTimeout(function(){
     var videoElementId = $('.jwplayer').attr('id');
     var player = jwplayer(videoElementId);
@@ -149,10 +152,26 @@ $(function(){
       console.log('video paused at '+player.getPosition());
     });
     console.log(videoElementId);
+
+    player.onReady(function() {
+      if (duration == 0) {
+        player.play();
+      }
+    });
+
+    player.onTime(function() {
+    if (duration == 0) {
+      duration = player.getDuration();
+      player.stop();
+    }
+  });
+
+  var lastFrame = $('.frame:last .caption-time:last');
+  lastFrame.val(duration);
+  lastFrame.attr('max', duration);
+
+
   }, 3000);
-
-
-
 
 
 
