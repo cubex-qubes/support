@@ -1,0 +1,22 @@
+.caption-time
+{
+  height: 15px !important;
+  font-size: 10px !important;
+  width: 36px;
+}
+
+.caption-control
+{
+  font-size:11px !important;
+}
+
+
+.caption-control textarea
+{
+  font-size:11px !important;
+}
+
+.caption-control .seek{
+  display: inline-block;
+  margin-top: -3px;
+}

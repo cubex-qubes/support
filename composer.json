@@ -23,7 +23,8 @@
     "ircmaxell/password-compat": "*",
     "jayfrancis/webvtt":         "*",
     "jayfrancis/cubex-jwplayer": "*",
-    "mpdf/mpdf":                 "*"
+    "mpdf/mpdf":                 "*",
+    "fobilow/mp3file":           "*"
   },
   "autoload":          {
     "psr-0": {
