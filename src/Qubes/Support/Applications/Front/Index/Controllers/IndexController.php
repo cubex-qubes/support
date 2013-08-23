@@ -16,7 +16,6 @@ class IndexController extends FrontController
   {
     /** @var IndexView $view */
     $view = $this->getView('IndexView');
-    $this->requireCss('index');
 
     return $this->setView($view);
   }
