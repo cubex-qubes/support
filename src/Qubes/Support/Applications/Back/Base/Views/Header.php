@@ -22,6 +22,7 @@ class Header extends ViewModel
     $menus = [
       'Categories' => 'admin/category',
       'Articles'   => 'admin/article',
+      'Videos'     => 'admin/video',
       'Platforms'  => 'admin/platform',
       'Users'      => 'admin/user'
     ];
