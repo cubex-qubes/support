@@ -14,7 +14,9 @@ use Cubex\Routing\Templates\ResourceTemplate;
 use Qubes\Support\Applications\Back\Base\Controllers\BaseBackController;
 use Qubes\Support\Applications\Back\Category\Views\CategoryForm;
 use Qubes\Support\Applications\Back\Category\Views\Index;
+use Qubes\Support\Components\Content\Article\Mappers\Article;
 use Qubes\Support\Components\Content\Category\Mappers\Category;
+use Qubes\Support\Components\Content\Video\Mappers\Video;
 
 class CategoryBackController extends BaseBackController
 {
@@ -71,13 +73,27 @@ class CategoryBackController extends BaseBackController
   public function renderDestroy()
   {
     $categoryId = $this->getInt('id');
-    $category   = new Category($categoryId);
-    $category->delete();
 
-    Redirect::to('/' . $this->baseUri())->with(
-      'msg',
-      new TransportMessage('success', 'Category was successfully deleted')
-    )->now();
+    $articlesInCategory = Article::collection(['category_id' => $categoryId]);
+    $videosInCategory = Video::collection(['category_id' => $categoryId]);
+
+    if($articlesInCategory->hasMappers() || $videosInCategory->hasMappers())
+    {
+      Redirect::to('/' . $this->baseUri())->with(
+        'msg',
+        new TransportMessage('error', 'Category cannot be deleted. Some Articles/Videos belong to it')
+      )->now();
+    }
+    else
+    {
+      $category   = new Category($categoryId);
+      $category->delete();
+
+      Redirect::to('/' . $this->baseUri())->with(
+        'msg',
+        new TransportMessage('success', 'Category was successfully deleted')
+      )->now();
+    }
   }
 
   public function getRoutes()

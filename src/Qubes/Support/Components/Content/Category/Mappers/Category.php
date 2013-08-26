@@ -4,6 +4,7 @@ namespace Qubes\Support\Components\Content\Category\Mappers;
 use Cubex\Data\Validator\Validator;
 use Cubex\Mapper\Database\I18n\I18nRecordMapper;
 use Qubes\Support\Components\Helpers\ViewOptionsTrait;
+use Qubes\Support\Libs\Helpers\Icons\Icon16;
 
 /**
  * @method static \Qubes\Support\Components\Content\Category\Mappers\Category[]|\Cubex\Mapper\Database\RecordCollection collection
@@ -18,6 +19,7 @@ class Category extends I18nRecordMapper
   public $description;
   public $view;
   public $slug;
+  public $icon;
   /**
    * @datatype int(11)
    */
@@ -74,4 +76,10 @@ class Category extends I18nRecordMapper
   {
     return $this->getViewOptions();
   }
+
+  public function icons()
+  {
+//    return new Icon16();
+  }
+
 }

@@ -7,6 +7,7 @@
 namespace Qubes\Support\Applications\Back\Category\Views;
 
 use Cubex\View\TemplatedViewModel;
+use Qubes\Support\Applications\Back\Category\Forms\IconPicker;
 use Qubes\Support\Components\Content\Category\Mappers\Category;
 
 class CategoryForm extends TemplatedViewModel
@@ -24,6 +25,12 @@ class CategoryForm extends TemplatedViewModel
     $this->_form   = $form;
     $this->_form->getElement('title')->setRequired(true);
     $this->_form->getElement('subTitle')->setRequired(true);
+
+    $iconPicker = new IconPicker($this->_form->getElement('icon'));
+    $this->_form->getElement('icon')
+    ->setId('icon-text')
+    ->addAttribute('style', 'width:160px')
+    ->setRenderer($iconPicker);
 
     $value     = $this->_form->getElement('parentCategoryId')->rawData();
     $exception = [];
@@ -52,6 +59,8 @@ class CategoryForm extends TemplatedViewModel
 
     $this->_form->addSelectElement('parentCategoryId', $options, $value);
     $this->_form->getElement('parentCategoryId')->setLabel('Parent Category');
+
+    $this->requireCss('/main.css');
   }
 
   public function form()
