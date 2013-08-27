@@ -3,7 +3,7 @@
  * @author  chris.sparshott
  */
 
-namespace Qubes\Support\Libs\Helpers\Menu;
+namespace Support\Libs\Helpers\Menu;
 
 use \Cubex\View\HtmlElement;
 
