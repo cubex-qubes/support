@@ -3,7 +3,7 @@
  * @author  chris.sparshott
  */
 
-namespace Qubes\Support\Libs\Helpers\Icons;
+namespace Support\Libs\Helpers\Icons;
 
 class ProductIcon
 {
