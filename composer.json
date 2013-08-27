@@ -10,6 +10,11 @@
       "name":     "Jay Francis",
       "email":    "jay.francis@justdevelop.it",
       "homepage": "http://www.justdevelop.it"
+    },
+    {
+      "name":     "Okechukwu Ugwu",
+      "email":    "oke.ugwu@justdevelop.it",
+      "homepage": "http://www.justdevelop.it"
     }
   ],
   "require":           {
