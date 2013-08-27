@@ -13,11 +13,10 @@ abstract class BaseFrontApp extends Application
 {
   protected $_project;
 
-  function __construct(\Cubex\Core\Project\Project $project)
+  public function __construct(\Cubex\Core\Project\Project $project)
   {
     $this->_project = $project;
   }
-
 
   /**
    * Get the application name
@@ -52,12 +51,19 @@ abstract class BaseFrontApp extends Application
 
     if($this->isExtended())
     {
-      $class = sprintf(
-        '%s\Applications\Front\%s\Controllers\%s',
+      $application = sprintf(
+        '%s\Applications\Front\%s',
         $this->getProjectNamespace(),
-        $applicationName,
+        $applicationName
+      );
+
+      $class = sprintf(
+        '%s\Controllers\%s',
+        $application,
         $className
       );
+      
+      $this->_listen($application);
 
       if(class_exists($class))
       {
