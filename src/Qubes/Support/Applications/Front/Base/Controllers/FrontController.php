@@ -227,10 +227,14 @@ abstract class FrontController extends WebpageController
   {
     if($view instanceof FrontView)
     {
-      $sidebar = $view->getSidebar();
-      if($sidebar !== null && $sidebar instanceof IRenderable)
+      foreach($this->getProject()->getNestedViews() as $nestedViewName)
       {
-        $this->nest("aside", $sidebar);
+        $getNestedView = sprintf('get%s', $nestedViewName);
+        $nestedView = $view->$getNestedView();
+        if($nestedView !== null && $nestedView instanceof IRenderable)
+        {
+          $this->nest($nestedViewName, $nestedView);
+        }
       }
 
       $breadcrumbs = $view->getBreadcrumbs();

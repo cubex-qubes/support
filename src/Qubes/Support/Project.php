@@ -14,6 +14,11 @@ class Project extends \Cubex\Core\Project\Project implements INamespaceAware
   use NamespaceAwareTrait;
   use ListenerTrait;
 
+  public function getNestedViews()
+  {
+    return ['sidebar'];
+  }
+
   public function getGlobalCss()
   {
     return [];
