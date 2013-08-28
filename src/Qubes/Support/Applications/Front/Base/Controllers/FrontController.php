@@ -91,12 +91,16 @@ abstract class FrontController extends WebpageController
       throw new \Exception('No default view specified');
     }
 
-    if(
-     isset($mapper->view)
-     && class_exists($mapper->view)
-     && $mapper->view instanceof IRenderable
-    )
+    if(isset($mapper->view) && class_exists($mapper->view))
     {
+
+      $view = new $mapper->view;
+      if(!$view instanceof IRenderable)
+      {
+        throw new \Exception(
+          sprintf('%s is not an instance of IRenderable', $mapper->view)
+        );
+      }
       return $this->createView(new $mapper->view);
     }
 
