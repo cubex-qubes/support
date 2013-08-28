@@ -25,7 +25,7 @@ class VideoController extends FrontController
     }
 
     /** @var VideoView $view */
-    $view = $this->getView('VideoView');
+    $view = $this->getMapperView($video, 'VideoView');
     $view->setVideo($video);
 
     return $this->setView($view);

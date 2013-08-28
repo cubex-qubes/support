@@ -25,7 +25,7 @@ class ArticleController extends FrontController
     }
 
     /** @var ArticleView $view */
-    $view = $this->getView('ArticleView');
+    $view = $this->getMapperView($article, 'ArticleView');
     $view->setArticle($article);
 
     return $this->setView($view);

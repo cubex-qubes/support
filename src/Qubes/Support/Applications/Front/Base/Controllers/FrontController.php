@@ -78,6 +78,31 @@ abstract class FrontController extends WebpageController
   }
 
   /**
+   * @param RecordMapper $mapper
+   * @param string       $defaultView
+   *
+   * @throws \Exception
+   * @return FrontView
+   */
+  public function getMapperView(RecordMapper $mapper, $defaultView = null)
+  {
+    if(!$defaultView)
+    {
+      throw new \Exception('No default view specified');
+    }
+
+    if(
+     isset($mapper->view)
+     && class_exists($mapper->view)
+     && $mapper->view instanceof IRenderable
+    )
+    {
+      return $this->createView(new $mapper->view);
+    }
+
+    return $this->getView($defaultView);
+  }
+  /**
    * Check for an override then return the view object
    *
    * @param      $className

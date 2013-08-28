@@ -32,7 +32,7 @@ class WalkthroughController extends FrontController
     }
 
     /** @var WalkthroughView $view */
-    $view = $this->getView('WalkthroughView');
+    $view = $this->getMapperView($walkthrough, 'WalkthroughView');
     $view->setWalkthrough($walkthrough);
     $view->setCurrentStep($step);
 
