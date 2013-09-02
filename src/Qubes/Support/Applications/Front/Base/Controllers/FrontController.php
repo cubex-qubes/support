@@ -259,7 +259,7 @@ abstract class FrontController extends WebpageController
       foreach($this->getProject()->getNestedViews() as $nestedViewName)
       {
         $getNestedView = sprintf('get%s', $nestedViewName);
-        $nestedView = $view->$getNestedView();
+        $nestedView = call_user_func([$view, $getNestedView]);
         if($nestedView !== null && $nestedView instanceof IRenderable)
         {
           $this->nest($nestedViewName, $nestedView);
