@@ -6,47 +6,50 @@
  * @var $this \Qubes\Support\Applications\Back\Video\Views\VideoCaptionify
  */
 ?>
+<a href="/admin/video/<?= $this->getVideo()->id() ?>/edit"
+   class="btn pull-right">Back to Video</a>
 <h1>Edit Video Caption</h1>
 <div class="row-fluid">
   <div class="span6">
     <?= $this->getVideoHtml(); ?>
   </div>
-  <div class="span6" >
+  <div class="span6">
     <div style="height:330px; overflow-y: scroll;">
-    <?= $this->form()->open() ?>
-    <table class="table table-compressed caption-control">
-      <tr>
-        <th>Time</th>
-        <th>Caption</th>
-      </tr>
-      <?php if($this->getCaptions()->hasMappers()): ?>
-        <?php foreach($this->getCaptions() as $caption): ?>
-          <?php $id = $caption->id(); ?>
+      <?= $this->form()->open() ?>
+      <table class="table table-compressed caption-control">
+        <tr>
+          <th>Time</th>
+          <th>Caption</th>
+        </tr>
+        <?php if($this->getCaptions()->hasMappers()): ?>
+          <?php foreach($this->getCaptions() as $caption): ?>
+            <?php $id = $caption->id(); ?>
+            <tr class="frame">
+              <td style="width:128px;">
+                <?= $this->form()->getElement("caption[$id][start]"); ?>
+                -
+                <?= $this->form()->getElement("caption[$id][end]"); ?>
+                <a href="#" class="seek icon-play-circle"
+                   data-video="<?= $this->videoElementId ?>"
+                   data-time="<?= $caption->startSecond ?>">
+                </a>
+              </td>
+              <td>
+                <?= $this->form()->getElement("caption[$id][text]"); ?>
+              </td>
+            </tr>
+          <?php endforeach; ?>
+        <?php else: ?>
           <tr class="frame">
             <td style="width:128px;">
-              <?= $this->form()->getElement("caption[$id][start]"); ?>
+              <?= $this->form()->getElement("_caption[0][start]"); ?>
               -
-              <?= $this->form()->getElement("caption[$id][end]"); ?>
-              <a href="#" class="seek icon-play-circle" data-video="<?= $this->videoElementId ?>"
-                 data-time="<?= $caption->startSecond ?>">
-               </a>
-              </td>
-            <td>
-              <?= $this->form()->getElement("caption[$id][text]"); ?>
+              <?= $this->form()->getElement("_caption[0][end]"); ?>
             </td>
+            <td><?= $this->form()->getElement("_caption[0][text]"); ?></td>
           </tr>
-        <?php endforeach; ?>
-      <?php else: ?>
-      <tr class="frame">
-        <td style="width:128px;">
-          <?= $this->form()->getElement("_caption[0][start]"); ?>
-          -
-          <?= $this->form()->getElement("_caption[0][end]"); ?>
-        </td>
-        <td><?= $this->form()->getElement("_caption[0][text]"); ?></td>
-      </tr>
-      <?php endif; ?>
-    </table>
+        <?php endif; ?>
+      </table>
     </div>
     <?= $this->form()->getElement('submit'); ?>
     <?= $this->form()->close() ?>
@@ -60,7 +63,6 @@
   <?= $this->getImportCaptionForm()->getElement('submit') ?>
   <?= $this->getImportCaptionForm()->close(); ?>
 </div>
-
 
 
 </div>
