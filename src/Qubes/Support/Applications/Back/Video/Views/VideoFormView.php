@@ -10,15 +10,15 @@ use Cubex\Form\Form;
 use Cubex\View\TemplatedViewModel;
 use Qubes\Support\Components\Content\Video\Mappers\Video;
 
-class VideoForm extends TemplatedViewModel
+class VideoFormView extends TemplatedViewModel
 {
   public $heading;
   protected $_form;
   protected $_video;
 
   /**
-   * @param string            $heading
-   * @param  \Cubex\Form\Form $form
+   * @param string                                                  $heading
+   * @param  \Qubes\Support\Applications\Back\Video\Forms\VideoForm $form
    */
   public function __construct($heading, $form)
   {
@@ -50,6 +50,4 @@ class VideoForm extends TemplatedViewModel
 
     return null;
   }
-
-
 }

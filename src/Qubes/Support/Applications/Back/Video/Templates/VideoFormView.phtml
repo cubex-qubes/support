@@ -1,0 +1,30 @@
+<?php
+/**
+ * Author: oke.ugwu
+ * Date: 31/07/13 10:25
+ *
+ * @var $this \Qubes\Support\Applications\Back\Video\Views\VideoFormView
+ */
+?>
+<h1><?= $this->heading ?></h1>
+<?= $this->form()->open() ?>
+<?= $this->form()->formNameInput() ?>
+<?= $this->form()->token() ?>
+<?= $this->form()->getElement('categoryId') ?>
+<?= $this->form()->getElement('view') ?>
+<?= $this->form()->getElement('title') ?>
+<?= $this->form()->getElement('subTitle') ?>
+<?= $this->form()->getElement('slug') ?>
+<?= $this->form()->getElement('url') ?>
+<?= $this->form()->getElement('imageUrl') ?>
+<?= $this->form()->getElement('order') ?>
+
+<?php if($this->getVideo()->exists()): ?>
+  <a class="btn btn-info pull-left"
+     style="margin-right:5px;"
+     href="/<?= $this->baseUri() ?>/<?= $this->getVideo()->id(
+     ) ?>/caption/<?= $this->getVideo()->id() ?>/edit">Edit Video Captions</a>
+<?php endif; ?>
+
+<?= $this->form()->getElement('submit') ?>
+<?= $this->form()->close() ?>

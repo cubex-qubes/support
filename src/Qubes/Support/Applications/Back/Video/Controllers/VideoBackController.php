@@ -10,9 +10,9 @@ use Cubex\Facade\Redirect;
 use Cubex\Form\Form;
 use Cubex\Routing\Templates\ResourceTemplate;
 use Qubes\Support\Applications\Back\Base\Controllers\BaseBackController;
-use Qubes\Support\Applications\Back\Video\Views\VideoForm;
+use Qubes\Support\Applications\Back\Video\Forms\VideoForm;
+use Qubes\Support\Applications\Back\Video\Views\VideoFormView;
 use Qubes\Support\Applications\Back\Video\Views\Index;
-use Qubes\Support\Components\Content\Category\Mappers\Category;
 use Qubes\Support\Components\Content\Video\Mappers\Video;
 
 class VideoBackController extends BaseBackController
@@ -25,16 +25,9 @@ class VideoBackController extends BaseBackController
 
   public function renderNew()
   {
-    $form = new Form('addVideo', '');
+    $form = new VideoForm('addVideo');
     $form->bindMapper(new Video());
-    $options = Category::collection()->getKeyPair('id', 'title');
-    $form->addSelectElement(
-      'categoryId',
-      $options
-    );
-
-
-    return new VideoForm("New Video", $form);
+    return new VideoFormView("New Video", $form);
   }
 
   public function postNew()
@@ -54,18 +47,9 @@ class VideoBackController extends BaseBackController
   public function renderEdit()
   {
     $VideoId = $this->getInt('id');
-    $form    = new Form('editVideo', '');
-    $video   = new Video($VideoId);
-    $form->bindMapper($video);
-
-    $options = Category::collection()->getKeyPair('id', 'title');
-    $form->addSelectElement(
-      'categoryId',
-      $options,
-      $video->categoryId
-    );
-
-    return new VideoForm("Edit Video", $form);
+    $form    = new VideoForm('editVideo');
+    $form->bindMapper(new Video($VideoId));
+    return new VideoFormView("Edit Video", $form);
   }
 
   public function postEdit()
