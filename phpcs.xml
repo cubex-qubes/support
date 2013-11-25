@@ -3,6 +3,6 @@
   <description>Code standards</description>
   <!-- Unit Tests -->
   <exclude-pattern>*/Tests/*</exclude-pattern>
-  <exclude-pattern>*/Qubes/Support/Components/Content/Article/Mappers/ArticleSectionBlock.php*</exclude-pattern>
+  <exclude-pattern>*/Qubes/Support/Cli/Populate.php*</exclude-pattern>
   <rule ref="CubexCodeStandards"/>
 </ruleset>
