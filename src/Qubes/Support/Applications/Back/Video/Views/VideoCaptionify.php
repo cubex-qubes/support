@@ -33,8 +33,8 @@ class VideoCaptionify extends TemplatedViewModel
     }
     else
     {
-      $formAction = '/admin/video/' . $this->_video->id(
-        ) . '/caption/' . $this->_video->id() . '/edit';
+      $formAction = '/admin/video/' . $this->_video->id()
+      . '/caption/' . $this->_video->id() . '/edit';
 
       $this->_form = new Form('captionForm', $formAction);
       $this->_form->setDefaultElementTemplate('{{input}}');
@@ -116,8 +116,8 @@ class VideoCaptionify extends TemplatedViewModel
     }
     else
     {
-      $formAction = '/admin/video/' . $this->_video->id(
-        ) . '/caption/' . $this->_video->id() . '/import';
+      $formAction = '/admin/video/' . $this->_video->id()
+      . '/caption/' . $this->_video->id() . '/import';
 
       $this->_importCaptionForm = new Form('captionForm', $formAction);
       $this->_importCaptionForm->setDefaultElementTemplate('{{input}}');
@@ -131,7 +131,7 @@ class VideoCaptionify extends TemplatedViewModel
 
       $this->_importCaptionForm->addSubmitElement('Captionify');
       $this->_importCaptionForm->getElement('submit')
-                               ->addAttribute('class', 'btn btn-success');
+      ->addAttribute('class', 'btn btn-success');
 
       return $this->_importCaptionForm;
     }

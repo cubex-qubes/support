@@ -49,8 +49,8 @@ class IconPicker extends FormElementRender
     $out  = str_replace('{{label}}', $this->renderLabel(), $out);
 
     $out .= $this->buildIconPicker();
-    $out = '<div data-picker-id="' . $this->_element->id(
-      ) . '" class="iconpicker-wrapper">' . $out . '</div>';
+    $out = '<div data-picker-id="' . $this->_element->id()
+    . '" class="iconpicker-wrapper">' . $out . '</div>';
 
     $this->requireCss($this->_css);
     $this->requireJs($this->_js);

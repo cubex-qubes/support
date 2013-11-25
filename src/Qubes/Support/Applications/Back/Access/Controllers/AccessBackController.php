@@ -58,7 +58,8 @@ class AccessBackController extends BaseBackController
   {
     return new RenderGroup(
       '<a id="support-logo" class="brand" href="/admin">',
-      ('Support Center</a>'));
+      ('Support Center</a>')
+    );
   }
 
   public function getSidebar()

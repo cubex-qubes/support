@@ -1,7 +1,6 @@
 <?php
 namespace Qubes\Support\Components\Content\Walkthrough\Mappers;
 
-
 use Cubex\Mapper\Database\I18n\I18nRecordMapper;
 use Cubex\Mapper\Database\RecordCollection;
 use Qubes\Support\Components\Content\Walkthrough\Mappers\WalkthroughText;
@@ -63,8 +62,6 @@ class Walkthrough extends I18nRecordMapper
 
     return false;
   }
-
-
 
   public function getTextContainer()
   {

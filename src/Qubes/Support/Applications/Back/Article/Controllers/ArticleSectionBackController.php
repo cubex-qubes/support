@@ -48,8 +48,8 @@ class ArticleSectionBackController extends BaseBackController
       $blockGroup            = new ArticleSection();
       $blockGroup->articleId = $articleId;
       $blockGroup->order     = ArticleSection::collection(
-                                 ['article_id' => $articleId]
-                               )->count() + 1;
+        ['article_id' => $articleId]
+      )->count() + 1;
       $blockGroup->saveChanges();
 
       foreach($platforms as $platform)
@@ -68,15 +68,15 @@ class ArticleSectionBackController extends BaseBackController
     {
       Redirect::to('/admin/article/' . $articleId . '/edit')
       ->with(
-          'msg',
-          new TransportMessage(
-            'error',
-            'Failed to add section to article. No Platforms exist. ' .
-            'Ensure you had created ' .
-            'some platforms first. <a href="/admin/platform/new">' .
-            'Create Platform Now</a>'
-          )
-        )->now();
+        'msg',
+        new TransportMessage(
+          'error',
+          ('Failed to add section to article. No Platforms exist. ' .
+          'Ensure you had created ' .
+          'some platforms first. <a href="/admin/platform/new">' .
+          'Create Platform Now</a>')
+        )
+      )->now();
     }
   }
 
@@ -112,11 +112,11 @@ class ArticleSectionBackController extends BaseBackController
 
     $oldOrder  = $blockGroup->order;
     $lastOrder = ArticleSection::collection(
-                   ['article_id' => $blockGroup->articleId]
-                 )->count();
+      ['article_id' => $blockGroup->articleId]
+    )->count();
 
     if($oldOrder == 1 && $direction == 'up'
-      || $oldOrder == $lastOrder && $direction == 'down'
+    || $oldOrder == $lastOrder && $direction == 'down'
     )
     {
       // Invalid Order Action
@@ -137,11 +137,11 @@ class ArticleSectionBackController extends BaseBackController
       }
 
       $swapBlockGroup = ArticleSection::collection()->loadWhere(
-                          [
-                          'article_id' => $blockGroup->articleId,
-                          'order'      => $swapOrder
-                          ]
-                        )->first();
+        [
+        'article_id' => $blockGroup->articleId,
+        'order'      => $swapOrder
+        ]
+      )->first();
       if($swapBlockGroup !== null)
       {
         $swapBlockGroup->order = $oldOrder;
@@ -174,7 +174,6 @@ class ArticleSectionBackController extends BaseBackController
 
     die;
   }
-
 
   public function getRoutes()
   {

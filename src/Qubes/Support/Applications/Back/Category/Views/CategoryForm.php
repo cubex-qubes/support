@@ -39,14 +39,14 @@ class CategoryForm extends TemplatedViewModel
       $id = $this->_form->getElement('id')->rawData();
       //child cannot be a parent of its parent
       $exception = Category::collection(['parent_category_id' => $id])
-                   ->getUniqueField('id');
+      ->getUniqueField('id');
     }
 
     //grand children not allowed to be parents of grand parents
     $grandChildren = Category::collection()->whereIn(
-                       'parent_category_id',
-                       $exception
-                     )->getUniqueField('id');
+      'parent_category_id',
+      $exception
+    )->getUniqueField('id');
 
     $exception = array_merge($exception, $grandChildren);
 
@@ -54,7 +54,7 @@ class CategoryForm extends TemplatedViewModel
     $exception[] = $id;
 
     $options = Category::collection()->whereNotIn('id', $exception)
-               ->getKeyPair('id', 'title');
+    ->getKeyPair('id', 'title');
     $options = [0 => '-SELECT-'] + $options;
 
     $this->_form->addSelectElement('parentCategoryId', $options, $value);

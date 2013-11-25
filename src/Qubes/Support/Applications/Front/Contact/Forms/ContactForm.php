@@ -7,7 +7,7 @@ use Cubex\Form\FormElement;
 
 class ContactForm extends Form
 {
-  function __construct()
+  public function __construct()
   {
     parent::__construct('contact');
   }

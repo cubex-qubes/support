@@ -64,12 +64,11 @@ class VideoCaptionBackController extends BaseBackController
     $videoId  = $this->getInt('id');
     $postData = $this->request()->postVariables();
 
-    Captionify::captionify($videoId, $postData['text']);
+    Captionify::create($videoId, $postData['text']);
 
     Redirect::to('/admin/video/' . $videoId . '/caption/' . $videoId . '/edit')
     ->now();
   }
-
 
   public function getRoutes()
   {

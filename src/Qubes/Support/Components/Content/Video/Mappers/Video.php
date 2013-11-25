@@ -6,9 +6,6 @@ use Cubex\Mapper\Database\RecordCollection;
 use Qubes\Support\Components\Content\Category\Mappers\Category;
 use Qubes\Support\Components\Helpers\ViewOptionsTrait;
 
-/**
- * @method static \Qubes\Support\Components\Content\Video\Mappers\Video[]|\Cubex\Mapper\Database\RecordCollection collection
- */
 class Video extends I18nRecordMapper
 {
   use ViewOptionsTrait;

@@ -11,7 +11,7 @@ class VideoView extends FrontView
   /** @var Video */
   private $_video;
 
-  function __construct()
+  public function __construct()
   {
     $this->requireJs('jwplayer');
   }

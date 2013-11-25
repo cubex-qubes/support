@@ -19,7 +19,6 @@ class ArticleForm extends TemplatedViewModel
   protected $_platforms;
   protected $_article;
 
-
   public function __construct($heading, $articleMapper, $platforms)
   {
     $this->heading    = $heading;

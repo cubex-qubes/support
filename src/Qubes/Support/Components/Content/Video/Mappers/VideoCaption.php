@@ -3,9 +3,6 @@ namespace Qubes\Support\Components\Content\Video\Mappers;
 
 use Cubex\Mapper\Database\I18n\I18nRecordMapper;
 
-/**
- * @method static \Qubes\Support\Components\Content\Video\Mappers\VideoCaption[]|\Cubex\Mapper\Database\RecordCollection collection
- */
 class VideoCaption extends I18nRecordMapper
 {
   public $videoId;

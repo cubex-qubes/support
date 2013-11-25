@@ -8,8 +8,6 @@ use Qubes\Support\Components\Helpers\ViewOptionsTrait;
 
 /**
  * Article Mapper
- *
- * @method static \Qubes\Support\Components\Content\Article\Mappers\Article[]|\Cubex\Mapper\Database\RecordCollection collection
  */
 class Article extends I18nRecordMapper
 {

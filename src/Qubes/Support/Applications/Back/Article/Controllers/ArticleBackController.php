@@ -48,9 +48,9 @@ class ArticleBackController extends BaseBackController
 
     Redirect::to('/' . $this->baseUri() . '/' . $newArticle->id() . '/edit')
     ->with(
-        'msg',
-        new TransportMessage('success', 'New Article was successfully added')
-      )->now();
+      'msg',
+      new TransportMessage('success', 'New Article was successfully added')
+    )->now();
   }
 
   public function renderEdit()

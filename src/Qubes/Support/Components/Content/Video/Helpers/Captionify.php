@@ -12,7 +12,7 @@ class Captionify
   CONST API_JTALK  = 'jtalk';
   CONST API_TTSAPI = 'tts-api';
 
-  public static function captionify(
+  public static function create(
     $videoId, $text, $api = Captionify::API_JTALK
   )
   {

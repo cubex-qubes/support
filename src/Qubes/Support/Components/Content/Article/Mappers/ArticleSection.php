@@ -5,9 +5,6 @@ use Cubex\Mapper\Database\I18n\I18nRecordMapper;
 use Cubex\Mapper\Database\RecordCollection;
 use Cubex\Mapper\Database\RecordMapper;
 
-/**
- * @method static \Qubes\Support\Components\Content\Article\Mappers\ArticleSection[]|\Cubex\Mapper\Database\RecordCollection collection
- */
 class ArticleSection extends RecordMapper
 {
   public $articleId;
@@ -45,5 +42,4 @@ class ArticleSection extends RecordMapper
   {
     return $this->belongsTo(new Article, 'articleId');
   }
-
 }
