@@ -14,7 +14,6 @@ class ArticleSectionBlock extends I18nRecordMapper
   public $title;
   public $content;
 
-
   /**
    * @return $this|void
    */

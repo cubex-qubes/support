@@ -28,9 +28,7 @@ class Header extends ViewModel
     ];
 
     $navItems = new Partial(
-      '<li class="%s">
-        <a href="%s" title="%s">%s</a></li>'
-      , null, false
+      '<li class="%s"><a href="%s" title="%s">%s</a></li>', null, false
     );
 
     $currPath = $this->request()->path();
@@ -39,7 +37,7 @@ class Header extends ViewModel
       $state = starts_with($currPath, "/$path", false) ? 'active' : '';
       $navItems->addElement(
         $state,
-      '/' . $path,
+        ('/' . $path),
         $item,
         $item
       );
@@ -51,12 +49,12 @@ class Header extends ViewModel
       '<ul class="nav">',
       $navItems,
       '</ul>',
-    '<div class="nav-collapse collapse">
-      <ul class="nav pull-right">
-        <li><a href="/admin/profile">' . Auth::getRawUsername() . '</a></li>
-          <li><a href="/admin/access/logout">Logout</a></li>
-        </ul>
-      </div>'
+      ('<div class="nav-collapse collapse">' .
+      '<ul class="nav pull-right">' .
+      '<li><a href="/admin/profile">' . Auth::getRawUsername() . '</a></li>' .
+      '<li><a href="/admin/access/logout">Logout</a></li>' .
+      '</ul>' .
+      '</div>')
     );
   }
 }
